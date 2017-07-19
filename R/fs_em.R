@@ -1,0 +1,126 @@
+
+
+#' Calculate EM-estimates of m- and u-probabilities
+#'
+#' @param patterns either a table of patterns (as output by 
+#'   \code{\link{tabulate}}) or pairs with comparison columns (as output by
+#'   \code{\link{compare}}).
+#' @param mprobs0,uprobs0 initial values of the m- and u-probabilities. These
+#'   should be lists with numeric values. The names of the elements in the list
+#'   should correspond to the names in \code{by_x} in \code{\link{link}}. 
+#' @param p0 the initial estimate of the probability that a pair is a match.
+#' 
+#' @export
+fs_em <- function(patterns, mprobs0 = list(0.95), uprobs0 = list(0.02), 
+    p0 = 0.05) {
+  if (methods::is(patterns, "pairs")) {
+    by <- attr(patterns, "by")
+    patterns <- tabulate(patterns)
+  } else {
+    by <- utils::head(names(patterns), -1)
+  }
+  # check and process input
+  mprobs0 <- extend_to(by, mprobs0, 0.95)
+  uprobs0 <- extend_to(by, uprobs0, 0.05)
+  if (!is.numeric(p0) || length(p0) > 1 || p0 < 0 || p0 > 1)
+    stop("p0 should be a number between 0 and 1.")
+  # initialisation
+  mprobs <- mprobs_prev <- mprobs0
+  uprobs <- uprobs_prev <- uprobs0
+  p      <- p_prev      <- p0
+  while (TRUE) {
+    # estep
+    a <- rep(1, nrow(patterns))
+    b <- rep(1, nrow(patterns))
+    for (col in by) {
+      m     <- patterns[[col]]
+      a     <- a * ifelse(m, mprobs[[col]], 1-mprobs[[col]])
+      b     <- b * ifelse(m, uprobs[[col]], 1-uprobs[[col]])
+    }
+    gm <- p*a / (p*a + (1-p)*b)
+    gu <- p*b / (p*a + (1-p)*b)
+    # mstep
+    for (col in by) {
+      m             <- patterns[[col]]
+      w             <- patterns$n
+      mprobs[[col]] <- sum(w*gm*m) / sum(w*gm)
+      uprobs[[col]] <- sum(w*gu*m) / sum(w*gu)
+      p <- sum(w*gm)/sum(w)
+    }
+    # check convergence
+    eps <- 0
+    for (col in by) {
+      eps <- eps + sum((mprobs[[col]] - mprobs_prev[[col]])^2)
+      if (eps > 1E-5) break
+      eps <- eps + sum((uprobs[[col]] - uprobs_prev[[col]])^2)
+      if (eps > 1E-5) break
+    }
+    if (eps < 1E-5) break
+    mprobs_prev <- mprobs
+    uprobs_prev <- uprobs
+  }
+  structure(list(mprobs=mprobs, uprobs=uprobs, p=p, patterns=patterns), 
+    class="simple_em")
+}
+
+
+
+
+
+
+#' Summarise the results from \code{\link{simple_em}}
+#' 
+#' @param object the \code{\link{simple_em}} object.
+#' @param ... ignored;
+#' 
+#' @export
+summary.simple_em <- function(object, ...) {
+  # calculate the posterior probabilities
+  m_prob <- rep(1, nrow(object$patterns))
+  u_prob <- rep(1, nrow(object$patterns))
+  for (col in names(object$mprobs)) {
+    m <- object$patterns[[col]]
+    m_prob <- m_prob * ifelse(m, object$mprobs[[col]], 1-object$mprobs[[col]])
+    u_prob <- u_prob * ifelse(m, object$uprobs[[col]], 1-object$uprobs[[col]])
+  }
+  m_post <- object$p*m_prob / (object$p*m_prob + (1-object$p)*u_prob)
+  u_post <- (1-object$p)*u_prob / (object$p*m_prob + (1-object$p)*u_prob)
+  object$patterns$m_prob <- m_prob
+  object$patterns$u_prob <- u_prob
+  object$patterns$m_post <- m_post
+  object$patterns$u_post <- u_post
+  object$patterns$weight <- log(m_prob) - log(u_prob)
+  # return orignal model with additional stats
+  structure(object, class="summary_simple_em")
+}
+
+
+#' @export
+print.summary_simple_em <- function(x, ...) {
+  cat("M- and u-probabilities estimated by the EM-algorithm:\n")
+  tab <- data.frame(variable = names(x$mprobs), mprobs = unlist(x$mprobs), 
+    uprobs = unlist(x$uprobs))
+  names(tab) <- c("Variable", "M-probability", "U-probability")
+  print(tab, row.names=FALSE)
+  
+  cat("\nMatching probability: ", x$p, ".\n", sep="")
+  cat("\nPatterns:\n")
+  
+  o <- order(x$patterns$m_post, decreasing = TRUE)
+  x$patterns <- x$patterns[o,]
+  for (col in c("m_prob", "u_prob", "m_post", "u_post", "weight")) {
+    x$patterns[[col]] <- round(x$patterns[[col]], 3)
+  }
+  print(x$patterns, row.names=FALSE)
+}
+
+#' @export
+print.simple_em <- function(x, ...) {
+  cat("M- and u-probabilities estimated by the EM-algorithm:\n")
+  tab <- data.frame(variable = names(x$mprobs), mprobs = unlist(x$mprobs), 
+    uprobs = unlist(x$uprobs))
+  names(tab) <- c("Variable", "M-probability", "U-probability")
+  print(tab, row.names=FALSE)
+  
+  cat("\nMatching probability: ", x$p, ".\n", sep="")  
+}

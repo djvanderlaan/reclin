@@ -1,0 +1,25 @@
+Package: reclin
+Type: Package
+Title: Probabilistic Record Linkage
+Version: 0.1.0
+Date: 2017-07-17
+Author: Jan van der Laan
+Maintainer: Jan van der Laan <djvanderlaan@unrealizedtime.nl>
+Description: Functions to assist in performing probabilistis record linkage: 
+    generating pairs, comparing records, em-algorithm for estimating m- and 
+    u-probabilities, forcing one-to-one matching. 
+Depends:
+    stats,
+    lvec,
+    lvec.stats,
+    R (>= 3.0.0)
+Imports:
+    dplyr,
+    stringdist,
+    utils,
+    methods
+Suggests:
+    testthat
+License: GPL-3
+LazyLoad: yes
+RoxygenNote: 6.0.1
