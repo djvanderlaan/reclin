@@ -1,7 +1,7 @@
 Package: reclin
 Type: Package
 Title: Probabilistic Record Linkage
-Version: 0.1.0
+Version: 0.0.1
 Date: 2017-07-17
 Author: Jan van der Laan
 Maintainer: Jan van der Laan <djvanderlaan@unrealizedtime.nl>
