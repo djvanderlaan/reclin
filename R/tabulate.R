@@ -1,7 +1,7 @@
 
 
 
-#' @import lvec.stats
+#' @import ldat
 #' @import lvec
 #' @export
 tabulate <- function(pairs, comparators, by) {

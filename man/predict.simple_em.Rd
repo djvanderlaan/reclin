@@ -5,7 +5,8 @@
 \title{Calculate weights and probabilities for pairs}
 \usage{
 \method{predict}{simple_em}(object, pairs = newdata, newdata = NULL,
-  type = c("weights", "mpost", "probs", "all"), ...)
+  type = c("weights", "mpost", "probs", "all"), binary = FALSE, comparators,
+  ...)
 }
 \arguments{
 \item{object}{an object of type `simple_em` as produced by 
@@ -18,6 +19,12 @@
 
 \item{type}{a character vector of length one speicifying what to calculate. 
 See results for more information.}
+
+\item{binary}{convert comparison vectors to binary vectors using the 
+comparison function in comparators.}
+
+\item{comparators}{a list of comparison functions (see \code{\link{compare}}). 
+When missing \code{attr(pairs, 'comparators')} is used.}
 }
 \value{
 In case of `type == "weights"` returns a vector (\code{\link{lvec}} or

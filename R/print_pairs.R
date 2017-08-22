@@ -6,7 +6,7 @@ big_num <- function(x, ...) {
 }
 
 
-#' @import lvec.stats
+#' @import ldat
 #' @import lvec
 #' @export
 print.pairs <- function(x, ...) {

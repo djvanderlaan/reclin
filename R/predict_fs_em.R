@@ -7,6 +7,10 @@
 #'   `newdata` or `pairs`. 
 #' @param type a character vector of length one speicifying what to calculate. 
 #'   See results for more information.
+#' @param binary convert comparison vectors to binary vectors using the 
+#'   comparison function in comparators. 
+#' @param comparators a list of comparison functions (see \code{\link{compare}}). 
+#'   When missing \code{attr(pairs, 'comparators')} is used. 
 #'   
 #' @return 
 #' In case of `type == "weights"` returns a vector (\code{\link{lvec}} or
@@ -17,16 +21,18 @@
 #' m- and u probabilities. In case `type == "all"` returns a data.frame or 
 #' \code{\link{ldat}} with both probabilities and weights. 
 #' 
-#' @import lvec.stats
+#' @import ldat
 #' @import lvec
 #' @export
 predict.simple_em <- function(object, pairs = newdata, newdata = NULL, 
-    type = c("weights", "mpost", "probs", "all"), ...) {
+    type = c("weights", "mpost", "probs", "all"), binary = FALSE, 
+    comparators, ...) {
   # Process input
   type <- match.arg(type)
   if (is.null(pairs)) pairs <- newdata
   if (is.null(pairs)) stop("Missing pairs or newdata.")
   by <- names(object$mprobs)
+  if (missing(comparators)) comparators <- attr(pairs, "comparators")
   # Initialise end result and for-loop
   weights <- if (is_ldat(pairs)) lvec(nrow(pairs), type="numeric") else 
     numeric(nrow(pairs))
@@ -45,14 +51,17 @@ predict.simple_em <- function(object, pairs = newdata, newdata = NULL,
     uc <- rep(1, nrow(d))
     
     for (col in by) {
+      
+      comp <- if (binary) comparators[[col]](d[[col]]) else d[[col]]
+      
       pm <- (1 - object$mprobs[[col]]) +
-                (2 * object$mprobs[[col]] - 1) * d[[col]]
+                (2 * object$mprobs[[col]] - 1) * comp
       
       pu <- (1 - object$uprobs[[col]]) + 
-                (2 * object$uprobs[[col]] - 1) * d[[col]]
+                (2 * object$uprobs[[col]] - 1) * comp
       w  <- log(pm / pu)
       
-      # Give pairs with missing values a weight 0 for correspongin variable
+      # Give pairs with missing values a weight 0 for corresponding variable
       w[is.na(w)] <- 0
       # Add weight, mprob, uprob to total vectors
       wc <- wc + w

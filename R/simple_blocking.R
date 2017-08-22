@@ -1,7 +1,7 @@
 
 
 #' @import lvec
-#' @import lvec.stats
+#' @import ldat
 #' @import dplyr
 #' @export
 simple_blocking <- function(x, y, blocking_var = NULL, large = TRUE, 
@@ -20,7 +20,7 @@ simple_blocking <- function(x, y, blocking_var = NULL, large = TRUE,
       if (is.null(pairs)) {
         pairs <- as_ldat(p)
       } else {
-        pairs <- lvec.stats::append(pairs, p, clone = FALSE)
+        pairs <- ldat::append(pairs, p, clone = FALSE)
       }  
     }
   } else {

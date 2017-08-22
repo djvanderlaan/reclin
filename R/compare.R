@@ -1,5 +1,5 @@
 
-#' @import lvec.stats
+#' @import ldat
 #' @import lvec
 #' @export
 compare <- function(pairs, by, comparators = list(default_comparator), 
