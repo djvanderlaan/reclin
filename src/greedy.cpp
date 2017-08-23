@@ -154,6 +154,6 @@ extern "C" {
     return res;
     RCATCH
   }
-};
+}
 
 
