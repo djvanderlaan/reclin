@@ -9,10 +9,12 @@
 #'   should be lists with numeric values. The names of the elements in the list
 #'   should correspond to the names in \code{by_x} in \code{\link{link}}. 
 #' @param p0 the initial estimate of the probability that a pair is a match.
+#' @param tol when the change in the m and u-probabilities is smaller than tol
+#'   the algorithm is stopped. 
 #' 
 #' @export
 fs_em <- function(patterns, mprobs0 = list(0.95), uprobs0 = list(0.02), 
-    p0 = 0.05) {
+    p0 = 0.05, tol = 1E-5) {
   if (methods::is(patterns, "pairs")) {
     by <- attr(patterns, "by")
     patterns <- tabulate(patterns)
@@ -28,6 +30,7 @@ fs_em <- function(patterns, mprobs0 = list(0.95), uprobs0 = list(0.02),
   mprobs <- mprobs_prev <- mprobs0
   uprobs <- uprobs_prev <- uprobs0
   p      <- p_prev      <- p0
+  recalculate_p_and_stop <- FALSE
   while (TRUE) {
     # estep
     a <- rep(1, nrow(patterns))
@@ -40,12 +43,13 @@ fs_em <- function(patterns, mprobs0 = list(0.95), uprobs0 = list(0.02),
     gm <- p*a / (p*a + (1-p)*b)
     gu <- p*b / (p*a + (1-p)*b)
     # mstep
+    p <- sum(patterns$n*gm)/sum(patterns$n)
+    if (recalculate_p_and_stop) break;
     for (col in by) {
       m             <- patterns[[col]]
-      w             <- patterns$n
-      mprobs[[col]] <- sum(w*gm*m) / sum(w*gm)
-      uprobs[[col]] <- sum(w*gu*m) / sum(w*gu)
-      p <- sum(w*gm)/sum(w)
+      mprobs[[col]] <- sum(patterns$n*gm*m) / sum(patterns$n*gm)
+      uprobs[[col]] <- sum(patterns$n*gu*m) / sum(patterns$n*gu)
+      
     }
     # check convergence
     eps <- 0
@@ -55,7 +59,7 @@ fs_em <- function(patterns, mprobs0 = list(0.95), uprobs0 = list(0.02),
       eps <- eps + sum((uprobs[[col]] - uprobs_prev[[col]])^2)
       if (eps > 1E-5) break
     }
-    if (eps < 1E-5) break
+    if (eps < 1E-5) recalculate_p_and_stop <- TRUE
     mprobs_prev <- mprobs
     uprobs_prev <- uprobs
   }
