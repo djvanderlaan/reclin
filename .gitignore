@@ -2,3 +2,4 @@
 *.swo
 src/*.o
 src/*.so
+work
