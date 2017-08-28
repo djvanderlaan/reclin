@@ -55,11 +55,11 @@ fs_em <- function(patterns, mprobs0 = list(0.95), uprobs0 = list(0.02),
     eps <- 0
     for (col in by) {
       eps <- eps + sum((mprobs[[col]] - mprobs_prev[[col]])^2)
-      if (eps > 1E-5) break
+      if (eps > tol) break
       eps <- eps + sum((uprobs[[col]] - uprobs_prev[[col]])^2)
-      if (eps > 1E-5) break
+      if (eps > tol) break
     }
-    if (eps < 1E-5) recalculate_p_and_stop <- TRUE
+    if (eps < tol) recalculate_p_and_stop <- TRUE
     mprobs_prev <- mprobs
     uprobs_prev <- uprobs
   }
