@@ -1,4 +1,5 @@
 
+#' @rdname comparators.rd
 #' @export
 identical <- function(x, y) {
   if (missing(x) && missing(y)) return(identical)
@@ -9,6 +10,7 @@ identical <- function(x, y) {
   }
 }
 
+#' @rdname comparators.rd
 #' @export
 jaro_winkler <- function(threshold = 0.95) {
   function(x, y) {

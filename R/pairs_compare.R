@@ -2,7 +2,7 @@
 #' @import ldat
 #' @import lvec
 #' @export
-compare <- function(pairs, by, comparators = list(default_comparator), 
+pairs_compare <- function(pairs, by, comparators = list(default_comparator), 
     x, y, default_comparator = identical) {
   # Process and preparare input
   if (missing(x)) x <- attr(pairs, "x")

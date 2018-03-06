@@ -1,0 +1,18 @@
+---
+title: "reclin introduction"
+author: "Jan van der Laan"
+output: html_document
+---
+
+```{r}
+cis <- read.csv("csv/cis.csv", stringsAsFactors = FALSE)
+prd <- read.csv("csv/prd.csv", stringsAsFactors = FALSE)
+
+head(prd)
+
+p <- pairs_blocking(cis, prd, blocking_var = "ENUMPC")
+
+p2 <- pairs_compare(p, by = c("PERNAME1", "PERNAME2", "SEX", "DOB_DAY", "DOB_MON", 
+  "DOB_YEAR"), comparators = list(PERNAME1 = jaro_winkler(), PERNAME2 = jaro_winkler()))
+
+```

@@ -4,7 +4,8 @@
 \alias{fs_em}
 \title{Calculate EM-estimates of m- and u-probabilities}
 \usage{
-fs_em(patterns, mprobs0 = list(0.95), uprobs0 = list(0.02), p0 = 0.05)
+fs_em(patterns, mprobs0 = list(0.95), uprobs0 = list(0.02), p0 = 0.05,
+  tol = 1e-05)
 }
 \arguments{
 \item{patterns}{either a table of patterns (as output by 
@@ -16,7 +17,11 @@ should be lists with numeric values. The names of the elements in the list
 should correspond to the names in \code{by_x} in \code{\link{link}}.}
 
 \item{p0}{the initial estimate of the probability that a pair is a match.}
+
+\item{tol}{when the change in the m and u-probabilities is smaller than tol
+the algorithm is stopped.}
 }
 \description{
 Calculate EM-estimates of m- and u-probabilities
 }
+
