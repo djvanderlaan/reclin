@@ -28,4 +28,3 @@ sel <- greedy(x, y, w)
 data.frame(x[sel], y[sel], w[sel])
 
 }
-

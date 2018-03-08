@@ -17,10 +17,9 @@ p2 <- pairs_compare(p, by = c("PERNAME1", "PERNAME2", "SEX", "DOB_DAY",
   "DOB_MON", "DOB_YEAR"), comparators = list(PERNAME1 = jaro_winkler(), 
     PERNAME2 = jaro_winkler()))
 
-
 p3 <- score_simsum(p2)
 
 
-
+m <- problink_em(p2)
 
 ```

@@ -14,4 +14,3 @@
 \description{
 Summarise the results from \code{\link{simple_em}}
 }
-

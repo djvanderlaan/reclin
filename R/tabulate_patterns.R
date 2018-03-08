@@ -1,0 +1,39 @@
+
+
+
+#' @import ldat
+#' @import lvec
+#' @export
+tabulate_patterns <- function(pairs, ..., comparators = NULL, by = NULL) {
+  if (!is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")
+  UseMethod("tabulate_patterns")
+}
+
+
+tabulate_patterns.data.frame <- function(pairs, ..., comparators = NULL, by = NULL) {
+  tabulate_patterns_impl(pairs, comparators, by)
+}
+
+tabulate_patterns.ldat <- function(pairs, ..., comparators = NULL, by = NULL) {
+  tabulate_patterns_impl(pairs, comparators, by)
+}
+
+
+tabulate_patterns_impl <- function(pairs, comparators, by) {
+  # Process arguments
+  if (missing(comparators) || is.null(comparators)) 
+    comparators <- attr(pairs, "comparators")
+  if (missing(by) || is.null(by)) 
+    by <- if (missing(comparators)) attr(pairs, "by") else names(comparators)
+  # Tabulate chunks
+  chunks <- chunk(pairs)
+  tab <- vector("list", length(chunks))
+  for (i in seq_along(chunks)) {
+    d <- slice_range(pairs, range = chunks[[i]], as_r = TRUE)
+    for (col in by) d[[col]] <- comparators[[col]](d[[col]])
+    tab[[i]] <- d %>% group_by_(.dots = by) %>% summarise(n = n())
+  }
+  # Combine
+  bind_rows(tab) %>% group_by_(.dots = by) %>% summarise(n = sum(n)) %>%
+    ungroup() %>% as.data.frame()
+}

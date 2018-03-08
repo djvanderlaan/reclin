@@ -1,23 +1,22 @@
 
 
 #' @export
-score_simsum <- function(pairs, by, var = "simsum", add = TRUE) {
+score_simsum <- function(pairs, var = "simsum", by, add = TRUE,
+    na_value = 0, ...) {
+  if (!is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")
+  UseMethod("score_simsum")
+}
+
+
+score_simsum.ldat <- function(pairs, var = "simsum", by, add = TRUE,
+    na_value = 0, ...) {
   if (missing(by)) by <- attr(pairs, "by")
   if (is.null(by)) 
     stop("Argument 'by' is missing and not in attributes of 'pairs'.")
-  score_simsum_impl(pairs, by, var, add)
-}
-
-
-score_simsum_impl <- function(pairs, by, var, add, ...) {
-  UseMethod("score_simsum_impl")
-}
-
-score_simsum_impl.ldat <- function(pairs, by, var, add, ...) {
   simsum <- lvec(nrow(pairs), "numeric")
   for (v in by) {
-    val <- clone(pairs[[v]])
-    val[is.na(val)] <- 0
+    val <- 1*pairs[[v]]
+    val[is.na(val)] <- na_value
     simsum <- simsum + val
   }
   if (add) { 
@@ -26,11 +25,15 @@ score_simsum_impl.ldat <- function(pairs, by, var, add, ...) {
   } else simsum
 }
 
-score_simsum_impl.data.frame <- function(pairs, by, var, add, ...) {
+score_simsum.data.frame <- function(pairs, var = "simsum", by, add = TRUE, 
+    na_value = 0, ...) {
+  if (missing(by)) by <- attr(pairs, "by")
+  if (is.null(by)) 
+    stop("Argument 'by' is missing and not in attributes of 'pairs'.")
   simsum <- numeric(nrow(pairs))
   for (v in by) {
-    val <- pairs[[v]]
-    val[is.na(val)] <- 0
+    val <- 1*pairs[[v]]
+    val[is.na(val)] <- na_value
     simsum <- simsum + val
   }
   if (add) { 

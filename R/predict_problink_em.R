@@ -1,7 +1,7 @@
 #' Calculate weights and probabilities for pairs
 #' 
-#' @param object an object of type `simple_em` as produced by 
-#'   \code{\link{fs_em}}.
+#' @param object an object of type `problink_em` as produced by 
+#'   \code{\link{problink_em}}.
 #' @param pairs a object with pairs for which to calculate weights.
 #' @param newdata an alternative name for the `pairs` argument. Specify 
 #'   `newdata` or `pairs`. 
@@ -15,16 +15,16 @@
 #' @return 
 #' In case of `type == "weights"` returns a vector (\code{\link{lvec}} or
 #' regular R-vector depending on the type of `pairs`). with the linkage weights. 
-#' In case of `type == "mpost"` returns a vector with the posterior mp-probabilities
-#' (probability that a pairs is a match). In case of `type == "probs"` returns a
-#' data.frame or \code{\link{ldat}} with the m- and u-probabilities and postertior
-#' m- and u probabilities. In case `type == "all"` returns a data.frame or 
+#' In case of `type == "mpost"` returns a vector with the posterior m-probabilities
+#' (probability that a pair is a match). In case of `type == "probs"` returns a
+#' data.frame or \code{\link{ldat}} with the m- and u-probabilities and posterior
+#' m- and u probabilities. In case `type == "all"` returns a `data.frame` or 
 #' \code{\link{ldat}} with both probabilities and weights. 
 #' 
 #' @import ldat
 #' @import lvec
 #' @export
-predict.simple_em <- function(object, pairs = newdata, newdata = NULL, 
+predict.problink_em <- function(object, pairs = newdata, newdata = NULL, 
     type = c("weights", "mpost", "probs", "all"), binary = FALSE, 
     comparators, ...) {
   # Process input
@@ -43,24 +43,17 @@ predict.simple_em <- function(object, pairs = newdata, newdata = NULL,
   chunks   <- chunk(pairs)
   # Process data in chunks
   for (c in chunks) {
-    
-    d <- slice_range(pairs, range = c, as_r = TRUE) 
-    
+    d  <- slice_range(pairs, range = c, as_r = TRUE) 
     wc <- rep(0, nrow(d))
     mc <- rep(1, nrow(d))
     uc <- rep(1, nrow(d))
-    
     for (col in by) {
-      
       comp <- if (binary) comparators[[col]](d[[col]]) else d[[col]]
-      
       pm <- (1 - object$mprobs[[col]]) +
                 (2 * object$mprobs[[col]] - 1) * comp
-      
       pu <- (1 - object$uprobs[[col]]) + 
                 (2 * object$uprobs[[col]] - 1) * comp
       w  <- log(pm / pu)
-      
       # Give pairs with missing values a weight 0 for corresponding variable
       w[is.na(w)] <- 0
       # Add weight, mprob, uprob to total vectors
@@ -68,7 +61,6 @@ predict.simple_em <- function(object, pairs = newdata, newdata = NULL,
       mc <- mc * pm
       uc <- uc * pu
     }
-    
     weights <- lset(weights, range = c, values = wc)
     mprobs  <- lset(mprobs,  range = c, values = mc)
     uprobs  <- lset(uprobs,  range = c, values = uc)

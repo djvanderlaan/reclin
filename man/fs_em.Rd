@@ -24,4 +24,3 @@ the algorithm is stopped.}
 \description{
 Calculate EM-estimates of m- and u-probabilities
 }
-

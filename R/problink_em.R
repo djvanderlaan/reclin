@@ -3,8 +3,8 @@
 #' Calculate EM-estimates of m- and u-probabilities
 #'
 #' @param patterns either a table of patterns (as output by 
-#'   \code{\link{tabulate}}) or pairs with comparison columns (as output by
-#'   \code{\link{compare}}).
+#'   \code{\link{tabulate_patterns}}) or pairs with comparison columns (as 
+#'   output by \code{\link{pairs_compare}}).
 #' @param mprobs0,uprobs0 initial values of the m- and u-probabilities. These
 #'   should be lists with numeric values. The names of the elements in the list
 #'   should correspond to the names in \code{by_x} in \code{\link{link}}. 
@@ -13,11 +13,11 @@
 #'   the algorithm is stopped. 
 #' 
 #' @export
-fs_em <- function(patterns, mprobs0 = list(0.95), uprobs0 = list(0.02), 
+problink_em <- function(patterns, mprobs0 = list(0.95), uprobs0 = list(0.02), 
     p0 = 0.05, tol = 1E-5) {
   if (methods::is(patterns, "pairs")) {
     by <- attr(patterns, "by")
-    patterns <- tabulate(patterns)
+    patterns <- tabulate_patterns(patterns)
   } else {
     by <- utils::head(names(patterns), -1)
   }
@@ -64,21 +64,18 @@ fs_em <- function(patterns, mprobs0 = list(0.95), uprobs0 = list(0.02),
     uprobs_prev <- uprobs
   }
   structure(list(mprobs=mprobs, uprobs=uprobs, p=p, patterns=patterns), 
-    class="simple_em")
+    class="problink_em")
 }
 
 
 
-
-
-
-#' Summarise the results from \code{\link{simple_em}}
+#' Summarise the results from \code{\link{problink_em}}
 #' 
-#' @param object the \code{\link{simple_em}} object.
+#' @param object the \code{\link{problink_em}} object.
 #' @param ... ignored;
 #' 
 #' @export
-summary.simple_em <- function(object, ...) {
+summary.problink_em <- function(object, ...) {
   # calculate the posterior probabilities
   m_prob <- rep(1, nrow(object$patterns))
   u_prob <- rep(1, nrow(object$patterns))
@@ -95,21 +92,19 @@ summary.simple_em <- function(object, ...) {
   object$patterns$u_post <- u_post
   object$patterns$weight <- log(m_prob) - log(u_prob)
   # return orignal model with additional stats
-  structure(object, class="summary_simple_em")
+  structure(object, class="summary_problink_em")
 }
 
 
 #' @export
-print.summary_simple_em <- function(x, ...) {
+print.summary_problink_em <- function(x, ...) {
   cat("M- and u-probabilities estimated by the EM-algorithm:\n")
   tab <- data.frame(variable = names(x$mprobs), mprobs = unlist(x$mprobs), 
     uprobs = unlist(x$uprobs))
   names(tab) <- c("Variable", "M-probability", "U-probability")
   print(tab, row.names=FALSE)
-  
   cat("\nMatching probability: ", x$p, ".\n", sep="")
   cat("\nPatterns:\n")
-  
   o <- order(x$patterns$m_post, decreasing = TRUE)
   x$patterns <- x$patterns[o,]
   for (col in c("m_prob", "u_prob", "m_post", "u_post", "weight")) {
@@ -119,12 +114,11 @@ print.summary_simple_em <- function(x, ...) {
 }
 
 #' @export
-print.simple_em <- function(x, ...) {
+print.problink_em <- function(x, ...) {
   cat("M- and u-probabilities estimated by the EM-algorithm:\n")
   tab <- data.frame(variable = names(x$mprobs), mprobs = unlist(x$mprobs), 
     uprobs = unlist(x$uprobs))
   names(tab) <- c("Variable", "M-probability", "U-probability")
   print(tab, row.names=FALSE)
-  
   cat("\nMatching probability: ", x$p, ".\n", sep="")  
 }
