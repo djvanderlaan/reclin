@@ -20,7 +20,6 @@
 #' @useDynLib reclin
 #' @import Rcpp
 #' @importFrom Rcpp evalCpp
-#' @export
 greedy <- function(x, y, weight) {
   stopifnot(length(x) == length(y))
   stopifnot(length(x) == length(weight))

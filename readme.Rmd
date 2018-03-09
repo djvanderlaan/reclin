@@ -11,7 +11,7 @@ cis <- read.csv("csv/cis.csv", stringsAsFactors = FALSE)
 prd <- read.csv("csv/prd.csv", stringsAsFactors = FALSE)
 
 
-p  <- pairs_blocking(cis, prd, blocking_var = "ENUMPC", large = TRUE)
+p  <- pairs_blocking(cis, prd, blocking_var = "ENUMPC", large = FALSE)
 
 p2 <- pairs_compare(p, by = c("PERNAME1", "PERNAME2", "SEX", "DOB_DAY", 
   "DOB_MON", "DOB_YEAR"), comparators = list(PERNAME1 = jaro_winkler(), 
@@ -25,6 +25,9 @@ m <- problink_em(p3)
 w <- predict(m, newdata = p3)
 
 p4 <- score_problink(p3, m)
+
+p5 <- select_threshold(p4, "weight", threshold = 3)
+p5 <- select_greedy(p4, "weight", threshold = 3)
 
 # TODO: iets van threshold
 # TODO: one-to-one greedy

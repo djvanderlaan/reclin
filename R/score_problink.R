@@ -1,0 +1,39 @@
+
+#' @export
+score_problink <- function(pairs, model, var = "weight", add = TRUE, ...) {
+  if (!is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")
+  UseMethod("score_problink")
+}
+
+score_problink.data.frame <- function(pairs, model, var = "weight", 
+    add = TRUE, ...) {
+  if (missing(var)) {
+    score_problink_impl(pairs, model, NULL, add, ...)
+  } else { 
+    score_problink_impl(pairs, model, var, add, ...)
+  }
+}
+
+score_problink.ldat <- function(pairs, model, var = "weight", 
+    add = TRUE, ...) {
+  if (missing(var)) {
+    score_problink_impl(pairs, model, NULL, add, ...)
+  } else { 
+    score_problink_impl(pairs, model, var, add, ...)
+  }
+}
+
+score_problink_impl <- function(pairs, model, var = "weight", add, ...) {
+  p <- predict(model, newdata = pairs, ...)
+  if (!add) return(p)
+  if (!is.data.frame(p) && !is_ldat(p)) {
+    if (is.null(var)) var <- "weight"
+    pairs[[var]] <- p
+  } else {
+    if (!missing(var) && !is.null(var))
+      names(p) <- paste0(var, "_", names(p))
+    for (col in names(p)) pairs[[col]] <- p[[col]]
+  }
+  pairs
+}
+
