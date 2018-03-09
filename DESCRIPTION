@@ -17,9 +17,12 @@ Imports:
     dplyr,
     stringdist,
     utils,
-    methods
+    methods,
+    Rcpp
 Suggests:
     testthat
+LinkingTo:
+    Rcpp
 License: GPL-3
 LazyLoad: yes
-RoxygenNote: 6.0.1
+RoxygenNote: 5.0.1

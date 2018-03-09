@@ -18,6 +18,8 @@
 #' data.frame(x[sel], y[sel], w[sel])
 #' 
 #' @useDynLib reclin
+#' @import Rcpp
+#' @importFrom Rcpp evalCpp
 #' @export
 greedy <- function(x, y, weight) {
   stopifnot(length(x) == length(y))
@@ -25,9 +27,7 @@ greedy <- function(x, y, weight) {
   o <- order(weight, decreasing = TRUE)
   x <- x[o]
   y <- y[o]
-  s <- .Call("greedy_logical_cpp", as.integer(x), as.integer(y), 
-    PACKAGE = "reclin")
+  s <- greedy_rcpp(x, y)
   s[o] <- s
   s
 }
-
