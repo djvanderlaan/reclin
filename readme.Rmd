@@ -11,7 +11,7 @@ cis <- read.csv("csv/cis.csv", stringsAsFactors = FALSE)
 prd <- read.csv("csv/prd.csv", stringsAsFactors = FALSE)
 
 
-p  <- pairs_blocking(cis, prd, blocking_var = "ENUMPC", large = FALSE)
+p  <- pairs_blocking(cis, prd, blocking_var = "ENUMPC", large = TRUE)
 
 p2 <- pairs_compare(p, by = c("PERNAME1", "PERNAME2", "SEX", "DOB_DAY", 
   "DOB_MON", "DOB_YEAR"), comparators = list(PERNAME1 = jaro_winkler(), 
@@ -34,4 +34,15 @@ p5 <- select_greedy(p4, "weight", threshold = 3)
 # TODO: one-to-one lp
 # TODO: iets om uiteindelijk te kopelen
 
+res <- link(p5)
+
+pairs <- p5
+backbone <- data.frame(.x = pairs$x[pairs$select],
+  .y = pairs$y[pairs$select])
+x <- attr(pairs, 'x') 
+x$.x <- seq_len(nrow(x))
+y <- attr(pairs, 'y') 
+y$.y <- seq_len(nrow(y))
+res <- left_join(backbone, x, by = ".x") %>% left_join(y, by = ".y") %>% 
+  select(-.x, -.y)
 ```

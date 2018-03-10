@@ -27,6 +27,7 @@ select_greedy.ldat <- function(pairs, weight, var = "select", threshold = NULL,
   sel <- greedy(x, y, as_rvec(weight[select]))
   select[select] <- sel
   pairs[[var]] <- select
+  attr(pairs, "selection") <- var
   pairs
 }
 
@@ -51,6 +52,7 @@ select_greedy.data.frame <- function(pairs, weight, var = "select", threshold = 
   sel <- greedy(x, y, as_rvec(weight[select]))
   select[select] <- sel
   pairs[[var]] <- select
+  attr(pairs, "selection") <- var
   pairs
 }
 
