@@ -26,23 +26,37 @@ w <- predict(m, newdata = p3)
 
 p4 <- score_problink(p3, m)
 
-p5 <- select_threshold(p4, "weight", threshold = 3)
-p5 <- select_greedy(p4, "weight", threshold = 3)
+p5 <- select_threshold(p4, "weight", threshold = 4.5)
+p5 <- select_greedy(p4, "weight", var = "greedy", threshold = 4.5)
+p5 <- select_n_to_m(p5, "weight", var = "ntom", threshold = 4.5)
 
-# TODO: iets van threshold
-# TODO: one-to-one greedy
-# TODO: one-to-one lp
-# TODO: iets om uiteindelijk te kopelen
+tst <- as.data.frame(p5[p5$ntom, c("x", "y")])
+table(duplicated(tst$x))
+table(duplicated(tst$y))
+
+
+tst <- as.data.frame(p5[p5$greedy, c("x", "y")])
+table(duplicated(tst$x))
+table(duplicated(tst$y))
+
+table(p5$ntom, p5$greedy)
 
 res <- link(p5)
 
-pairs <- p5
-backbone <- data.frame(.x = pairs$x[pairs$select],
-  .y = pairs$y[pairs$select])
-x <- attr(pairs, 'x') 
-x$.x <- seq_len(nrow(x))
-y <- attr(pairs, 'y') 
-y$.y <- seq_len(nrow(y))
-res <- left_join(backbone, x, by = ".x") %>% left_join(y, by = ".y") %>% 
-  select(-.x, -.y)
+
+
+p5 <- add_from_x(p5, x_id = "PERSON_ID")
+p5 <- add_from_y(p5, y_id = "PERSON_ID")
+p5$true <- p5$x_id == p5$y_id
+
+table(p5$true, p5$greedy)
+table(p5$true, p5$ntom)
+
+
+# TODO: one-to-one lp
+# TODO: variabele uit x/y toevoegen aan pairs
+
+
+
+
 ```
