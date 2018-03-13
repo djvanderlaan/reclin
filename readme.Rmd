@@ -7,56 +7,45 @@ output: html_document
 ```{r}
 library(devtools)
 load_all()
-cis <- read.csv("csv/cis.csv", stringsAsFactors = FALSE)
-prd <- read.csv("csv/prd.csv", stringsAsFactors = FALSE)
+```
+
+We will work with a pair of data sets with artificial data. They are tiny, but 
+that allows us to see what happens. 
+```{r}
+data("linkexample1", "linkexample2")
+print(linkexample1)
+print(linkexample2)
+```
+
+We have two data sets with personal information. The second data set contains a
+lot of errors, but we will try to link the second data set to the first. 
 
 
-p  <- pairs_blocking(cis, prd, blocking_var = "ENUMPC", large = TRUE)
+```{r}
 
-p2 <- pairs_compare(p, by = c("PERNAME1", "PERNAME2", "SEX", "DOB_DAY", 
-  "DOB_MON", "DOB_YEAR"), comparators = list(PERNAME1 = jaro_winkler(), 
-    PERNAME2 = jaro_winkler()))
+p <- pairs_blocking(linkexample1, linkexample2, "postcode")
+p <- pairs_compare(p, by = c("lastname", "firstname", "address", "sex"), 
+  default_comparator = jaro_winkler(0.9))
 
-p3 <- score_simsum(p2)
+m <- problink_em(p)
 
+p <- score_simsum(p, var = "simsum")
+p <- score_problink(p, model = m, var = "weight")
 
-m <- problink_em(p3)
+p <- select_n_to_m(p, "weight", var = "ntom_weight", threshold = 0)
+p <- select_greedy(p, "weight", var = "greedy_weight", threshold = 0)
 
-w <- predict(m, newdata = p3)
+p <- select_n_to_m(p, "simsum", var = "ntom_simsum", threshold = 2)
+p <- select_greedy(p, "simsum", var = "greedy_simsum", threshold = 2)
 
-p4 <- score_problink(p3, m)
+p <- add_from_x(p, id_x = "id") 
+p <- add_from_y(p, id_y = "id")
+p$true <- p$id_x == p$id_y
 
-p5 <- select_threshold(p4, "weight", threshold = 4.5)
-p5 <- select_greedy(p4, "weight", var = "greedy", threshold = 4.5)
-p5 <- select_n_to_m(p5, "weight", var = "ntom", threshold = 4.5)
-
-tst <- as.data.frame(p5[p5$ntom, c("x", "y")])
-table(duplicated(tst$x))
-table(duplicated(tst$y))
-
-
-tst <- as.data.frame(p5[p5$greedy, c("x", "y")])
-table(duplicated(tst$x))
-table(duplicated(tst$y))
-
-table(p5$ntom, p5$greedy)
-
-res <- link(p5)
-
-
-
-p5 <- add_from_x(p5, x_id = "PERSON_ID")
-p5 <- add_from_y(p5, y_id = "PERSON_ID")
-p5$true <- p5$x_id == p5$y_id
-
-table(p5$true, p5$greedy)
-table(p5$true, p5$ntom)
-
-
-# TODO: one-to-one lp
-# TODO: variabele uit x/y toevoegen aan pairs
-
-
-
+table(p$ntom_weight, p$true)
+table(p$ntom_simsum, p$true)
+table(p$greedy_simsum, p$true)
+table(p$greedy_weight, p$true)
 
 ```
+

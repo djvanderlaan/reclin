@@ -1,0 +1,7 @@
+id lastname   firstname address       sex postcode
+1   "Smith"    "Anna"    "12 Mainstr"  F   "1234 AB"
+2   "Smith"    "George"  "12 Mainstr"  M   "1234 AB"
+3   "Johnson"  "Anna"    "61 Mainstr"  F   "1234 AB"
+4   "Johnson"  "Charles" "61 Mainstr"  M   "1234 AB"
+5   "Johnson"  "Charly"  "61 Mainstr"  M   "1234 AB"
+6   "Schwartz" "Ben"     "1 Eaststr"   M   "6789 XY"

@@ -1,4 +1,3 @@
-
 #' Generate pairs using simple blocking
 #'
 #' Generates all combinations of records from \code{x} and \code{y} where the 
@@ -19,7 +18,7 @@
 #' Generating (all) pairs of the records of two data sets, is usually the first 
 #' step when linking the two data sets. However, this often results in a too 
 #' large number of records. Therefore, blocking is usually applied. 
-#' 
+#'  
 #' @return 
 #' When \code{large} is \code{FALSE}, a \code{data.frame} with two columns, 
 #' \code{x} and \code{y}, is returned. Columns \code{x} and \code{y} are 
