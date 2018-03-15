@@ -14,6 +14,7 @@
 #' @param y the second \code{data.frame}, when missing \code{attr(pairs, "y")} 
 #'   is used. 
 #' @param default_comparator the default \link[=identical]{comparison function}.
+#' @param overwrite overwrite exiting variables in \code{pairs}
 #' 
 #' @return 
 #' Returns the \code{pairs} object with a column added for each variable in 
@@ -24,7 +25,7 @@
 #' @import lvec
 #' @export
 pairs_compare <- function(pairs, by, comparators = list(default_comparator), 
-    x, y, default_comparator = identical) {
+    x, y, default_comparator = identical, overwrite = FALSE) {
   # Process and preparare input
   if (missing(x)) x <- attr(pairs, "x")
   if (is.null(x)) stop("Missing x.")
@@ -32,7 +33,7 @@ pairs_compare <- function(pairs, by, comparators = list(default_comparator),
   if (is.null(y)) stop("Missing y.")
   if (missing(by) && !missing(by)) by <- names(comparators)
   if (missing(by) || is.null(by)) stop("by is missing.")
-  if (any(by %in% names(pairs))) 
+  if (!overwrite && any(by %in% names(pairs))) 
     stop("Variable in by already present in pairs.")
   if (!all(by %in% names(x)))
     stop("Not all variables in by are present in x.")
