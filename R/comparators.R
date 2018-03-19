@@ -3,6 +3,10 @@
 #' @export
 identical <- function(x, y) {
   if (missing(x) && missing(y)) return(identical)
+  if (is.factor(x) || is.factor(y)) {
+    x <- as.character(x)
+    y <- as.character(y)
+  }
   if (!missing(y)) {
     x == y
   } else {

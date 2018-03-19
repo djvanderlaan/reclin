@@ -1,21 +1,25 @@
 
 #' @export
-link <- function(pairs, selection = NULL, x = NULL, y = NULL, ...) {
+link <- function(pairs, selection = NULL, x = NULL, y = NULL, all_x = TRUE, 
+    all_y = TRUE, ...) {
   if (!is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")
   UseMethod("link")
 }
 
 
-link.data.frame <- function(pairs, selection = NULL, x = NULL, y = NULL, ...) {
-  link_impl(pairs, selection, x, y)
+link.data.frame <- function(pairs, selection = NULL, x = NULL, y = NULL,
+    all_x = TRUE, all_y = TRUE, ...) {
+  link_impl(pairs, selection, x, y, all_x, all_y)
 }
 
-link.ldat <- function(pairs, selection = NULL, x = NULL, y = NULL, ...) {
-  link_impl(pairs, selection, x, y)
+link.ldat <- function(pairs, selection = NULL, x = NULL, y = NULL, all_x = TRUE, 
+    all_y = TRUE, ...) {
+  link_impl(pairs, selection, x, y, all_x, all_y)
 }
 
 
-link_impl <- function(pairs, selection = NULL, x = NULL, y = NULL) {
+link_impl <- function(pairs, selection = NULL, x = NULL, y = NULL, 
+    all_x = TRUE, all_y = TRUE) {
   # Process x and y
   if (missing(x) || is.null(x)) x <- attr(pairs, "x")
   if (is.null(x)) stop("Missing x")
@@ -36,8 +40,10 @@ link_impl <- function(pairs, selection = NULL, x = NULL, y = NULL) {
   } 
   # Link
   res <- data.frame(.x = as_rvec(pairs$x[selection]),
-    .y = as_rvec(pairs$y[selection]))  
-  res <- dplyr::left_join(res, x, by = ".x")
-  res <- dplyr::left_join(res, y, by = ".y") 
+    .y = as_rvec(pairs$y[selection]))
+  res <- if (all_x) dplyr::full_join(res, x, by = ".x") else 
+    dplyr::left_join(res, x, by = ".x")
+  res <- if (all_y) dplyr::full_join(res, y, by = ".y") else 
+    dplyr::left_join(res, y, by = ".y") 
   dplyr::select(res, -.x, -.y)
 }
