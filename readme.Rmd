@@ -4,7 +4,7 @@ author: "Jan van der Laan"
 output: html_document
 ---
 
-```{r}
+```{r,echo=FALSE,results='hide',message=FALSE,warning=FALSE}
 library(devtools)
 load_all()
 ```
@@ -22,18 +22,28 @@ lot of errors, but we will try to link the second data set to the first.
 
 
 ```{r}
+pairs <- pairs_blocking(linkexample1, linkexample2, "postcode")
+print(pairs)
+```
 
-p <- pairs_blocking(linkexample1, linkexample2, "postcode")
-p <- pairs_compare(p, by = c("lastname", "firstname", "address", "sex"), 
+```{r}
+pairs <- pairs_compare(pairs, by = c("lastname", "firstname", "address", "sex"), 
   default_comparator = jaro_winkler(0.9))
+```
 
+```{r}
+pairs <- score_simsum(pairs, var = "simsum")
+pairs <- select_greedy(pairs, "weight", var = "greedy_weight", threshold = 0)
+```
+
+```{r}
 m <- problink_em(p)
 
-p <- score_simsum(p, var = "simsum")
+
 p <- score_problink(p, model = m, var = "weight")
 
 p <- select_n_to_m(p, "weight", var = "ntom_weight", threshold = 0)
-p <- select_greedy(p, "weight", var = "greedy_weight", threshold = 0)
+
 
 p <- select_n_to_m(p, "simsum", var = "ntom_simsum", threshold = 2)
 p <- select_greedy(p, "simsum", var = "greedy_simsum", threshold = 2)
