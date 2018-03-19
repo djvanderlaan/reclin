@@ -75,7 +75,7 @@ predict.problink_em <- function(object, pairs = newdata, newdata = NULL,
         mpost = mpost, upost = 1 - mpost) else 
       data.frame(mprob = mprobs, uprob = uprobs, mpost = mpost, 
         upost = 1 - mpost)
-    if (type == "all") res$weights <- weights
+    if (type == "all") res$weight <- weights
     res
   } 
 }

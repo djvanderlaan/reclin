@@ -21,6 +21,7 @@ score_simsum.ldat <- function(pairs, var = "simsum", by, add = TRUE,
   }
   if (add) { 
     pairs[[var]] <- simsum
+    attr(pairs, "score") <- var
     pairs
   } else simsum
 }
@@ -38,6 +39,7 @@ score_simsum.data.frame <- function(pairs, var = "simsum", by, add = TRUE,
   }
   if (add) { 
     pairs[[var]] <- simsum
+    attr(pairs, "score") <- var
     pairs
   } else simsum
 }

@@ -31,10 +31,16 @@ score_problink_impl <- function(pairs, model = NULL, var = "weight", add, ...) {
   if (!is.data.frame(p) && !is_ldat(p)) {
     if (is.null(var)) var <- "weight"
     pairs[[var]] <- p
+    attr(pairs, "score") <- var
   } else {
-    if (!missing(var) && !is.null(var))
-      names(p) <- paste0(var, "_", names(p))
+    prepend <- if (!missing(var) && !is.null(var)) paste0(var, "_") else ""
+    names(p) <- paste0(prepend, names(p))
     for (col in names(p)) pairs[[col]] <- p[[col]]
+    if (paste0(prepend, "weight") %in% names(p)) {
+      attr(pairs, "score") <- paste0(prepend, "weight")
+    } else if (paste0(prepend, "mpost") %in% names(p)) {
+      attr(pairs, "score") <- paste0(prepend, "mpost")
+    }
   }
   pairs
 }
