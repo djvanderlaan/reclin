@@ -26,9 +26,8 @@
 #' When \code{large} is \code{TRUE}, an object of type \code{ldat} is returned. 
 #'
 #' @examples
-#' x <- data.frame(a = c(1,1,2,2,3), b = 1:5)
-#' y <- data.frame(a = c(2,2,3,3,5), b = 1:5)
-#' pairs_blocking(x, y, "a")
+#' data("linkexample1", "linkexample2")
+#' pairs <- pairs_blocking(linkexample1, linkexample2, "postcode")
 #'
 #' @import lvec
 #' @import ldat

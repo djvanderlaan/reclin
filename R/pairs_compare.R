@@ -21,6 +21,11 @@
 #' \code{by}. The value is the column is given by the return value of the 
 #' corresponding \link[=identical]{comparison function}.
 #' 
+#' @examples
+#' data("linkexample1", "linkexample2")
+#' pairs <- pairs_blocking(linkexample1, linkexample2, "postcode")
+#' pairs <- pairs_compare(pairs, c("lastname", "firstname", "address", "sex"))
+#' 
 #' @import ldat
 #' @import lvec
 #' @export
