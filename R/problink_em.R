@@ -11,6 +11,26 @@
 #' @param p0 the initial estimate of the probability that a pair is a match.
 #' @param tol when the change in the m and u-probabilities is smaller than tol
 #'   the algorithm is stopped. 
+#'   
+#' @return 
+#' Returns an object of type \code{problink_em}. This is a list containing the
+#' estimated \code{mprobs}, \code{uprobs} and overall linkage probability 
+#' \code{p}. It also contains the table of comparison \code{patterns}. 
+#' 
+#' @references 
+#' Fellegi, I. and A. Sunter (1969). "A Theory for Record Linkage", 
+#' \emph{Journal of the American Statistical Association}. 64 (328): 
+#' pp. 1183–1210. doi:10.2307/2286061.
+#' 
+#' Herzog, T.N., F.J. Scheuren and W.E. Winkler (2007). 
+#' \emph{Data Quality and Record Linkage Techniques}, Springer.
+#' 
+#' @examples 
+#' data("linkexample1", "linkexample2")
+#' pairs <- pairs_blocking(linkexample1, linkexample2, "postcode")
+#' pairs <- pairs_compare(pairs, c("lastname", "firstname", "address", "sex"))
+#' model <- problink_em(pairs)
+#' summary(model)
 #' 
 #' @export
 problink_em <- function(patterns, mprobs0 = list(0.95), uprobs0 = list(0.02), 

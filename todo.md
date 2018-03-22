@@ -9,13 +9,14 @@
 
 Document:
 + `add_from_x`/`add_from_y`
-- `score_problink`
++ `score_problink`
 + `score_simsum`
-- `problink_em` 
++ `problink_em` 
 + `predict.problink_em`
 - `select_threshold`
 - `select_ntom`
 - `select_greedy`
 + `pairs_compare`
 + `pairs_blocking`
-- `tabulate_patterns`
++ `tabulate_patterns`
+- comparison functions

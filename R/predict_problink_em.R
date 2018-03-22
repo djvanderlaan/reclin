@@ -1,3 +1,4 @@
+
 #' Calculate weights and probabilities for pairs
 #' 
 #' @param object an object of type `problink_em` as produced by 
