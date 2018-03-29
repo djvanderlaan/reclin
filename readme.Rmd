@@ -44,7 +44,7 @@ different blocking variables and combine both data sets.
 
 The first step in (probabilistic) linkage is, therefore, generating all pairs:
 ```{r}
-p <- pairs_blocking(linkexample1, linkexample2, "postcode")
+p <- pairs_blocking(linkexample1, linkexample2, "postcode", large = FALSE)
 print(p)
 ```
 

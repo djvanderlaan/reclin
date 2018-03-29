@@ -5,6 +5,8 @@
 - `pairs_compare`: for `var` allow `c(xvar = "yvar")` for different named variables
 - `pairs_blocking`: same as above
 - `jaro_winkler`: add option to always return `TRUE`/`FALSE`
++ 1-to-1 selection: implement for data.frame
++ greedy: add `id_x` and `id_y`
 
 
 Document:
