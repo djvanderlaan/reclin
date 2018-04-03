@@ -7,7 +7,7 @@ select_greedy <- function(pairs, threshold = NULL, weight, var = "select",
   UseMethod("select_greedy")
 }
 
-select_greedy.data.frame <- function(pairs, threshold = NULL, weight, var = "select",
+select_greedy.data.frame <- function(pairs, threshold = NULL, weight = NULL, var = "select",
     preselect = NULL, id_x = NULL, id_y = NULL, ...) {
   prep <- select_preprocess(pairs, threshold, weight, preselect, id_x, id_y)
   select <- prep$select
@@ -21,7 +21,7 @@ select_greedy.data.frame <- function(pairs, threshold = NULL, weight, var = "sel
 }
 
 #' @export
-select_greedy.ldat <- function(pairs, threshold = NULL, weight, var = "select", 
+select_greedy.ldat <- function(pairs, threshold = NULL, weight = NULL, var = "select", 
     preselect = NULL, id_x = NULL, id_y = NULL, ...) {
   prep <- select_preprocess(pairs, threshold, weight, preselect, id_x, id_y)
   select <- prep$select
@@ -34,10 +34,12 @@ select_greedy.ldat <- function(pairs, threshold = NULL, weight, var = "select",
   pairs
 }
 
-#' @export
+
 select_preprocess <- function(pairs, threshold = NULL, weight, preselect = NULL, 
     n = 1, m = 1, id_x = NULL, id_y = NULL) {
   # Process weight
+  if (missing(weight) || is.null(weight)) weight <- attr(pairs, "score")
+  if (is.null(weight)) stop("Missing weight")
   if (is.character(weight)) weight <- pairs[[weight]]
   # Proces selection: threshold/preselect
   if (!is.null(preselect)) {

@@ -47,18 +47,18 @@
 #' 
 #' # Select pairs with a simsum > 5 and force one-to-one linkage
 #' pairs <- select_n_to_m(pairs, 0, var = "ntom")
-#' pairs <- select_greedy(pairs, 0, var = "greedy)
+#' pairs <- select_greedy(pairs, 0, var = "greedy")
 #' table(pairs[c("ntom", "greedy")])
 #' 
 #' @rdname select_n_to_m
 #' @export
-select_n_to_m <- function(pairs, threshold = NULL, weight, var = "select", 
+select_n_to_m <- function(pairs, threshold = NULL, weight = NULL, var = "select", 
     preselect = NULL, n = 1, m = 1, id_x = NULL, id_y = NULL, ...) {
   UseMethod("select_n_to_m")
 }
 
 #' @export
-select_n_to_m.data.frame <- function(pairs, threshold = NULL, weight, var = "select",
+select_n_to_m.data.frame <- function(pairs, threshold = NULL, weight = NULL, var = "select",
     preselect = NULL, n = 1, m = 1, id_x = NULL, id_y = NULL, ...) {
   prep <- select_preprocess(pairs, threshold, weight, preselect, id_x, id_y)
   select <- prep$select
@@ -74,7 +74,7 @@ select_n_to_m.data.frame <- function(pairs, threshold = NULL, weight, var = "sel
 }
 
 #' @export
-select_n_to_m.ldat <- function(pairs, threshold = NULL, weight, var = "select",
+select_n_to_m.ldat <- function(pairs, threshold = NULL, weight = NULL, var = "select",
     preselect = NULL, n = 1, m = 1, id_x = NULL, id_y = NULL, ...) {
   prep <- select_preprocess(pairs, threshold, weight, preselect, id_x, id_y)
   select <- prep$select

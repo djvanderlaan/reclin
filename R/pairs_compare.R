@@ -30,7 +30,7 @@
 #' @import lvec
 #' @export
 pairs_compare <- function(pairs, by, comparators = list(default_comparator), 
-    x, y, default_comparator = identical, overwrite = FALSE) {
+    x, y, default_comparator = identical(), overwrite = FALSE) {
   # Process and preparare input
   if (missing(x)) x <- attr(pairs, "x")
   if (is.null(x)) stop("Missing x.")
