@@ -20,12 +20,4 @@ Greedy one-to-one matching of pairs
 Pairs with the highest weight are selected as long a neither the lhs as the
 rhs are already selected in a pair with a higher weight.
 }
-\examples{
-x <- sample(10, 1E2, replace = TRUE)
-y <- sample(8, 1E2, replace = TRUE)
-w <- rnorm(1E2)
-sel <- greedy(x, y, w)
-data.frame(x[sel], y[sel], w[sel])
-
-}
 

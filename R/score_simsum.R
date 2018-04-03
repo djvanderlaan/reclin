@@ -10,6 +10,8 @@
 #'   is used. 
 #' @param add add the variable to the \code{pairs} object and return the 
 #'   \code{pairs} object. Otherwise, return a vector with the scores.
+#' @param na_value the value to use for missing values
+#' @param ... passed on to other methods.
 #'   
 #' @details 
 #' The scores are calculated by summing the columns given by \code{by}. Missing
@@ -29,7 +31,7 @@
 #' @export
 score_simsum <- function(pairs, var = "simsum", by, add = TRUE,
     na_value = 0, ...) {
-  if (!is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")
+  if (!methods::is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")
   UseMethod("score_simsum")
 }
 

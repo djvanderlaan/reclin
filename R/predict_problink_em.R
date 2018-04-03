@@ -10,8 +10,9 @@
 #'   See results for more information.
 #' @param binary convert comparison vectors to binary vectors using the 
 #'   comparison function in comparators. 
-#' @param comparators a list of comparison functions (see \code{\link{compare}}). 
+#' @param comparators a list of comparison functions (see \code{\link{pairs_compare}}). 
 #'   When missing \code{attr(pairs, 'comparators')} is used. 
+#' @param ... unused.
 #'   
 #' @return 
 #' In case of `type == "weights"` returns a vector (\code{\link{lvec}} or

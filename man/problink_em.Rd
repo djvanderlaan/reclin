@@ -14,7 +14,7 @@ output by \code{\link{pairs_compare}}).}
 
 \item{mprobs0, uprobs0}{initial values of the m- and u-probabilities. These
 should be lists with numeric values. The names of the elements in the list
-should correspond to the names in \code{by_x} in \code{\link{link}}.}
+should correspond to the names in \code{by_x} in \code{\link{pairs_compare}}.}
 
 \item{p0}{the initial estimate of the probability that a pair is a match.}
 

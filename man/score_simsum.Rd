@@ -19,6 +19,10 @@ is used.}
 
 \item{add}{add the variable to the \code{pairs} object and return the 
 \code{pairs} object. Otherwise, return a vector with the scores.}
+
+\item{na_value}{the value to use for missing values}
+
+\item{...}{passed on to other methods.}
 }
 \value{
 When \code{add = TRUE} the original \code{pairs} object is returned with the 

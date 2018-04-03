@@ -36,7 +36,7 @@
 #' @export
 score_problink <- function(pairs, model = NULL, var = "weight", 
     add = TRUE, ...) {
-  if (!is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")
+  if (!methods::is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")
   UseMethod("score_problink")
 }
 
@@ -60,7 +60,7 @@ score_problink.ldat <- function(pairs, model = NULL, var = "weight",
 
 score_problink_impl <- function(pairs, model = NULL, var = "weight", add, ...) {
   if (missing(model) || is.null(model)) model <- problink_em(pairs)
-  p <- predict(model, newdata = pairs, ...)
+  p <- stats::predict(model, newdata = pairs, ...)
   if (!add) return(p)
   if (!is.data.frame(p) && !is_ldat(p)) {
     if (is.null(var)) var <- "weight"

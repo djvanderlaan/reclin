@@ -3,7 +3,7 @@
 #' @export
 select_greedy <- function(pairs, threshold = NULL, weight, var = "select", 
     preselect = NULL, id_x = NULL, id_y = NULL, ...) {
-  if (!is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")
+  if (!methods::is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")
   UseMethod("select_greedy")
 }
 

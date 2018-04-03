@@ -23,8 +23,10 @@ See results for more information.}
 \item{binary}{convert comparison vectors to binary vectors using the 
 comparison function in comparators.}
 
-\item{comparators}{a list of comparison functions (see \code{\link{compare}}). 
+\item{comparators}{a list of comparison functions (see \code{\link{pairs_compare}}). 
 When missing \code{attr(pairs, 'comparators')} is used.}
+
+\item{...}{unused.}
 }
 \value{
 In case of `type == "weights"` returns a vector (\code{\link{lvec}} or

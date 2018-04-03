@@ -9,6 +9,7 @@
 #' @param by the columns that should be used for the comparison vectors. When
 #'   missing or \code{NULL}, \code{attr(pairs, "by")} is used. Therefore, this
 #'   parameter usually does not need to be specified. 
+#' @param ... passed on to other methods.
 #'   
 #' @details 
 #' Since comparison vectors can contain continuous numbers (usually between 0
@@ -32,7 +33,7 @@
 #'
 #' @export
 tabulate_patterns <- function(pairs, ..., comparators = NULL, by = NULL) {
-  if (!is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")
+  if (!methods::is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")
   UseMethod("tabulate_patterns")
 }
 

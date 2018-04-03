@@ -24,7 +24,7 @@
 #' 
 #' @export
 select_threshold <- function(pairs, threshold, weight, var = "select") {
-  if (!is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")
+  if (!methods::is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")
   UseMethod("select_threshold")
 }
 

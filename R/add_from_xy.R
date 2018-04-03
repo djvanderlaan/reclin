@@ -22,7 +22,7 @@
 #' @rdname add_from_x
 #' @export
 add_from_x <- function(pairs, ...) {
-  if (!is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")  
+  if (!methods::is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")  
   UseMethod("add_from_x")
 }
 
@@ -39,7 +39,7 @@ add_from_x.ldat <- function(pairs, ...) {
 #' @rdname add_from_x
 #' @export
 add_from_y <- function(pairs, ...) {
-  if (!is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")  
+  if (!methods::is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")  
   UseMethod("add_from_y")
 }
 
