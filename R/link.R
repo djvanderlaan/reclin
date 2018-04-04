@@ -57,11 +57,15 @@ link_impl <- function(pairs, selection = NULL, x = NULL, y = NULL,
     selection <- pairs[[selection]]
   } 
   # Link
-  res <- data.frame(.x = as_rvec(pairs$x[selection]),
-    .y = as_rvec(pairs$y[selection]))
-  res <- if (all_x) dplyr::full_join(res, x, by = ".x") else 
+  res <- data.frame('.x' = as_rvec(pairs$x[selection]),
+    '.y' = as_rvec(pairs$y[selection]))
+  res <- if (all_x) dplyr::full_join(res, x, by = ".x") else
     dplyr::left_join(res, x, by = ".x")
-  res <- if (all_y) dplyr::full_join(res, y, by = ".y") else 
-    dplyr::left_join(res, y, by = ".y") 
-  dplyr::select(res, -.x, -.y)
+  res <- if (all_y) dplyr::full_join(res, y, by = ".y") else
+    dplyr::left_join(res, y, by = ".y")
+  res$.x <- NULL
+  res$.y <- NULL
+  res
+  # The following gnerates note in R CMD check
+  # dplyr::select(res, -`.x`, -`.y`)
 }

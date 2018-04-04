@@ -40,6 +40,7 @@ score_problink <- function(pairs, model = NULL, var = "weight",
   UseMethod("score_problink")
 }
 
+#' @export
 score_problink.data.frame <- function(pairs, model = NULL, var = "weight", 
     add = TRUE, ...) {
   if (missing(var)) {
@@ -49,6 +50,7 @@ score_problink.data.frame <- function(pairs, model = NULL, var = "weight",
   }
 }
 
+#' @export
 score_problink.ldat <- function(pairs, model = NULL, var = "weight", 
     add = TRUE, ...) {
   if (missing(var)) {

@@ -20,7 +20,7 @@
 #' @references 
 #' Fellegi, I. and A. Sunter (1969). "A Theory for Record Linkage", 
 #' \emph{Journal of the American Statistical Association}. 64 (328): 
-#' pp. 1183–1210. doi:10.2307/2286061.
+#' pp. 1183-1210. doi:10.2307/2286061.
 #' 
 #' Herzog, T.N., F.J. Scheuren and W.E. Winkler (2007). 
 #' \emph{Data Quality and Record Linkage Techniques}, Springer.

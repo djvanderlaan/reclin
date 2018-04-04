@@ -30,9 +30,9 @@ select_threshold <- function(pairs, threshold, weight, var = "select") {
 
 #' @export
 select_threshold.ldat <- function(pairs, threshold, weight, var = "select") {  
+  if (missing(weight) || is.null(weight)) weight <- attr(pairs, "score")
+  if (is.null(weight)) stop("Missing weight")
   if (is.character(weight)) weight <- pairs[[weight]]
-  if (missing(var) && !is.null(attr(pairs, "score")))
-    var <- attr(pairs, "var")
   pairs[[var]] <- weight > threshold
   attr(pairs, "selection") <- var
   pairs
@@ -41,9 +41,9 @@ select_threshold.ldat <- function(pairs, threshold, weight, var = "select") {
 #' @export
 select_threshold.data.frame <- function(pairs, threshold, weight,
     var = "select") {  
+  if (missing(weight) || is.null(weight)) weight <- attr(pairs, "score")
+  if (is.null(weight)) stop("Missing weight")
   if (is.character(weight)) weight <- pairs[[weight]]
-  if (missing(var) && !is.null(attr(pairs, "score")))
-    var <- attr(pairs, "var")
   pairs[[var]] <- weight > threshold
   attr(pairs, "selection") <- var
   pairs
