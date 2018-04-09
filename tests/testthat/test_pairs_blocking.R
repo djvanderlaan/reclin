@@ -51,5 +51,43 @@ test_that("blocking large = FALSE", {
   expect_s3_class(p, "data.frame")
 })
 
+test_that("edge case of 0 row data.frames", {
+  data("linkexample1", "linkexample2")
+  p <- pairs_blocking(linkexample1, linkexample2[FALSE, ])
+  expect_equal(nrow(p), 0)
+  expect_equal(ncol(p), 2)
+  expect_equal(names(p), c("x", "y"))
+  expect_s3_class(p, "ldat")
+  
+  p <- pairs_blocking(linkexample1, linkexample2[FALSE, ], large = FALSE)
+  expect_equal(nrow(p), 0)
+  expect_equal(ncol(p), 2)
+  expect_equal(names(p), c("x", "y"))
+  expect_s3_class(p, "data.frame")
+  
+  p <- pairs_blocking(linkexample1[FALSE, ], linkexample2)
+  expect_equal(nrow(p), 0)
+  expect_equal(ncol(p), 2)
+  expect_equal(names(p), c("x", "y"))
+  expect_s3_class(p, "ldat")
+  
+  p <- pairs_blocking(linkexample1[FALSE, ], linkexample2, large = FALSE)
+  expect_equal(nrow(p), 0)
+  expect_equal(ncol(p), 2)
+  expect_equal(names(p), c("x", "y"))
+  expect_s3_class(p, "data.frame")
 
+  p <- pairs_blocking(linkexample1[FALSE, ], linkexample2[FALSE, ])
+  expect_equal(nrow(p), 0)
+  expect_equal(ncol(p), 2)
+  expect_equal(names(p), c("x", "y"))
+  expect_s3_class(p, "ldat")
+
+  p <- pairs_blocking(linkexample1[FALSE, ], linkexample2[FALSE, ], large = FALSE)
+  expect_equal(nrow(p), 0)
+  expect_equal(ncol(p), 2)
+  expect_equal(names(p), c("x", "y"))
+  expect_s3_class(p, "data.frame")
+  
+})
 

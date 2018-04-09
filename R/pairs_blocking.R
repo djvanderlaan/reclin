@@ -40,17 +40,13 @@ pairs_blocking <- function(x, y, blocking_var = NULL, large = TRUE,
   # to the pairs data.frame
   if (large) {
     nblocks <- if (is.null(blocking_var)) 1 else nrow(unique(x[blocking_var]))
-    chunks <- chunk(x, chunk_size = round(nblocks * 1E7/nrow(y)))
-    pairs <- NULL
+    chunks <- chunk(x, chunk_size = round(nblocks * 1E7/(nrow(y)+1)))
+    pairs <- ldat(x = lvec(0, type = "numeric"), y = lvec(0, type = "numeric"))
     for (i in seq_along(chunks)) {
       p <- pairs_blocking(slice_range(x, range = chunks[[i]], as_r = TRUE), 
         y, blocking_var, large = FALSE)
       p$x <- p$x + chunks[[i]][1] - 1
-      if (is.null(pairs)) {
-        pairs <- as_ldat(p)
-      } else {
-        pairs <- ldat::append(pairs, p, clone = FALSE)
-      }  
+      pairs <- ldat::append(pairs, p, clone = FALSE)
     }
   } else {
     if (missing(blocking_var) || is.null(blocking_var)) {
