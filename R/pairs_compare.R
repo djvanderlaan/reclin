@@ -48,7 +48,7 @@ pairs_compare <- function(pairs, by, comparators = list(default_comparator),
   # Compare
   chunks <- chunk(pairs$x)
   for (col in by) {
-    res <- NULL
+    res <- if (is_ldat(pairs)) lvec(0, "numeric") else numeric()
     comparator <- comparators[[col]]
     for (c in chunks) {
       x_i <- slice_range(pairs$x, range = c, as_r = TRUE)
@@ -56,7 +56,7 @@ pairs_compare <- function(pairs, by, comparators = list(default_comparator),
       y_i <- slice_range(pairs$y, range = c, as_r = TRUE)
       y_chunk <- y[[col]][y_i]
       comparison <- comparator(x_chunk, y_chunk)
-      if (is.null(res)) {
+      if (is.null(res) || length(res) == 0) {
         res <- if (is_ldat(pairs)) as_lvec(comparison) else comparison
         length(res) <- length(pairs$x)
       } else {
