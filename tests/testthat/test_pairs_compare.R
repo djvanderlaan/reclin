@@ -83,3 +83,4 @@ test_that("edge case of 0 row data.frames", {
     "postcode"))
   expect_s3_class(p, "data.frame")
 })
+

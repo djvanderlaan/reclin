@@ -1,13 +1,14 @@
 Package: reclin
 Type: Package
-Title: Probabilistic Record Linkage
-Version: 0.0.4
+Title: Record Linkage Toolkit
+Version: 0.0.5
 Date: 2017-07-28
 Author: Jan van der Laan
 Maintainer: Jan van der Laan <djvanderlaan@unrealizedtime.nl>
 Description: Functions to assist in performing probabilistis record linkage:
     generating pairs, comparing records, em-algorithm for estimating m- and
-    u-probabilities, forcing one-to-one matching.
+    u-probabilities, forcing one-to-one matching. Can also be used for pre- 
+    and post-processing for machine learning methods for record linkage. 
 Depends:
     stats,
     lvec,
