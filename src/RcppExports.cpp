@@ -5,6 +5,19 @@
 
 using namespace Rcpp;
 
+// equivalence_rcpp
+IntegerVector equivalence_rcpp(IntegerVector a, IntegerVector b, int n);
+RcppExport SEXP _reclin_equivalence_rcpp(SEXP aSEXP, SEXP bSEXP, SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type a(aSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type b(bSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(equivalence_rcpp(a, b, n));
+    return rcpp_result_gen;
+END_RCPP
+}
 // greedy_rcpp
 LogicalVector greedy_rcpp(IntegerVector x, IntegerVector y);
 RcppExport SEXP _reclin_greedy_rcpp(SEXP xSEXP, SEXP ySEXP) {
@@ -19,6 +32,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_reclin_equivalence_rcpp", (DL_FUNC) &_reclin_equivalence_rcpp, 3},
     {"_reclin_greedy_rcpp", (DL_FUNC) &_reclin_greedy_rcpp, 2},
     {NULL, NULL, 0}
 };

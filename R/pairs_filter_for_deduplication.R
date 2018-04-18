@@ -28,7 +28,7 @@ pairs_filter_for_deduplication.data.frame <- function(pairs) {
 
 pairs_filter_for_deduplication_impl <- function(pairs) {
   sel <- pairs$y > pairs$x
-  res <- pairs[sel, , drop = FALSE]
+  res <- if (is.data.frame(pairs)) pairs[sel, , drop = FALSE] else pairs[sel, ]
   attributes(res) <- attributes(pairs)
   res
 }
