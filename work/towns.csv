@@ -1,5 +1,5 @@
 "name","group"
-"alblasserdam",
+"alblasserdam",15
 "amsterdam",1
 "amsterdam-z.o.",1
 "amsterdam-zuidoost",1
@@ -9,22 +9,22 @@
 "amsterdam zuid oost",1
 "amsterdam zuidoost",1
 "amsterdamzuidoost",1
-"hoogvliet rotterdam",2
-"leerdam",
-"nieuw amsterdam",
-"pernis rotterdam",
+"hoogvliet rotterdam",5
+"leerdam",13
+"nieuw amsterdam",12
+"pernis rotterdam",7
 "rotterdam",2
-"zwammerdam",
-"hoogvliet (rotterdam)",2
-"rotterdam hoogvliet",2
-"asmsterdam",
+"zwammerdam",9
+"hoogvliet (rotterdam)",5
+"rotterdam hoogvliet",5
+"asmsterdam",1
 "amsterdam-zuid oost",1
 "msterdam",1
 "amsterdam zuid/oost",1
 "rotterdam-schiebroek",2
 "amsterdam-zeebrug",1
 "amsterdam/diemen",1
-"nieuw - amsterdam",
+"nieuw - amsterdam",12
 "amsterdam zuid-oost",1
 "amsterdam noord",1
 "amserdam",1
@@ -48,55 +48,52 @@
 "amsterdam/zunderdorp",1
 "amstetrdam",1
 "a msterdam",1
-"amsterdamzaandam",
 "amsterdam-zo",1
 "amsterdam  zuidoost",1
 "amsterdam- zuidoost",1
 "amsterdam     z.o.",1
 "amesterdam",1
 "rotterdam charlois",2
-"hoogvliet-rotterdam",2
-"rootterdam",
-"nieuw-amsterdam",
-"rottterdam",
-"den helder / rotterdam",
-"rotterdam-hoogvliet",2
+"hoogvliet-rotterdam",5
+"rootterdam",2
+"nieuw-amsterdam",12
+"rottterdam",2
+"rotterdam-hoogvliet",5
 "rotterdam.",2
-"nw. amsterdam",
+"nw. amsterdam",12
 "roterdam",2
-"rotterdam-pernis",
-"rotterdam - hoogvliet",2
+"rotterdam-pernis",7
+"rotterdam - hoogvliet",5
 "rotterrdam",2
 "rooterdam",2
 "rottrdam",2
 "rotterdaml",2
-"hoogvliet /rotterdam",2
-"totterdam",
-"+msterdam",
-"ablasserdam",
+"hoogvliet /rotterdam",5
+"totterdam",2
+"+msterdam",1
+"ablasserdam",15
 "amnsterdam",1
-"amsterdam-holysloot",
+"amsterdam-holysloot",1
 "amsterdam-ijburg",1
-"amsterdam - diemen",
-"amsterdam - ijburg",
-"amsterdam - zuidoost",
-"amsterdam  zo",
-"amsterdam (driemond)",
-"amsterdam (ijburg)",
-"amsterdam (z.o.)",
-"amsterdam nw sloten",
-"amsterdam zd-oost",
-"amsterdam zuidooost",
-"amsterdam/noord",
-"amstserdam",
-"hoogvliet - rotterdam",2
-"hoogvlietrotterdam",2
-"nieuwamsterdam",
-"nw-amsterdam",
-"nw amsterdam",
-"pernis-rotterdam",
-"pernis - rotterdam",
-"pernis (rotterdam)",
+"amsterdam - diemen",19
+"amsterdam - ijburg",1
+"amsterdam - zuidoost",1
+"amsterdam  zo",1
+"amsterdam (driemond)",1
+"amsterdam (ijburg)",1
+"amsterdam (z.o.)",1
+"amsterdam zd-oost",1
+"amsterdam zuidooost",1
+"amsterdam/noord",1
+"amstserdam",1
+"hoogvliet - rotterdam",5
+"hoogvlietrotterdam",5
+"nieuwamsterdam",12
+"nw-amsterdam",12
+"nw amsterdam",12
+"pernis-rotterdam",7
+"pernis - rotterdam",7
+"pernis (rotterdam)",7
 "rotterdam-hillegersb",2
 "rotterdam-overschie",2
 "rotterdam (hillegersberg",2
@@ -104,104 +101,99 @@
 "rotterdam / overschie",2
 "rotterdam,",2
 "rotterdamk",2
-"spaardam",
-"zammerdam",
-"zwabberdam",
-"amstaerdam",
-"amsterdam- driemond",
-"amsterdam-driemond",
-"amsterdam-duivendrecht",
-"amsterdam-zoudoost",
-"amsterdam   ransdorp",
-"amsterdam  z-o",
-"amsterdam tuindorp",
-"amsterdams",
-"europoort-rotterdam",2
-"hoogvliet-rottterdam",
-"hoogvliet/rotterdam",2
+"spaardam",20
+"zammerdam",9
+"zwabberdam",9
+"amstaerdam",1
+"amsterdam- driemond",1
+"amsterdam-driemond",1
+"amsterdam-duivendrecht",18
+"amsterdam-zoudoost",1
+"amsterdam   ransdorp",1
+"amsterdam  z-o",1
+"amsterdam tuindorp",1
+"amsterdams",1
+"europoort-rotterdam",4
+"hoogvliet-rottterdam",5
+"hoogvliet/rotterdam",5
 "ritterdam",2
 "rotterdam- overchie",2
 "rotterdam-beverwaard",2
 "rotterdam - zuid",2
-"rotterdam -hoogvliet",2
+"rotterdam -hoogvliet",5
 "rotterdam (nesselande)",2
-"rotterdam pernis",
-"rotterdam/hoogvliet",2
+"rotterdam pernis",7
+"rotterdam/hoogvliet",5
 "amsaterdam",1
 "amstardam",1
 "amsterdam- west",1
-"amsterdam-buitenveldert",
+"amsterdam-buitenveldert",1
 "amsterdam-n",1
 "amsterdam-oost",1
 "amsterdam - oost",1
 "amsterdam  -  noord",1
-"amsterdam ( sloten )",
-"amsterdam osdorp",
+"amsterdam osdorp",1
 "amsterdam west",1
 "amsterdam/zuidoost",1
 "amsterdm",1
 "asmterdam",1
-"hoogvliet  rotterdam",2
-"klein amsterdam",
-"pernis / rotterdam",
-"riotterdam",
-"rotetrdam",
-"rotterdam  hoogvliet",2
+"hoogvliet  rotterdam",5
+"pernis / rotterdam",7
+"riotterdam",2
+"rotetrdam",2
+"rotterdam  hoogvliet",5
 "rotterdam west",2
 "rotterdamm",2
-"spaardam west",
-"5amsterdam",
-"amssterdam",
-"amsterdam-holendr.",
-"amsterdam-n.",
-"amsterdam - z.o.",
-"amsterdam (noord)",
-"amsterdam (zo)",
-"amsterdam gein iii",
-"amsterdam z-o.",
-"amsterdamzo",
-"hoogvliet-rdam",
-"nieuw- amsterdam",
-"nw.amsterdam",
-"pernis/rotterdam",
+"spaardam west",2
+"5amsterdam",1
+"amssterdam",1
+"amsterdam-holendr.",1
+"amsterdam-n.",1
+"amsterdam - z.o.",1
+"amsterdam (noord)",1
+"amsterdam (zo)",1
+"amsterdam z-o.",1
+"amsterdamzo",1
+"hoogvliet-rdam",5
+"nieuw- amsterdam",12
+"nw.amsterdam",12
+"pernis/rotterdam",7
 "rotterdam-ommoord",2
-"rotterdm",
+"rotterdm",1
 ".rotterdam",2
-"amsterdam-gein iv",
-"amsterdam   (ijburg)",
-"amsterdam (z-o)",
-"amsterdam (zuid-oost)",
-"amsterdam(zuid-oost)",
-"hoogvliet rdam",2
-"rotterdam-botlek",2
+"amsterdam   (ijburg)",1
+"amsterdam (z-o)",1
+"amsterdam (zuid-oost)",1
+"amsterdam(zuid-oost)",1
+"hoogvliet rdam",5
+"rotterdam-b3tlek",3
 "rotterdam-zuid",2
 "rotterdam beverwaard",2
 "rotterdam hillergersberg",2
 "rotterdam schiebroek",2
-"zuidoost amsterdam",
-"aamsterdam zuidoost",
-"amsamsterdam zuidoost",
-"amsrdam",
-"amsterdam  noord",
-"amsterdam driemond",
-"amsterdam oost",
-"amsterdamamsterdam",
-"amterdam zuidoost",
-"hoogvliet / rotterdam",2
-"msterdamamsterdam zuidoo",
+"zuidoost amsterdam",1
+"aamsterdam zuidoost",1
+"amsamsterdam zuidoost",1
+"amsrdam",1
+"amsterdam  noord",1
+"amsterdam driemond",1
+"amsterdam oost",1
+"amsterdamamsterdam",1
+"amterdam zuidoost",1
+"hoogvliet / rotterdam",5
+"msterdamamsterdam zuidoo",1
 "otterdam",2
-"rotterdam - pernis",
+"rotterdam - pernis",7
 "rrotterdam",2
-"veerdam",
+"veerdam",22
 "`rotterdam",2
-"albasserdam",
-"amersterdam",
-"amsterdam-nw.sloten",
-"amsterdam-ransdorp",
-"amsterdm z.o.",
-"amsterrdam",
-"hoogvliet- rotterdam",2
-"rortterdam",
+"albasserdam",15    TOT HIER
+"amersterdam",1
+"amsterdam-ransdorp",1
+"amsterdm z.o.",1
+"amsterrdam",1
+"hoogvliet- rotterdam",5
+"rortterdam",2
 "rotterdam-ijsselmonde",2
 "rotterdam-nesselande",2
 "rotterdam-zevenkam",2
@@ -210,413 +202,383 @@
 "rotterdam ijsselmond",2
 "rotterdam ijsselmonde",2
 "rotterdam nesselande",2
-"rotterdam(hoogvliet)",2
-"rozenburg -rotterdam",
-"spaardam-west",
-"allasserdam",
-"amsterdam- zo",
-"amsterdam -zo",
-"amsterdam zudoost",
-"europoort rotterdam",2
-"hoogvliet, rotterdam",2
-"leerdam.",
+"rotterdam(hoogvliet)",5
+"rozenburg -rotterdam",23
+"spaardam-west",20
+"allasserdam",15
+"amsterdam- zo",1
+"amsterdam -zo",1
+"amsterdam zudoost",1
+"europoort rotterdam",4
+"hoogvliet, rotterdam",5
+"leerdam.",13
 "nl rotterdam",2
-"pernis(rotterdam)",
+"pernis(rotterdam)",7
 "rotterdam-kralingen",2
 "rotterdam-kralingse veer",2
 "rotterdam - kralingen",2
 "rotterdam zevenkamp",2
-"amsterdam  z.o.",
+"amsterdam  z.o.",1
 "r0tterdam",2
-"rotterdam-poortugaal",
-"albalsserdam",
-"amsterdam - holendrecht",
-"amsterdam -zuidoost",
-"amsterdam  z/o",
-"amsterdam de aker",
-"amsterdam yburg",
-"amsterdamde aker",
-"pernisrotterdam",
-"rotterdam-albrandswaard",
+"rotterdam-poortugaal",24
+"albalsserdam",15
+"amsterdam - holendrecht",1
+"amsterdam -zuidoost",1
+"amsterdam  z/o",1
+"amsterdam yburg",1
+"pernisrotterdam",7
+"rotterdam-albrandswaard",14
 "rotterdam-charlois",2
-"amsterdam- noord",
-"amsterdam- slotermeer",
-"amsterdam-sloten",
-"amsterdam - slotermeer",
-"amsterdam - zuid oost",
-"amsterdam  nh",
-"amsterdam (nh)",
-"amsterdam zuid - oost",
-"amsterdam/westerpark",
-"amsterdam/zuid oost",
-"amsterdamn",
-"amsterdamnoord",
-"amsterdamz-o",
-"amsterdamzuid-oost",
-"driemond (amsterdam zuid",
-"osdorp amsterdam",
+"amsterdam- noord",1
+"amsterdam- slotermeer",1
+"amsterdam - slotermeer",1
+"amsterdam - zuid oost",1
+"amsterdam  nh",1
+"amsterdam (nh)",1
+"amsterdam zuid - oost",1
+"amsterdam/westerpark",1
+"amsterdam/zuid oost",1
+"amsterdamn",1
+"amsterdamnoord",1
+"amsterdamz-o",1
+"amsterdamzuid-oost",1
+"driemond (amsterdam zuid",1
+"osdorp amsterdam",1
 "rotterdam -overschie",2
-"rotterdam heyplaat",
-"amsterdam-nieuw sloten",
-"amsterdam - z.o",
-"oud alblasserdam",
-"pernis- rotterdam",
+"rotterdam heyplaat",2
+"amsterdam - z.o",1
+"oud alblasserdam",15
+"pernis- rotterdam",7
 "rotterdam-hillegersbe",2
 "rotterdam overschie",2
 "rotterdam/hillegerberg",2
 "rotterdam/overschie",2
-"rotterdma",
-"amsterdam-buitenv.",
-"amsterdam-geuzenveld",
-"amsterdam-zuid-oost",
-"amsterdam-zuidooost",
-"amsterdam - west",
-"amsterdam - z-o",
-"amsterdam duivendrecht",
-"amsterdam oud zuid",
-"amsterdam. zuidoost",
-"anmsterdam",
+"rotterdma",2
+"amsterdam-buitenv.",1
+"amsterdam-geuzenveld",1
+"amsterdam-zuid-oost",1
+"amsterdam-zuidooost",1
+"amsterdam - west",1
+"amsterdam - z-o",1
+"amsterdam duivendrecht",18
+"amsterdam oud zuid",1
+"amsterdam. zuidoost",1
+"anmsterdam",1
 "rotterdam-overschi",2
 "rotterdam - ijsselm.",2
 "rotterdam spangen",2
 "rotterdam/zevenkamp",2
-"am sterdam",
-"amsterdam,",
-"amsterdam/osdorp",
-"driemond-amsterdam z-o",
+"am sterdam",1
+"amsterdam,",1
+"amsterdam/osdorp",1
+"driemond-amsterdam z-o",1
 "rotterdam-west",2
-"amsterdam zuidoostt",
-"amsterdam  zeeburg",
-"rotterdam (hoogvliet)",2
-"amsterdam sloten",
-"amsterdam zo.",
-"amsterdam zuid-0ost",
-"damamsterdam",
-"amaterdam",
-"masterdam",
-"ammsterdam",
-"amsterdam n",
-"gaasperdam gem.a-dam",
-"rotterdam-hoogvlie",2
+"amsterdam zuidoostt",1
+"amsterdam  zeeburg",1
+"rotterdam (hoogvliet)",5
+"amsterdam zo.",1
+"amsterdam zuid-0ost",1
+"damamsterdam",1
+"amaterdam",1
+"masterdam",1
+"ammsterdam",1
+"amsterdam n",1
+"rotterdam-hoogvlie",5
 "rotterdam zuid",2
-"amserdam zuidoost",
-"amsterdam-z.o",
-"amsterdam  z.o",
-"amsterdam(z-o)",
-"driemond (amsterdam zo)",
-"driemond (amsterdamzo)",
-"rotterdam-europoort",2
+"amserdam zuidoost",1
+"amsterdam-z.o",1
+"amsterdam  z.o",1
+"amsterdam(z-o)",1
+"driemond (amsterdam zo)",1
+"driemond (amsterdamzo)",1
+"rotterdam-europoort",4
 "rotterdam-kattendrecht",2
 "rotterdam (ijsselmonde)",2
 "rotterdam (prinsen",2
 "rotterdam/beverw.",2
-"zuid oost, amsterdam",
-"amsterdam-zunderdorp",
-"amsterdam - schiphol",
-"amsterdam z.-o.",
-"amsterdam3",
-"amstyerdam",
-"appingerdam",
-"asmterdam.",
-"gasperdam",
-"h-s amsterdam",
+"zuid oost, amsterdam",1
+"amsterdam-zunderdorp",1
+"amsterdam - schiphol",1
+"amsterdam z.-o.",1
+"amsterdam3",1
+"amstyerdam",1
+"asmterdam.",1
+"h-s amsterdam",1
 "rotterdam - ijsselmonde",2
 "rotterdam zuidwijk",2
-"rottrerdam",
-"amatsterdam",
-"amsterdam-schiphol",
-"amsterdam, z/o",
-"amsterdamj",
+"rottrerdam",2
+"amatsterdam",1
+"amsterdam-schiphol",1
+"amsterdam, z/o",1
+"amsterdamj",1
 "rotterdam-hillegersberg",2
 "rotterdam / noord",2
 "rotterdam / west",2
 "rotterdam / zuid",2
 "rotterdam alexander",2
-"alblaserdam",
-"amsterdam -z-o-",
-"amsterdam -z.o.",
-"amsterdam  (z.o.)",
-"amsterdamm",
+"alblaserdam",15
+"amsterdam -z-o-",1
+"amsterdam -z.o.",1
+"amsterdam  (z.o.)",1
+"amsterdamm",1
 "overschie rotterdam",2
 "roitterdam",2
 "rotterdam - ommoord",2
 "rotterdam - prinsenland",2
 "rotterdam        *",2
-"amsrerdam",
-"amsterdam   zo",
-"amsterdam / breda",
-"amsterdamam",
-"nieuw-amstterdam",
-"amseterdam zuidoost",
-"amsterdam- zuid-oost",
-"amsterdam (zuid -oost)",
-"amsterdam nrd.",
-"amsterdam zuid",
-"amsterdam zuid-oost gein",
-"amsterdam zuid -oost",
-"materdam",
-"ouderkerk a/d aamsterdam",
+"amsrerdam",1
+"amsterdam   zo",1
+"amsterdamam",1
+"nieuw-amstterdam",12
+"amseterdam zuidoost",1
+"amsterdam- zuid-oost",1
+"amsterdam (zuid -oost)",1
+"amsterdam nrd.",1
+"amsterdam zuid",1
+"amsterdam zuid-oost gein",1
+"amsterdam zuid -oost",1
+"materdam",1
 "rotterdam - beverwaard",2
-"zwmmerdam",
-"amsterdam zuid- oost",
-"amsterdam, noord holland",
-"amsterdama",
-"nieuw  amsterdam",
-"pernis  rotterdam",
+"zwmmerdam",9
+"amsterdam zuid- oost",1
+"amsterdam, noord holland",1
+"amsterdama",1
+"nieuw  amsterdam",12
+"pernis  rotterdam",7
 "rotteerdam",2
 "rotterdam - overschie",2
-"rotterdam (schiedam)",
-"rptterdam",
-"amsterdam-z-o",
-"amsterdam - zo",
-"amsterdam zuid-oos",
-"hoogvliet ( rotterdam)",2
-"nieuw -amsterdam",
-"rottetrdam",
-"amst erdam",
-"amsterdam zuioost",
-"ijburg amsterdam",
-"zwannerdam",
-"amsterdam- z.o.",
-"amsterdam-geuzenfeld",
-"amsterdam - zuid-oo",
-"amsterdam  z o",
-"amsterdam geuzenveld",
-"amsterdam o-w",
-"asterdam zo",
-"bergschenhoek rotterdam",
-"gerardmer, vosges",
-"rdam-ijsselmonde",
-"rotterdam-zweth",
+"rotterdam (schiedam)",25
+"rptterdam",2
+"amsterdam-z-o",1
+"amsterdam - zo",1
+"amsterdam zuid-oos",1
+"hoogvliet ( rotterdam)",5
+"nieuw -amsterdam",12
+"rottetrdam",2
+"amst erdam",1
+"amsterdam zuioost",1
+"ijburg amsterdam",1
+"zwannerdam",9
+"amsterdam- z.o.",1
+"amsterdam-geuzenfeld",1
+"amsterdam - zuid-oo",1
+"amsterdam  z o",1
+"amsterdam geuzenveld",1
+"amsterdam o-w",1
+"asterdam zo",1
+"rdam-ijsselmonde",2
 "rotterdam -alexander",2
 "rotterdam  zh",2
 "rotterdamt",2
-"amsterdam - nl",
-"amsterdam buitenveldert",
-"amsterdam z0",
-"amtsterdam",
+"amsterdam - nl",1
+"amsterdam buitenveldert",1
+"amsterdam z0",1
+"amtsterdam",1
 "hoogvliet/ rotterdam",2
 "hoogvloiet rotterdam",2
-"pernis/ rotterdam",
+"pernis/ rotterdam",7
 "rotterdam (zuid)",2
-"rotterdam albrands",
-"amdterdam",
-"amsteerdam",
-"amsterdam- zuid oost",
-"amsterdam bijlmermeer",
-"amsterdam buitenveld",
-"amsterdam ransdorp",
-"amsterdam zd.o",
-"amsterdamrdam",
-"bos en lommer amsterdam",
+"rotterdam albrands",14
+"amdterdam",1
+"amsteerdam",1
+"amsterdam- zuid oost",1
+"amsterdam bijlmermeer",1
+"amsterdam buitenveld",1
+"amsterdam ransdorp",1
+"amsterdam zd.o",1
+"amsterdamrdam",1
 "hoogvliet roterdam",2
 "rotterdam-ijsselmond",2
 "rotterdamn",2
-"amsterdam - europe",
+"amsterdam - europe",1
 "rotterdam /west",2
-"ametsrdam",
-"amsterdam-tuindorp",
-"amsterdam (n)",
-"amsterdam dam",
-"asmsterdam zuidoost",
-"munsterdam",
-"onderdam",
+"ametsrdam",1
+"amsterdam-tuindorp",1
+"amsterdam (n)",1
+"amsterdam dam",1
+"asmsterdam zuidoost",1
 "rotterdamrotterdam",2
-"waardamme",
-"allblasserdam",
-"amsterdam zuidosst",
-"amstrerdam zuid oost",
-"leeerdam",
+"allblasserdam",15
+"amsterdam zuidosst",1
+"amstrerdam zuid oost",1
+"leeerdam",13
 "rotterdamr",2
 "rotterdamse",2
-"amstelrdam",
-"amsterdam  zuid oost",
-"amsterdam zuid/oos",
-"amsterdamo",
-"amsterdamt",
+"amstelrdam",1
+"amsterdam  zuid oost",1
+"amsterdam zuid/oos",1
+"amsterdamo",1
+"amsterdamt",1
 "hoogvlieg rotterdam",2
-"qmsterdam",
-"amasterdam.",
-"amssterdamzuidoost",
-"amsterdam (zuid)",
-"amsterdam / holland",
-"amsterdam duivendr",
-"amsterdam]",
-"amsterdamdiemen",
-"amtserdam",
+"qmsterdam",1
+"amasterdam.",1
+"amssterdamzuidoost",1
+"amsterdam (zuid)",1
+"amsterdam / holland",1
+"amsterdam duivendr",18
+"amsterdam]",1
+"amsterdamdiemen",19
+"amtserdam",1
 "charlois rotterdam",2
 "rotterdam / ijsselmonde",2
-"?msterdam",
-"alblassserdam",
+"?msterdam",1
+"alblassserdam",15
 "amsterdam  ( zo )",1
 "amsterdam  zuid-oost",1
 "amsterdam (nrd)",1
 "amsterdam nrd",1
 "amsterdam z-0",1
 "asmetrdam",1
-"roptterdam",
+"roptterdam",2
 "rotterdam- hoogvliet",2
 "rotterdam (beverwaard)",2
-"albrasserdam",
-"ameterdam",
-"amsetrdam z-o",
+"albrasserdam",15
+"ameterdam",1
+"amsetrdam z-o",1
 "amsterdam-schellingwoud",1
 "amsterdam, osdorp",1
 "amsterdamk",1
-"heijplaat-rotterdam",
+"heijplaat-rotterdam",1
 "rotterdam (zh)",2
 "rotterdam hillegersberg",2
 "rotterdam ommoord",2
 "rotterdam/kralingen",2
-"terdam",
-"zunderdorp/amsterdam",
-"amsrterdam",
+"amsrterdam",1
 "amsterdam-zuid oos",1
 "amsterdam - yburg",1
-"amsyterdam",
-"amwsterdam",
-"nieuw amserdam",
+"amsyterdam",1
+"amwsterdam",1
+"nieuw amserdam",12
 "amsterdam oud-zuid",1
 "amsterdam zuidoost.",1
-"alblaaserdam",
+"alblaaserdam",15
 "amsterdam-geuzeveld",1
 "amsterdam-zeeburg",1
 "amsterdam - sloten",1
 "amsterdam -z-o",1
 "amsterdam -zuid oost",1
 "amsterdam0",1
-"amsyerdam",
-"kerkerdam",
-"leidscherdam",
-"nieuw ansterdam",
+"amsyerdam",1
+"nieuw ansterdam",12
 "rotterdamq",2
 "amasterdam",1
 "amsterdam2",1
-"driemond -amsterdam-",
+"driemond -amsterdam-",1
 "hoogvliet   rotterdam",2
 "rotterdamom",2
-"werdam",
-"amsterdam - ransdorp",
+"amsterdam - ransdorp",1
 "amsterdam zeeburg",1
 "amsterdamnld",1
 "hgt rotterdam",2
 "hoogvliet -rotterdam",2
 "rottardam",2
-"rotterdam/pernis",
-"amderdam zuid-oost",
+"rotterdam/pernis",7
+"amderdam zuid-oost",1
 "amsterdam-c",1
 "amsterdam holysloot",1
 "amsterdam zuisdoost",1
 "amsterdam(ijburg)",1
-"amsterdamerkoop",
-"amstgerdam",
-"amswterdam",
+"amstgerdam",1
+"amswterdam",1
 "maasvlakte rotterdam",2
-"rotterdam (pernis)",
-"rotyterdam",
-"amsdterdam",
+"rotterdam (pernis)",7
+"rotyterdam",2
+"amsdterdam",1
 "amsterdam - zuidsoost",1
 "amsterdam(z.o.)",1
 "amsterdaml",1
 "hamsterdam",1
 "rottderdam",2
-"rotterdam-pendrecht",
+"rotterdam-pendrecht",2
 "rotterdam (charlois)",2
 "rotterdam (postadres)",2
 "rotterdam hoogvlie",2
 "rotterdam1",2
 "rotterdamne",2
-"amsrterdam zuidoost",
-"amsterdam-diemen",
+"amsrterdam zuidoost",1
+"amsterdam-diemen",19
 "amsterdam z.0.",1
 "amsterdam``",1
-"amsterdma",
+"amsterdma",1
 "rotterdam hgvl",2
-"rotterdam poortugaal",
+"rotterdam poortugaal",24
 "rotterdam/centrum",2
-"amseterdam",
+"amseterdam",1
 "amsterdam-z-oost",1
 "amsterdam-zuid",1
-"amsterdam haarlem",
 "amsterdam n-holland",1
 "amsterdamsterdam",1
 "aqmsterdam",1
-"driemond amsterdam zuido",
-"guardamar del segura",
-"oosterwijk (leerdam)",
+"oosterwijk (leerdam)",13
 "roeterdam",2
 "rottederdam",2
-"rotterdam-heijplaat",
-"te rotterdam",
-"amsterdam diemen",
+"rotterdam-heijplaat",2
+"te rotterdam",2
+"amsterdam diemen",19
 "amsterdam z -o",1
 "amsterdamq",1
 "amsterdamr",1
-"amstjerdam",
-"amtserdam zuid oost",
-"hoogvliet ( rotterdam )",
-"hoogvliet rotterdamhoogv",
-"nieuwe amsterdam",
-"nueuw amsterdam",
-"r>otterdam",
-"rdam",
-"rotterdam-schiedam",
-"utrecht / amsterdam",
-"zo beemsterdam",
+"amstjerdam",1
+"amtserdam zuid oost",1
+"hoogvliet ( rotterdam )",5
+"hoogvliet rotterdamhoogv",5
+"nieuwe amsterdam",12
+"nueuw amsterdam",12
+"r>otterdam",2
+"rdam",2
+"rotterdam-schiedam",25
 "amsterdam nh",1
 "amsterdam(zo)",1
 "amsterdamd",1
-"amsterrdam`",
-"naarden - amsterdam",
+"amsterrdam`",1
+"naarden - amsterdam",26
 "ro0tterdam",2
 "rotterdam  / zuid",2
 "rotterdam / holland",2
-"rotterdam/kralingse veer",
+"rotterdam/kralingse veer",2
 "rotterdardam",2
 "yburg-amsterdam",1
 "|amsterdam",1
-"alblasserdam,",
-"amarerdam",
+"alblasserdam,",15
+"amarerdam",1
 "amasterdam zo",1
 "amsterdam-centrum",1
 "amsterdam-w",1
-"amsterdam zo driemond",
+"amsterdam zo driemond",1
 "hoogvliet(rotterdam)",2
-"leerdm",
-"llerdam",
-"overschie-rotterdam",
-"ransdorp (gem. amsterdam",
+"leerdm",13
+"llerdam",13
+"overschie-rotterdam",2
+"ransdorp (gem. amsterdam",1
 "rotterdam - nesselande",2
 "rotterdam nesseland",2
 "rtterdam",2
 "?amsterdam",1
-"a<sterdam",
+"a<sterdam",1
 "amsterdam-west",1
 "amsterdam ziodoost",1
-"amsterdam/apeldoorn",
-"amsterdmam",
-"amstewrdam",
-"amstrerdam-noord",
-"amstterdam",
-"asterdam-zuidoost",
-"botlek rotterdam",2
-"diemen, amsterdam",
-"driemond (gem. amsterdam",
-"durgerdam-amsterdam",
+"amsterdmam",1
+"amstewrdam",1
+"amstrerdam-noord",1
+"amstterdam",1
+"asterdam-zuidoost",1
+"botlek rotterdam",3
+"diemen, amsterdam",19
+"driemond (gem. amsterdam",1
 "hoogvliet - (rotterdam)",2
-"hoogvliet ( roterdam )",2
+"5oogvliet ( roterdam )",2
 "hoogvliet,rotterdam",2
 "hoogvliet>rotterdam",2
-"lerdam",
+"lerdam",13
 "rottedrdam",2
 "rotterdam - neselande",2
-"rotterdam/ overschie",
+"rotterdam/ overschie",2
 "rotterdamj",2
-"aksterdam",
+"aksterdam",1
 "ametrdam",1
-"amsterdam-driemand",
+"amsterdam-driemand",1
 "amsterdam-z/o",1
-"amsterdam (duivendrecht)",
+"amsterdam (duivendrecht)",18
 "amsterdam zzuidoost",1
 "hoovliet (rotterdam)",2
 "roettrdam",2
