@@ -1,19 +1,55 @@
+---
+title: "Deduplication"
+author: "Jan van der Laan"
+output: html_document
+---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
 library(devtools)
 library(dplyr)
 load_all()
+```
 
+```{r}
 towns <- read.csv("work/towns.csv")
+head(towns)
+```
 
+First, we do a little bit of cleanup of the names. We have a lot of names of the
+form 'amsterdam z.o.', 'amsterdam zo', etc. Removing non-alphanumeric characters
+will probably help. Also, some of the o's are written as 0's (zeros). 
+```{r}
 towns$clean_name <- gsub("[^[:alnum:]]", "", towns$name)
 towns$clean_name <- gsub("0", "o", towns$clean_name)
+```
 
+We will now compare all records from the dataset to each other. First, we 
+generate all possible pairs of records. However, as it is not necessary to 
+compare the first record to the second and also the second to the first, we will
+only select pairs for which the second index is larger than the first. This is
+done by `pairs_filter_for_deduplication`. We compare the names using 
+`jaro_winkler` and select records for which the Jaro-Winkler similarity is above
+0.88. This value is determined by eye-balling the data. Usually values around
+0.9 work.
+```{r}
 p <- pairs_blocking(towns, towns) %>% 
   pairs_filter_for_deduplication() %>%
   pairs_compare("clean_name", default_comparator = jaro_winkler()) %>% 
   score_simsum() %>% 
   select_threshold(0.88)
+head(d)
+```
 
+We have now selected some town names that we consider the same: records 2 and 3
+are the same, and records 3 and 4. 
+
+
+
+```{r}
 res <- deduplicate_equivalence(p)
 
 length(unique(res$duplicate_groups))/nrow(res)
