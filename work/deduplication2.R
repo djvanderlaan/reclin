@@ -7,6 +7,7 @@ towns <- read.csv("work/towns.csv")
 
 towns$clean_name <- gsub("[^[:alnum:]]", "", towns$name)
 towns$clean_name <- gsub("0", "o", towns$clean_name)
+towns$regel <- seq(1, nrow(towns))
 
 p <- pairs_blocking(towns, towns) %>% 
   pairs_filter_for_deduplication() %>%
