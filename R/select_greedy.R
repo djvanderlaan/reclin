@@ -7,6 +7,7 @@ select_greedy <- function(pairs, threshold = NULL, weight, var = "select",
   UseMethod("select_greedy")
 }
 
+#' @export
 select_greedy.data.frame <- function(pairs, threshold = NULL, weight = NULL, var = "select",
     preselect = NULL, id_x = NULL, id_y = NULL, ...) {
   prep <- select_preprocess(pairs, threshold, weight, preselect, id_x, id_y)

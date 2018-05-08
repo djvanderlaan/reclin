@@ -24,6 +24,10 @@
 #' (\code{TRUE}/\code{FALSE} or \code{1}/\code{0}) result. The result should 
 #' not contain missing values. 
 #' 
+#' The `jaro_winkler`, `lcs` and `jaccard` functions use the corresponding 
+#' methods from \code{\link{stringdist}} except that they are transformed from
+#' a distnce to a similarity score.
+#' 
 #' @return 
 #' The functions return a comparison function (see details).
 #' 
@@ -64,6 +68,32 @@ jaro_winkler <- function(threshold = 0.95) {
   function(x, y) {
     if (!missing(y)) {
       1-stringdist::stringdist(x, y, method = "jw")
+    } else {
+      (x > threshold) & !is.na(x)
+    }
+  }
+}
+
+#' @rdname comparators
+#' @export
+lcs <- function(threshold = 0.80) {
+  function(x, y) {
+    if (!missing(y)) {
+      d <- stringdist::stringdist(x, y, method = "lcs")
+      maxd <- nchar(x) + nchar(y)
+      1 - d/maxd
+    } else {
+      (x > threshold) & !is.na(x)
+    }
+  }
+}
+
+#' @rdname comparators
+#' @export
+jaccard <- function(threshold = 0.80) {
+  function(x, y) {
+    if (!missing(y)) {
+      1-stringdist::stringdist(x, y, method = "jaccard", q = 2)
     } else {
       (x > threshold) & !is.na(x)
     }

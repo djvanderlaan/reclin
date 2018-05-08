@@ -2,12 +2,18 @@
 % Please edit documentation in R/comparators.R
 \name{identical}
 \alias{identical}
+\alias{jaccard}
 \alias{jaro_winkler}
+\alias{lcs}
 \title{Comparison functions}
 \usage{
 identical()
 
 jaro_winkler(threshold = 0.95)
+
+lcs(threshold = 0.8)
+
+jaccard(threshold = 0.8)
 }
 \arguments{
 \item{threshold}{threshold to use for the Jaro-Winkler string distance when
@@ -37,7 +43,11 @@ comparison function is called with one argument.
 When the comparison is called with one argument, it is passed the result of
 a previous comparison. The function should translate that result to a binary 
 (\code{TRUE}/\code{FALSE} or \code{1}/\code{0}) result. The result should 
-not contain missing values.
+not contain missing values. 
+
+The `jaro_winkler`, `lcs` and `jaccard` functions use the corresponding 
+methods from \code{\link{stringdist}} except that they are transformed from
+a distnce to a similarity score.
 }
 \examples{
 cmp <- identical()

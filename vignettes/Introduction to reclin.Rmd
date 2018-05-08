@@ -1,0 +1,212 @@
+---
+title: "Introduction to reclin"
+author: "Jan van der Laan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## Introduction
+
+```{r,message=FALSE,results='hide',warning=FALSE,echo=TRUE}
+library(reclin)
+library(dplyr)
+```
+
+We will work with a pair of data sets with artificial data. They are tiny, but
+that allows us to see what happens.
+```{r}
+data("linkexample1", "linkexample2")
+print(linkexample1)
+print(linkexample2)
+```
+
+We have two data sets with personal information. The second data set contains a
+lot of errors, but we will try to link the second data set to the first.
+
+## Step 1: generate pairs
+
+In principle linkage consists of comparing each combination of records from the
+two data sets and determine which of those combinations (or pairs as we will
+call them below) belong to the same entity. In case of a perfect linkage key, it
+is of course, not necessary to compare all combinations of records, but when
+the linkage keys are imperfect and contain errors, it is in principle necessary
+to compare all pairs.
+
+However, comparing all pairs can result in an intractable number of
+pairs: when linking two data sets with a million records there are $10^{12}$
+possible pairs. Therefore, some sort of reduction of the possible pairs is
+usually applied. In the example below, we apply *blocking*, which means that
+pairs are only generated when they agree on the blocking variable (in this case
+the postcode). This means that pairs of records that disagree on the blocking
+variable are not considered. Therefore, one will only use variables that can
+be considered without errors as blocking variable, or link multiple times with
+different blocking variables and combine both data sets.
+
+The first step in (probabilistic) linkage is, therefore, generating all pairs:
+```{r}
+p <- pairs_blocking(linkexample1, linkexample2, "postcode", large = FALSE)
+print(p)
+```
+
+As you can see, record 1 from `x` (the first data set) is compared to records
+1, 2 and 3 from `y`.
+
+## Step 2: compare pairs
+
+We can now compare the records on their linkage keys:
+```{r}
+p <- pairs_compare(p, by = c("lastname", "firstname", "address", "sex"))
+print(p)
+```
+
+The default comparison function returns `TRUE` when the linkage keys agree and
+false when they don't. However, when looking at the original data sets, we can
+see that most of our linkage keys are string variables that contain typing
+errors. The quality of our linkage could be improved if we could use a
+similarity score to compare the two strings: a high score means that the two
+strings are very similar a value close to zero means that the strings are very
+different.
+
+Below we use the `jaro_winkler` similarity score to compare all fields:
+
+```{r}
+p <- pairs_compare(p, by = c("lastname", "firstname", "address", "sex"),
+  default_comparator = jaro_winkler(0.9), overwrite = TRUE)
+print(p)
+```
+
+## Step 3: score pairs
+
+The next step in the process, is to determined which pairs of records belong to
+the same entity and which do not. There are numerous ways to do this. One
+possibility is to label some of the pairs as match or no match, and use some
+machine learning algorithm to predict the match status using the comparison
+vectors. Another, method, is to score the pairs based on the comparison vectors
+and select those with a score above some threshold. The simplest way to score
+the pairs, is to calculate the sum of the comparison vectors. That is what
+`score_simsum` does:
+
+```{r}
+p <- score_simsum(p, var = "simsum")
+print(p)
+```
+
+The disadvantage of `score_simsum` is that it doesn't take into account that
+the amount of information in agreement or disagreement on a variable depends
+on the variable. For example, agreement on sex doesn't tell us much: when
+our data sets contain 50% men an 50% women, there is a 50% chance that two
+random records agree on sex. On the other hand the probability that two random
+records agree on last name is much lower. Therefore, agreement on last name makes
+it much more likely that the two records belong to the same entity.
+
+This is what the probabilistic linkage framework initially formalised by Fellegi
+and Sunter tries to do. The function `problink_em` uses an EM-algorithm to
+estimate the so called m- and u-probabilities for each of the linkage variables.
+The m-probability is the probability that two records concerning the same entity
+agree on the linkage variable; this means that the m-probability corresponds to
+the probability that there is an error in the linkage variables.
+The u-probability is the probability that two records belonging to different
+entities agree on a variable. For a variable with few categories (such as sex)
+this probability will be large, while for a variable with a large number of
+categories (such as last name) this probability will be small.
+
+```{r}
+m <- problink_em(p)
+print(m)
+```
+
+These m- and u-probabilities can be used to score the pairs:
+
+```{r}
+p <- score_problink(p, model = m, var = "weight")
+print(p)
+```
+
+The higher the weight the more likely the two pairs belong to the same
+entity/are a match.
+
+## Step 4: select pairs
+
+The final step is to select the pairs that are considered to belong to the
+same entities. The simplest method is to select all pairs above a certain
+threshold
+
+```{r}
+p <- select_threshold(p, "weight", var = "threshold", threshold = 8)
+```
+
+In this case we know which records truly belong to each other. We can use that
+to evaluate the linkage:
+```{r}
+p <- add_from_x(p, id_x = "id")
+p <- add_from_y(p, id_y = "id")
+p$true <- p$id_x == p$id_y
+table(as.data.frame(p[c("true", "threshold")]))
+```
+
+We see that three of the four matches that should have been found have indeed
+been found (the recall is 3/4) and we have one false link (sensitivity is 1/4).
+
+Using a threshold, does not take into account the fact that often we know that
+one record from the first data set can be linked to at most one record from the
+second data set and vice versa. If we make th threshold low enough we have more
+links than records in either data set. `reclin` contains two functions that
+force one-to-one linkage: `select_greedy` and `select_n_to_m`. The first is
+fast (it selects pairs starting from the highest score; pairs are only selected
+when each of the records in a pair have not been selected previously); the
+second is slower, but can lead to better results (it tries to optimise to total
+score of the selected records under the restriction that each record can be
+selected only once):
+
+
+```{r}
+p <- select_greedy(p, "weight", var = "greedy", threshold = 0)
+table(as.data.frame(p[c("true", "greedy")]))
+```
+
+
+```{r}
+p <- select_n_to_m(p, "weight", var = "ntom", threshold = 0)
+table(as.data.frame(p[c("true", "ntom")]))
+```
+
+Perfection!
+
+## The final, last step
+
+The real final step is to create the linked data set. We now know which pairs
+are to be linked, but we still have to actually link them. `link` does that (the
+optional arguments `all_x` and `all_y` control the type of linkage):
+
+```{r}
+linked_data_set <- link(p)
+print(linked_data_set)
+```
+
+## All together now
+The functions have been designed to be usable with pipe operators, so the
+entire linkage process could be written as:
+
+```{r, message=FALSE}
+library(dplyr)
+
+linked_data_set <- pairs_blocking(linkexample1, linkexample2, "postcode") %>%
+  pairs_compare(by = c("lastname", "firstname", "address", "sex"),
+      default_comparator = jaro_winkler(0.9)) %>%
+  score_problink(var = "weight") %>%
+  select_n_to_m("weight", var = "ntom", threshold = 0) %>%
+  link()
+```
+

@@ -3,3 +3,4 @@
 src/*.o
 src/*.so
 work
+inst/doc

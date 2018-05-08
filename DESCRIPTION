@@ -22,9 +22,12 @@ Imports:
     lpSolve,
     Rcpp
 Suggests:
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 LinkingTo:
     Rcpp
 License: GPL-3
 LazyLoad: yes
 RoxygenNote: 5.0.1
+VignetteBuilder: knitr
