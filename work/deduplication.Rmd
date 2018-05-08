@@ -14,8 +14,15 @@ library(dplyr)
 load_all()
 ```
 
+Using `reclin` for deduplication will be demonstrated using an example 
+
+Towns with names containing 'rdam' or 'rdm' have been selected. This should 
+contain most records concerning the two largest cities in The Netherlands: 
+Amsterdam and Rotterdam. 
+
+
 ```{r}
-towns <- read.csv("work/towns.csv")
+towns <- read.csv("towns.csv")
 head(towns)
 ```
 
@@ -41,18 +48,37 @@ p <- pairs_blocking(towns, towns) %>%
   pairs_compare("clean_name", default_comparator = jaro_winkler()) %>% 
   score_simsum() %>% 
   select_threshold(0.88)
-head(d)
+head(p)
 ```
 
-We have now selected some town names that we consider the same: records 2 and 3
-are the same, and records 3 and 4. 
+We have now selected some town names that we consider the same: records 2 and 3 
+(record 3 in output above) are the same, and records 3 and 4 (record 6). However,
+records 2 and 4 are not classified as belonging to the same record (record 5). 
 
-
+In our final step we want to assign each record in our original data set `towns`
+into a number of groups, each group containing all records with the same town
+names. The function `deduplicate_equivalance` does that. It will use the 'rules'
+derived above: `2 and 3 belong to the same group`, 
+`3 and 4 belong to the same group`, etc., to assign each record to a group. It 
+will, therefore, also assign records 2 and 4 to the same group. For those 
+familiar with graph theory: it derives all subgraphs and assigns a nodes in a 
+subgraph the same identifier. 
 
 ```{r}
 res <- deduplicate_equivalence(p)
+head(res)
+```
 
+As we can see records 2 to 6 are assigned the the same group. 
+
+```{r}
+nrow(res)
+```
+
+```{r}
+length(unique(res$duplicate_groups))
 length(unique(res$duplicate_groups))/nrow(res)
+```
 
 
 t <- table(res$duplicate_groups, res$official_name)
