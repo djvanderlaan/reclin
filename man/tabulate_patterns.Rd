@@ -44,4 +44,3 @@ pairs <- pairs_compare(pairs, c("lastname", "firstname", "address", "sex"))
 tabulate_patterns(pairs)
 
 }
-

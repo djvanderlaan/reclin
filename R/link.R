@@ -24,12 +24,13 @@ link <- function(pairs, selection = NULL, x = NULL, y = NULL, all_x = TRUE,
   UseMethod("link")
 }
 
-
+#' @export
 link.data.frame <- function(pairs, selection = NULL, x = NULL, y = NULL,
     all_x = TRUE, all_y = TRUE, ...) {
   link_impl(pairs, selection, x, y, all_x, all_y)
 }
 
+#' @export
 link.ldat <- function(pairs, selection = NULL, x = NULL, y = NULL, all_x = TRUE, 
     all_y = TRUE, ...) {
   link_impl(pairs, selection, x, y, all_x, all_y)

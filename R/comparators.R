@@ -63,11 +63,12 @@ identical <- function() {
 }
 
 #' @rdname comparators
+#' @importFrom stringdist stringdist
 #' @export
 jaro_winkler <- function(threshold = 0.95) {
   function(x, y) {
     if (!missing(y)) {
-      1-stringdist::stringdist(x, y, method = "jw")
+      1-stringdist(x, y, method = "jw")
     } else {
       (x > threshold) & !is.na(x)
     }
@@ -75,11 +76,12 @@ jaro_winkler <- function(threshold = 0.95) {
 }
 
 #' @rdname comparators
+#' @importFrom stringdist stringdist
 #' @export
 lcs <- function(threshold = 0.80) {
   function(x, y) {
     if (!missing(y)) {
-      d <- stringdist::stringdist(x, y, method = "lcs")
+      d <- stringdist(x, y, method = "lcs")
       maxd <- nchar(x) + nchar(y)
       1 - d/maxd
     } else {
@@ -89,11 +91,12 @@ lcs <- function(threshold = 0.80) {
 }
 
 #' @rdname comparators
+#' @importFrom stringdist stringdist
 #' @export
 jaccard <- function(threshold = 0.80) {
   function(x, y) {
     if (!missing(y)) {
-      1-stringdist::stringdist(x, y, method = "jaccard", q = 2)
+      1-stringdist(x, y, method = "jaccard", q = 2)
     } else {
       (x > threshold) & !is.na(x)
     }

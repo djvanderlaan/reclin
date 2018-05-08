@@ -9,4 +9,3 @@ deduplicate_equivalence(pairs, var = "duplicate_groups", selection, x)
 \description{
 Deduplicatin using equivalence groups
 }
-

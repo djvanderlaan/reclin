@@ -44,4 +44,3 @@ data("linkexample1", "linkexample2")
 pairs <- pairs_blocking(linkexample1, linkexample2, "postcode")
 
 }
-
