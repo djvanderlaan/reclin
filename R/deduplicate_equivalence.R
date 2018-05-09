@@ -9,6 +9,7 @@ deduplicate_equivalence <- function(pairs, var = "duplicate_groups", selection, 
 }
 
 
+#' @export
 deduplicate_equivalence.data.frame <- function(pairs, var = "duplicate_groups", 
     selection, x) {
   if (missing(selection)) selection <- NULL
@@ -16,6 +17,7 @@ deduplicate_equivalence.data.frame <- function(pairs, var = "duplicate_groups",
   deduplicate_equivalence_impl(pairs, var, selection, x)
 }
 
+#' @export
 deduplicate_equivalence.ldat <- function(pairs, var = "duplicate_groups", 
     selection, x) {
   if (missing(selection)) selection <- NULL
