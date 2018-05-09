@@ -23,3 +23,22 @@ NULL
 #' @name linkexample2
 #' @rdname linkexample
 NULL
+
+#' Spelling variations of a set of town names
+#'
+#' Contains spelling variations found in various files of a set of town/village
+#' names. Names were selected that contain 'rdam' or 'rdm'. The correct/official
+#' names are also given. This data set can be used as an example data set for 
+#' deduplication
+#'
+#' \itemize{
+#'   \item name the name of the town/village as found in the files
+#'   \item official_name the official/correct name
+#' }
+#'
+#' @docType data
+#' @keywords datasets
+#' @name town_names
+#' @format Data frames with 584 records and two columns.
+NULL
+

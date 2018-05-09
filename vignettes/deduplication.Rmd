@@ -1,17 +1,25 @@
 ---
-title: "Deduplication"
+title: "Introduction to reclin"
 author: "Jan van der Laan"
-output: html_document
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
 ```
 
-```{r}
-library(devtools)
+
+```{r,results='hide',message=FALSE,warning=FALSE}
+library(reclin)
 library(dplyr)
-load_all()
 ```
 
 Using `reclin` for deduplication will be demonstrated using an example 
@@ -22,16 +30,16 @@ Amsterdam and Rotterdam.
 
 
 ```{r}
-towns <- read.csv("towns.csv")
-head(towns)
+data("town_names")
+head(town_names)
 ```
 
 First, we do a little bit of cleanup of the names. We have a lot of names of the
 form 'amsterdam z.o.', 'amsterdam zo', etc. Removing non-alphanumeric characters
 will probably help. Also, some of the o's are written as 0's (zeros). 
 ```{r}
-towns$clean_name <- gsub("[^[:alnum:]]", "", towns$name)
-towns$clean_name <- gsub("0", "o", towns$clean_name)
+town_names$clean_name <- gsub("[^[:alnum:]]", "", town_names$name)
+town_names$clean_name <- gsub("0", "o", town_names$clean_name)
 ```
 
 We will now compare all records from the dataset to each other. First, we 
@@ -43,7 +51,7 @@ done by `pairs_filter_for_deduplication`. We compare the names using
 0.88. This value is determined by eye-balling the data. Usually values around
 0.9 work.
 ```{r}
-p <- pairs_blocking(towns, towns) %>% 
+p <- pairs_blocking(town_names, town_names) %>% 
   pairs_filter_for_deduplication() %>%
   pairs_compare("clean_name", default_comparator = jaro_winkler()) %>% 
   score_simsum() %>% 
@@ -55,7 +63,7 @@ We have now selected some town names that we consider the same: records 2 and 3
 (record 3 in output above) are the same, and records 3 and 4 (record 6). However,
 records 2 and 4 are not classified as belonging to the same record (record 5). 
 
-In our final step we want to assign each record in our original data set `towns`
+In our final step we want to assign each record in our original data set `town_names`
 into a number of groups, each group containing all records with the same town
 names. The function `deduplicate_equivalance` does that. It will use the 'rules'
 derived above: `2 and 3 belong to the same group`, 
@@ -69,29 +77,32 @@ res <- deduplicate_equivalence(p)
 head(res)
 ```
 
-As we can see records 2 to 6 are assigned the the same group. 
-
-```{r}
-nrow(res)
-```
+As we can see records 2 to 6 are assigned the the same group. We can calculate
+the number of groups and compare that to the original number of town names:
 
 ```{r}
 length(unique(res$duplicate_groups))
 length(unique(res$duplicate_groups))/nrow(res)
 ```
+We are only left with `r length(unique(res$duplicate_groups))` town names; a
+reduction of approximately 90 percent. For this small number of remaining groups
+it is possible to manually derive the correct names, or, if that would be 
+available, we could use the most frequent name in each group as the group name. 
 
-
-t <- table(res$duplicate_groups, res$official_name)
-apply(t, 1, function(d) sum(d!=0))
-
-
+Lets assume that we are able to correctly determine the group names. This means
+that we assign the most frequent official name to each group:
+```{r}
 res <- res %>% group_by(duplicate_groups, official_name) %>% mutate(n = n()) %>% 
   group_by(duplicate_groups) %>%
   mutate(group_name = first(official_name, order_by = desc(n)))
+```
 
+We can then calculate the confusion matrix and calculate the precision and
+recall:
+```
 t <- table(res$group_name, res$official_name)
 t
-
+```
 
 e <- res$group_name != res$official_name
 table(e)
@@ -136,7 +147,7 @@ jaccard <- function(threshold = 0.95) {
 }
 
 
-p <- pairs_blocking(towns, towns) %>% 
+p <- pairs_blocking(town_names, town_names) %>% 
   pairs_filter_for_deduplication() %>%
   pairs_compare("clean_name", default_comparator = jaccard()) %>% 
   score_simsum() %>% 
