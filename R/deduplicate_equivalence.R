@@ -51,3 +51,4 @@ deduplicate_equivalence_impl <- function(pairs, var, selection, x) {
   x[[var]] <- equivalence(seq_len(nrow(x)), tmp)
   x
 }
+
