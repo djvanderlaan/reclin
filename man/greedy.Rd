@@ -20,3 +20,4 @@ Greedy one-to-one matching of pairs
 Pairs with the highest weight are selected as long a neither the lhs as the
 rhs are already selected in a pair with a higher weight.
 }
+

@@ -40,3 +40,4 @@ m- and u probabilities. In case `type == "all"` returns a `data.frame` or
 \description{
 Calculate weights and probabilities for pairs
 }
+

@@ -7,8 +7,8 @@ Author: Jan van der Laan
 Maintainer: Jan van der Laan <djvanderlaan@unrealizedtime.nl>
 Description: Functions to assist in performing probabilistis record linkage:
     generating pairs, comparing records, em-algorithm for estimating m- and
-    u-probabilities, forcing one-to-one matching. Can also be used for pre- 
-    and post-processing for machine learning methods for record linkage. 
+    u-probabilities, forcing one-to-one matching. Can also be used for pre-
+    and post-processing for machine learning methods for record linkage.
 Depends:
     stats,
     lvec,
@@ -25,9 +25,8 @@ Suggests:
     testthat,
     knitr,
     rmarkdown
-LinkingTo:
-    Rcpp
+LinkingTo: Rcpp
 License: GPL-3
 LazyLoad: yes
-RoxygenNote: 6.0.1
+RoxygenNote: 5.0.1
 VignetteBuilder: knitr

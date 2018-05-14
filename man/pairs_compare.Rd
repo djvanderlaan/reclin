@@ -43,3 +43,4 @@ pairs <- pairs_blocking(linkexample1, linkexample2, "postcode")
 pairs <- pairs_compare(pairs, c("lastname", "firstname", "address", "sex"))
 
 }
+

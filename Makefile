@@ -1,17 +1,19 @@
 
-.PHONY: install test check build
+.PHONY: install test check build document
 
 all: build
 
-install:
+install: document
 	R --vanilla --slave -e "devtools::install()"
 
-test:
+test: document
 	R --vanilla --slave -e "devtools::test()"
 
-check:
+check: document
 	R --vanilla --slave -e "devtools::check()"
 
-build: 
+build: document
 	R --vanilla --slave -e "devtools::build()"
 
+document:
+	R --vanilla --slave -e "devtools::document()"

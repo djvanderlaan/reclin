@@ -99,7 +99,8 @@ res <- res %>% group_by(duplicate_groups, official_name) %>% mutate(n = n()) %>%
 
 We can then calculate the confusion matrix and calculate the precision and
 recall:
-```
+
+```{r}
 t <- table(res$group_name, res$official_name)
 t
 ```
