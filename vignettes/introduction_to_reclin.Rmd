@@ -161,7 +161,7 @@ been found (the recall is 3/4) and we have one false link (sensitivity is 1/4).
 
 Using a threshold, does not take into account the fact that often we know that
 one record from the first data set can be linked to at most one record from the
-second data set and vice versa. If we make th threshold low enough we have more
+second data set and vice versa. If we make the threshold low enough we have more
 links than records in either data set. `reclin` contains two functions that
 force one-to-one linkage: `select_greedy` and `select_n_to_m`. The first is
 fast (it selects pairs starting from the highest score; pairs are only selected

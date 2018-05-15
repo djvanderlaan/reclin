@@ -36,7 +36,7 @@ head(town_names)
 
 First, we do a little bit of cleanup of the names. We have a lot of names of the
 form 'amsterdam z.o.', 'amsterdam zo', etc. Removing non-alphanumeric characters
-will probably help. Also, some of the o's are written as 0's (zeros). 
+will probably help. Also, some of the O's are written as 0's (zeros). 
 ```{r}
 town_names$clean_name <- gsub("[^[:alnum:]]", "", town_names$name)
 town_names$clean_name <- gsub("0", "o", town_names$clean_name)
@@ -77,7 +77,7 @@ res <- deduplicate_equivalence(p)
 head(res)
 ```
 
-As we can see records 2 to 6 are assigned the the same group. We can calculate
+As we can see records 2 to 6 are assigned to the same group. We can calculate
 the number of groups and compare that to the original number of town names:
 
 ```{r}
