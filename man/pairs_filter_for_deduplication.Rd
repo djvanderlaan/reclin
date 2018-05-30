@@ -16,4 +16,3 @@ comparisons only have to be made for records for which the index of the
 records from the first data set is larger than the index fron the record from
 the second data set.
 }
-

@@ -43,4 +43,3 @@ pairs <- pairs_compare(pairs, c("lastname", "firstname", "address", "sex"))
 pairs <- score_simsum(pairs)
  
 }
-

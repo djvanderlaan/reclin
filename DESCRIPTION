@@ -2,10 +2,10 @@ Package: reclin
 Type: Package
 Title: Record Linkage Toolkit
 Version: 0.0.5
-Date: 2017-07-28
+Date: 2018-05-30
 Author: Jan van der Laan
 Maintainer: Jan van der Laan <djvanderlaan@unrealizedtime.nl>
-Description: Functions to assist in performing probabilistis record linkage:
+Description: Functions to assist in performing probabilistic record linkage:
     generating pairs, comparing records, em-algorithm for estimating m- and
     u-probabilities, forcing one-to-one matching. Can also be used for pre-
     and post-processing for machine learning methods for record linkage.
@@ -26,7 +26,8 @@ Suggests:
     knitr,
     rmarkdown
 LinkingTo: Rcpp
+SystemRequirements: C++11
 License: GPL-3
 LazyLoad: yes
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr

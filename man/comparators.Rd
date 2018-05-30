@@ -2,9 +2,9 @@
 % Please edit documentation in R/comparators.R
 \name{identical}
 \alias{identical}
-\alias{jaccard}
 \alias{jaro_winkler}
 \alias{lcs}
+\alias{jaccard}
 \title{Comparison functions}
 \usage{
 identical()
@@ -65,4 +65,3 @@ x <- cmp(c("john", "mary", "susan", "jack"),
 cmp(x)
 
 }
-
