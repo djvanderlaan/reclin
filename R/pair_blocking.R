@@ -27,13 +27,13 @@
 #'
 #' @examples
 #' data("linkexample1", "linkexample2")
-#' pairs <- pairs_blocking(linkexample1, linkexample2, "postcode")
+#' pairs <- pair_blocking(linkexample1, linkexample2, "postcode")
 #'
 #' @import lvec
 #' @import ldat
 #' @import dplyr
 #' @export
-pairs_blocking <- function(x, y, blocking_var = NULL, large = TRUE, 
+pair_blocking <- function(x, y, blocking_var = NULL, large = TRUE, 
     add_xy = TRUE, chunk_size = 1E7) {
   if (missing(chunk_size)) chunk_size <- getOption("chunk_size", chunk_size)
   # when large = TRUE: chunk x; generate pairs for each chunk and append those
@@ -43,7 +43,7 @@ pairs_blocking <- function(x, y, blocking_var = NULL, large = TRUE,
     chunks <- chunk(x, chunk_size = round(nblocks * 1E7/(nrow(y)+1)))
     pairs <- ldat(x = lvec(0, type = "numeric"), y = lvec(0, type = "numeric"))
     for (i in seq_along(chunks)) {
-      p <- pairs_blocking(slice_range(x, range = chunks[[i]], as_r = TRUE), 
+      p <- pair_blocking(slice_range(x, range = chunks[[i]], as_r = TRUE), 
         y, blocking_var, large = FALSE)
       p$x <- p$x + chunks[[i]][1] - 1
       pairs <- ldat::append(pairs, p, clone = FALSE)

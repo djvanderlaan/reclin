@@ -27,7 +27,7 @@
 #' 
 #' @examples 
 #' data("linkexample1", "linkexample2")
-#' pairs <- pairs_blocking(linkexample1, linkexample2, "postcode")
+#' pairs <- pair_blocking(linkexample1, linkexample2, "postcode")
 #' pairs <- pairs_compare(pairs, c("lastname", "firstname", "address", "sex"))
 #' model <- problink_em(pairs)
 #' summary(model)

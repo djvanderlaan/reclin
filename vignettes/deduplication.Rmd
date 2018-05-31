@@ -51,7 +51,7 @@ done by `pairs_filter_for_deduplication`. We compare the names using
 0.88. This value is determined by eye-balling the data. Usually values around
 0.9 work.
 ```{r}
-p <- pairs_blocking(town_names, town_names) %>% 
+p <- pair_blocking(town_names, town_names) %>% 
   pairs_filter_for_deduplication() %>%
   pairs_compare("clean_name", default_comparator = jaro_winkler()) %>% 
   score_simsum() %>% 

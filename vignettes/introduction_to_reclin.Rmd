@@ -56,7 +56,7 @@ different blocking variables and combine both data sets.
 
 The first step in (probabilistic) linkage is, therefore, generating all pairs:
 ```{r}
-p <- pairs_blocking(linkexample1, linkexample2, "postcode", large = FALSE)
+p <- pair_blocking(linkexample1, linkexample2, "postcode", large = FALSE)
 print(p)
 ```
 
@@ -202,7 +202,7 @@ entire linkage process could be written as:
 ```{r, message=FALSE}
 library(dplyr)
 
-linked_data_set <- pairs_blocking(linkexample1, linkexample2, "postcode") %>%
+linked_data_set <- pair_blocking(linkexample1, linkexample2, "postcode") %>%
   pairs_compare(by = c("lastname", "firstname", "address", "sex"),
       default_comparator = jaro_winkler(0.9)) %>%
   score_problink(var = "weight") %>%

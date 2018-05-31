@@ -8,7 +8,7 @@ test_that("n_to_m large = TRUE", {
   data("linkexample1", "linkexample2")
   
   by <- c("lastname", "firstname", "address", "sex", "postcode")
-  p <- pairs_blocking(linkexample1, linkexample2) %>% 
+  p <- pair_blocking(linkexample1, linkexample2) %>% 
     pairs_compare(by = by, default_comparator = jaro_winkler()) %>% 
     score_simsum() %>% 
     select_n_to_m(threshold = 2)
@@ -38,7 +38,7 @@ test_that("n_to_m large = FALSE", {
   data("linkexample1", "linkexample2")
   
   by <- c("lastname", "firstname", "address", "sex", "postcode")
-  p <- pairs_blocking(linkexample1, linkexample2, large = FALSE) %>% 
+  p <- pair_blocking(linkexample1, linkexample2, large = FALSE) %>% 
     pairs_compare(by = by, default_comparator = jaro_winkler()) %>% 
     score_simsum() %>% 
     select_n_to_m(threshold = 2)

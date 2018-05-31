@@ -35,7 +35,7 @@ print.pairs <- function(x, ...) {
 }
 
 #' @export
-print.simple_blocking <- function(x, ...) {
+print.pairs_blocking <- function(x, ...) {
   cat("Simple blocking\n")
   if (!is.null(attr(x, "blocking_var"))) {
     cat("  Blocking variable(s): ", 
