@@ -26,7 +26,7 @@
 #' @examples 
 #' data("linkexample1", "linkexample2")
 #' pairs <- pair_blocking(linkexample1, linkexample2, "postcode")
-#' pairs <- pairs_compare(pairs, c("lastname", "firstname", "address", "sex"))
+#' pairs <- compare_pairs(pairs, c("lastname", "firstname", "address", "sex"))
 #' pairs <- score_problink(pairs)
 #' 
 #' # is the same as

@@ -9,7 +9,7 @@ test_that("simsum large = TRUE", {
   
   by <- c("lastname", "firstname", "address", "sex", "postcode")
   p <- pair_blocking(linkexample1, linkexample2) %>% 
-    pairs_compare(by = by, default_comparator = jaro_winkler()) %>% 
+    compare_pairs(by = by, default_comparator = jaro_winkler()) %>% 
     score_simsum()
   
   expect_equal(names(p), c("x", "y", by, "simsum"))
@@ -40,7 +40,7 @@ test_that("simsum large = TRUE", {
   
   by <- c("lastname", "firstname", "address", "sex", "postcode")
   p <- pair_blocking(linkexample1, linkexample2, large = FALSE) %>% 
-    pairs_compare(by = by, default_comparator = jaro_winkler()) %>% 
+    compare_pairs(by = by, default_comparator = jaro_winkler()) %>% 
     score_simsum()
   
   expect_equal(names(p), c("x", "y", by, "simsum"))

@@ -10,7 +10,7 @@
 #' @param large should the pairs be returned as a \code{\link{ldat}} object.
 #' @param add_xy add \code{x} and \code{y} as attributes to the returned 
 #'   pairs. This makes calling some subsequent operations that need \code{x} and 
-#'   \code{y} (such as \code{\link{pairs_compare}} easier.
+#'   \code{y} (such as \code{\link{compare_pairs}} easier.
 #' @param chunk_size used when \code{large = TRUE} to specify the approximate 
 #'   number of pairs that are kept in memory.
 #'

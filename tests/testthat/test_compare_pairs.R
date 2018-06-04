@@ -1,6 +1,6 @@
 
 
-context("pairs_compare")
+context("compare_pairs")
 
 
 test_that("compare large = TRUE", {
@@ -8,7 +8,7 @@ test_that("compare large = TRUE", {
   data("linkexample1", "linkexample2")
   
   p <- pair_blocking(linkexample1, linkexample2) %>% 
-    pairs_compare(by = c("lastname", "firstname", "address", "sex", "postcode"))
+    compare_pairs(by = c("lastname", "firstname", "address", "sex", "postcode"))
   
   
   x <- rep(1:nrow(linkexample1), times = nrow(linkexample2))
@@ -39,7 +39,7 @@ test_that("compare large = FALSE", {
   data("linkexample1", "linkexample2")
   
   p <- pair_blocking(linkexample1, linkexample2, large = FALSE) %>% 
-    pairs_compare(by = c("lastname", "firstname", "address", "sex", "postcode"))
+    compare_pairs(by = c("lastname", "firstname", "address", "sex", "postcode"))
   
   
   x <- rep(1:nrow(linkexample1), times = nrow(linkexample2))
@@ -70,14 +70,14 @@ test_that("compare large = FALSE", {
 test_that("edge case of 0 row data.frames", {
   data("linkexample1", "linkexample2")
   p <- pair_blocking(linkexample1, linkexample2[FALSE, ], large = TRUE)  %>% 
-    pairs_compare(by = c("lastname", "firstname", "address", "sex", "postcode"))
+    compare_pairs(by = c("lastname", "firstname", "address", "sex", "postcode"))
   expect_equal(nrow(p), 0)
   expect_equal(names(p), c("x", "y", "lastname", "firstname", "address", "sex",
     "postcode"))
   expect_s3_class(p, "ldat")
   
   p <- pair_blocking(linkexample1, linkexample2[FALSE, ], large = FALSE)  %>% 
-    pairs_compare(by = c("lastname", "firstname", "address", "sex", "postcode"))
+    compare_pairs(by = c("lastname", "firstname", "address", "sex", "postcode"))
   expect_equal(nrow(p), 0)
   expect_equal(names(p), c("x", "y", "lastname", "firstname", "address", "sex",
     "postcode"))

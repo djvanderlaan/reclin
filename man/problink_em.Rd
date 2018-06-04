@@ -10,11 +10,11 @@ problink_em(patterns, mprobs0 = list(0.95), uprobs0 = list(0.02),
 \arguments{
 \item{patterns}{either a table of patterns (as output by 
 \code{\link{tabulate_patterns}}) or pairs with comparison columns (as 
-output by \code{\link{pairs_compare}}).}
+output by \code{\link{compare_pairs}}).}
 
 \item{mprobs0, uprobs0}{initial values of the m- and u-probabilities. These
 should be lists with numeric values. The names of the elements in the list
-should correspond to the names in \code{by_x} in \code{\link{pairs_compare}}.}
+should correspond to the names in \code{by_x} in \code{\link{compare_pairs}}.}
 
 \item{p0}{the initial estimate of the probability that a pair is a match.}
 
@@ -32,7 +32,7 @@ Calculate EM-estimates of m- and u-probabilities
 \examples{
 data("linkexample1", "linkexample2")
 pairs <- pair_blocking(linkexample1, linkexample2, "postcode")
-pairs <- pairs_compare(pairs, c("lastname", "firstname", "address", "sex"))
+pairs <- compare_pairs(pairs, c("lastname", "firstname", "address", "sex"))
 model <- problink_em(pairs)
 summary(model)
 

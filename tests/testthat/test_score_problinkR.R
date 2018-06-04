@@ -8,7 +8,7 @@ test_that("problink large = TRUE", {
   
   by <- c("lastname", "firstname", "address", "sex", "postcode")
   p <- pair_blocking(linkexample1, linkexample2) %>% 
-    pairs_compare(by = by, default_comparator = jaro_winkler()) %>% 
+    compare_pairs(by = by, default_comparator = jaro_winkler()) %>% 
     score_problink()
   
   expect_equal(names(p), c("x", "y", by, "weight"))
@@ -33,7 +33,7 @@ test_that("problink large = FALSE", {
   
   by <- c("lastname", "firstname", "address", "sex", "postcode")
   p <- pair_blocking(linkexample1, linkexample2, large = FALSE) %>% 
-    pairs_compare(by = by, default_comparator = jaro_winkler()) %>% 
+    compare_pairs(by = by, default_comparator = jaro_winkler()) %>% 
     score_problink()
   
   expect_equal(names(p), c("x", "y", by, "weight"))

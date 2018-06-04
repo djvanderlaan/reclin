@@ -67,7 +67,7 @@ As you can see, record 1 from `x` (the first data set) is compared to records
 
 We can now compare the records on their linkage keys:
 ```{r}
-p <- pairs_compare(p, by = c("lastname", "firstname", "address", "sex"))
+p <- compare_pairs(p, by = c("lastname", "firstname", "address", "sex"))
 print(p)
 ```
 
@@ -82,7 +82,7 @@ different.
 Below we use the `jaro_winkler` similarity score to compare all fields:
 
 ```{r}
-p <- pairs_compare(p, by = c("lastname", "firstname", "address", "sex"),
+p <- compare_pairs(p, by = c("lastname", "firstname", "address", "sex"),
   default_comparator = jaro_winkler(0.9), overwrite = TRUE)
 print(p)
 ```
@@ -203,7 +203,7 @@ entire linkage process could be written as:
 library(dplyr)
 
 linked_data_set <- pair_blocking(linkexample1, linkexample2, "postcode") %>%
-  pairs_compare(by = c("lastname", "firstname", "address", "sex"),
+  compare_pairs(by = c("lastname", "firstname", "address", "sex"),
       default_comparator = jaro_winkler(0.9)) %>%
   score_problink(var = "weight") %>%
   select_n_to_m("weight", var = "ntom", threshold = 0) %>%

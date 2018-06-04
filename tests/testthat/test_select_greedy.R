@@ -9,7 +9,7 @@ test_that("greedy large = TRUE", {
   
   by <- c("lastname", "firstname", "address", "sex", "postcode")
   p <- pair_blocking(linkexample1, linkexample2) %>% 
-    pairs_compare(by = by, default_comparator = jaro_winkler()) %>% 
+    compare_pairs(by = by, default_comparator = jaro_winkler()) %>% 
     score_simsum() %>% 
     select_greedy(threshold = 2)
   
@@ -39,7 +39,7 @@ test_that("greedy large = FALSE", {
   
   by <- c("lastname", "firstname", "address", "sex", "postcode")
   p <- pair_blocking(linkexample1, linkexample2, large = FALSE) %>% 
-    pairs_compare(by = by, default_comparator = jaro_winkler()) %>% 
+    compare_pairs(by = by, default_comparator = jaro_winkler()) %>% 
     score_simsum() %>% 
     select_greedy(threshold = 2)
   

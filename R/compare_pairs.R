@@ -24,12 +24,12 @@
 #' @examples
 #' data("linkexample1", "linkexample2")
 #' pairs <- pair_blocking(linkexample1, linkexample2, "postcode")
-#' pairs <- pairs_compare(pairs, c("lastname", "firstname", "address", "sex"))
+#' pairs <- compare_pairs(pairs, c("lastname", "firstname", "address", "sex"))
 #' 
 #' @import ldat
 #' @import lvec
 #' @export
-pairs_compare <- function(pairs, by, comparators = list(default_comparator), 
+compare_pairs <- function(pairs, by, comparators = list(default_comparator), 
     x, y, default_comparator = identical(), overwrite = FALSE) {
   # Process and preparare input
   if (missing(x)) x <- attr(pairs, "x")

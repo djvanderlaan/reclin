@@ -53,7 +53,7 @@ done by `pairs_filter_for_deduplication`. We compare the names using
 ```{r}
 p <- pair_blocking(town_names, town_names) %>% 
   pairs_filter_for_deduplication() %>%
-  pairs_compare("clean_name", default_comparator = jaro_winkler()) %>% 
+  compare_pairs("clean_name", default_comparator = jaro_winkler()) %>% 
   score_simsum() %>% 
   select_threshold(0.88)
 head(p)

@@ -14,7 +14,7 @@
 #' @examples 
 #' data("linkexample1", "linkexample2")
 #' pairs <- pair_blocking(linkexample1, linkexample2, "postcode")
-#' pairs <- pairs_compare(pairs, c("lastname", "firstname", "address", "sex"))
+#' pairs <- compare_pairs(pairs, c("lastname", "firstname", "address", "sex"))
 #' pairs <- add_from_x(pairs, id_x = "id")
 #' pairs <- add_from_y(pairs, id_y = "id")
 #' pairs$true_match <- pairs$id_x == pairs$id_y
