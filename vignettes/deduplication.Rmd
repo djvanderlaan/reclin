@@ -1,5 +1,5 @@
 ---
-title: "Introduction to reclin"
+title: "Deduplication using reclin"
 author: "Jan van der Laan"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -69,7 +69,7 @@ names. The function `deduplicate_equivalance` does that. It will use the 'rules'
 derived above: `2 and 3 belong to the same group`, 
 `3 and 4 belong to the same group`, etc., to assign each record to a group. It 
 will, therefore, also assign records 2 and 4 to the same group. For those 
-familiar with graph theory: it derives all subgraphs and assigns a nodes in a 
+familiar with graph theory: it derives all subgraphs and assigns all nodes in a 
 subgraph the same identifier. 
 
 ```{r}

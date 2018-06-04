@@ -19,6 +19,15 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
+`reclin` implements methodology for linking records based on inexact keys. It
+allows for maximum flexibility by giving users full control over each step of
+the linking procedure.  The package is built with performance and scalability
+in mind: the core algorithms have been implemented in `C++` and where
+necessary, intermediate results are stored or retrieved from disc using an
+efficient memory  mapping scheme.
+
+
+
 ```{r,message=FALSE,results='hide',warning=FALSE,echo=TRUE}
 library(reclin)
 library(dplyr)
@@ -70,6 +79,11 @@ We can now compare the records on their linkage keys:
 p <- compare_pairs(p, by = c("lastname", "firstname", "address", "sex"))
 print(p)
 ```
+As you can see, we don't need to pass the original data sets although the
+variables `lastname` etc. are from those original data sets. This is because a
+copy of the original data sets are stored with the pairs object `p` (and should
+you be worrying about memory: as long as the original data sets are not
+modified the data sets are not actually copied).
 
 The default comparison function returns `TRUE` when the linkage keys agree and
 false when they don't. However, when looking at the original data sets, we can
@@ -89,7 +103,7 @@ print(p)
 
 ## Step 3: score pairs
 
-The next step in the process, is to determined which pairs of records belong to
+The next step in the process, is to determine which pairs of records belong to
 the same entity and which do not. There are numerous ways to do this. One
 possibility is to label some of the pairs as match or no match, and use some
 machine learning algorithm to predict the match status using the comparison
@@ -145,12 +159,22 @@ threshold
 
 ```{r}
 p <- select_threshold(p, "weight", var = "threshold", threshold = 8)
+print(p)
 ```
+
+The select functions add a (logical) variable to the data set indicating
+whether a pairs is selected or not.
 
 In this case we know which records truly belong to each other. We can use that
 to evaluate the linkage:
 ```{r}
 p <- add_from_x(p, id_x = "id")
+print(p)
+```
+The `add_from_x` function adds variables from the original `x`. As was
+mentioned before the two data sets are stored in `p`.
+
+```{r}
 p <- add_from_y(p, id_y = "id")
 p$true <- p$id_x == p$id_y
 table(as.data.frame(p[c("true", "threshold")]))
