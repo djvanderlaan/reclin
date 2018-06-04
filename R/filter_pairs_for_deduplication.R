@@ -11,22 +11,22 @@
 #'   \code{\link{pair_blocking}}
 #'   
 #' @export
-pairs_filter_for_deduplication <- function(pairs) {
+filter_pairs_for_deduplication <- function(pairs) {
   if (!methods::is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")
-  UseMethod("pairs_filter_for_deduplication")
+  UseMethod("filter_pairs_for_deduplication")
 }
 
 #' @export
-pairs_filter_for_deduplication.ldat <- function(pairs) {
-  pairs_filter_for_deduplication_impl(pairs)
+filter_pairs_for_deduplication.ldat <- function(pairs) {
+  filter_pairs_for_deduplication_impl(pairs)
 }
 
 #' @export
-pairs_filter_for_deduplication.data.frame <- function(pairs) {
-  pairs_filter_for_deduplication_impl(pairs)
+filter_pairs_for_deduplication.data.frame <- function(pairs) {
+  filter_pairs_for_deduplication_impl(pairs)
 }
 
-pairs_filter_for_deduplication_impl <- function(pairs) {
+filter_pairs_for_deduplication_impl <- function(pairs) {
   sel <- pairs$y > pairs$x
   res <- if (is.data.frame(pairs)) pairs[sel, , drop = FALSE] else pairs[sel, ]
   attributes(res) <- attributes(pairs)
