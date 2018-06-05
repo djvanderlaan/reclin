@@ -18,7 +18,7 @@ should correspond to the names in \code{by_x} in \code{\link{compare_pairs}}.}
 
 \item{p0}{the initial estimate of the probability that a pair is a match.}
 
-\item{tol}{when the change in the m and u-probabilities is smaller than tol
+\item{tol}{when the change in the m and u-probabilities is smaller than \code{tol}
 the algorithm is stopped.}
 }
 \value{

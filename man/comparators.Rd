@@ -45,9 +45,9 @@ a previous comparison. The function should translate that result to a binary
 (\code{TRUE}/\code{FALSE} or \code{1}/\code{0}) result. The result should 
 not contain missing values. 
 
-The `jaro_winkler`, `lcs` and `jaccard` functions use the corresponding 
+The \code{jaro_winkler}, \code{lcs} and \code{jaccard} functions use the corresponding 
 methods from \code{\link{stringdist}} except that they are transformed from
-a distnce to a similarity score.
+a distance to a similarity score.
 }
 \examples{
 cmp <- identical()

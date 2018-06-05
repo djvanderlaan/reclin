@@ -11,13 +11,13 @@ Contains fictional records of 7 persons.
 }
 \details{
 \itemize{
-  \item id the id of the person; this contains no errors and can be used to 
+  \item \code{id} the id of the person; this contains no errors and can be used to 
     validate the linkage. 
-  \item lastname the lastname of the person; contains errors.
-  \item firstname the firstname of the persons; contains errors.
-  \item address the address; contains errors.
-  \item sex the sex; contains errors and missing values.
-  \item postcode the postcode; contains no errors. 
+  \item \code{lastname} the last name of the person; contains errors.
+  \item \code{firstname} the first name of the persons; contains errors.
+  \item \code{address} the address; contains errors.
+  \item \code{sex} the sex; contains errors and missing values.
+  \item \code{postcode} the postcode; contains no errors. 
 }
 }
 \keyword{datasets}

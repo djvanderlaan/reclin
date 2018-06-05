@@ -9,7 +9,7 @@
 #'   should be lists with numeric values. The names of the elements in the list
 #'   should correspond to the names in \code{by_x} in \code{\link{compare_pairs}}. 
 #' @param p0 the initial estimate of the probability that a pair is a match.
-#' @param tol when the change in the m and u-probabilities is smaller than tol
+#' @param tol when the change in the m and u-probabilities is smaller than \code{tol}
 #'   the algorithm is stopped. 
 #'   
 #' @return 

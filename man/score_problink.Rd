@@ -29,7 +29,7 @@ arguments are passed on to \code{\link{predict.problink_em}} using the
 \code{...} argument that causes the calculation of multiple scores (such
 are \code{type = "all"}). In that case the text given by \code{var} is 
 prepended to the names of the variables returned by 
-\code{\link{predict.problink_em}} (with a seperator '\code{_}'). 
+\code{\link{predict.problink_em}} (with a separator '\code{_}'). 
 
 When \code{add = FALSE} the scores are returned as is.
 }

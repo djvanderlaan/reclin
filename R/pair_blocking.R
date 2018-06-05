@@ -22,7 +22,7 @@
 #' @return 
 #' When \code{large} is \code{FALSE}, a \code{data.frame} with two columns, 
 #' \code{x} and \code{y}, is returned. Columns \code{x} and \code{y} are 
-#' rownumbers from \code{data.frame}s \code{x} and \code{y} respectively. 
+#' row numbers from \code{data.frame}s \code{x} and \code{y} respectively. 
 #' When \code{large} is \code{TRUE}, an object of type \code{ldat} is returned. 
 #'
 #' @examples

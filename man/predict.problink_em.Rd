@@ -9,15 +9,15 @@
   ...)
 }
 \arguments{
-\item{object}{an object of type `problink_em` as produced by 
+\item{object}{an object of type \code{problink_em} as produced by 
 \code{\link{problink_em}}.}
 
 \item{pairs}{a object with pairs for which to calculate weights.}
 
-\item{newdata}{an alternative name for the `pairs` argument. Specify 
-`newdata` or `pairs`.}
+\item{newdata}{an alternative name for the \code{pairs} argument. Specify 
+\code{newdata} or \code{pairs}.}
 
-\item{type}{a character vector of length one speicifying what to calculate. 
+\item{type}{a character vector of length one specifying what to calculate. 
 See results for more information.}
 
 \item{binary}{convert comparison vectors to binary vectors using the 
@@ -29,12 +29,12 @@ When missing \code{attr(pairs, 'comparators')} is used.}
 \item{...}{unused.}
 }
 \value{
-In case of `type == "weights"` returns a vector (\code{\link{lvec}} or
-regular R-vector depending on the type of `pairs`). with the linkage weights. 
-In case of `type == "mpost"` returns a vector with the posterior m-probabilities
-(probability that a pair is a match). In case of `type == "probs"` returns a
+In case of \code{type == "weights"} returns a vector (\code{\link{lvec}} or
+regular R-vector depending on the type of \code{pairs}). with the linkage weights. 
+In case of \code{type == "mpost"} returns a vector with the posterior m-probabilities
+(probability that a pair is a match). In case of \code{type == "probs"} returns a
 data.frame or \code{\link{ldat}} with the m- and u-probabilities and posterior
-m- and u probabilities. In case `type == "all"` returns a `data.frame` or 
+m- and u probabilities. In case \code{type == "all"} returns a \code{data.frame} or 
 \code{\link{ldat}} with both probabilities and weights.
 }
 \description{
