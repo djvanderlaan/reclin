@@ -46,6 +46,8 @@
 #' # in a logical result, with NA's and values below the threshold FALSE
 #' cmp(x)
 #' 
+#' \dontshow{gc()}
+#' 
 #' @rdname comparators
 #' @export
 identical <- function() {

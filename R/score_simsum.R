@@ -28,6 +28,8 @@
 #' pairs <- compare_pairs(pairs, c("lastname", "firstname", "address", "sex"))
 #' pairs <- score_simsum(pairs)
 #'  
+#' \dontshow{gc()}
+#'
 #' @export
 score_simsum <- function(pairs, var = "simsum", by, add = TRUE,
     na_value = 0, ...) {

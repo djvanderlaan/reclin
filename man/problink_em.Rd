@@ -36,6 +36,8 @@ pairs <- compare_pairs(pairs, c("lastname", "firstname", "address", "sex"))
 model <- problink_em(pairs)
 summary(model)
 
+\dontshow{gc()}
+
 }
 \references{
 Fellegi, I. and A. Sunter (1969). "A Theory for Record Linkage", 

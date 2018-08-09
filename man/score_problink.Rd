@@ -46,4 +46,6 @@ pairs <- score_problink(pairs)
 model <- problink_em(pairs)
 pairs <- score_problink(pairs, model = model)
 
+\dontshow{gc()}
+
 }

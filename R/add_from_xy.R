@@ -19,6 +19,8 @@
 #' pairs <- add_from_y(pairs, id_y = "id")
 #' pairs$true_match <- pairs$id_x == pairs$id_y
 #'
+#' \dontshow{gc()}
+#'
 #' @rdname add_from_x
 #' @export
 add_from_x <- function(pairs, ...) {

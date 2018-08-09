@@ -73,4 +73,6 @@ pairs <- select_n_to_m(pairs, 0, var = "ntom")
 pairs <- select_greedy(pairs, 0, var = "greedy")
 table(pairs[c("ntom", "greedy")])
 
+\dontshow{gc()}
+
 }

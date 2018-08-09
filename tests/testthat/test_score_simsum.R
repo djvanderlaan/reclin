@@ -33,6 +33,7 @@ test_that("simsum large = TRUE", {
   expect_s3_class(p, "ldat")
 })
 
+gc()
 
 test_that("simsum large = TRUE", {
   
@@ -63,3 +64,5 @@ test_that("simsum large = TRUE", {
   expect_s3_class(p, "pairs_blocking")
   expect_s3_class(p, "data.frame")
 })
+
+gc()

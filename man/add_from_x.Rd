@@ -32,4 +32,6 @@ pairs <- add_from_x(pairs, id_x = "id")
 pairs <- add_from_y(pairs, id_y = "id")
 pairs$true_match <- pairs$id_x == pairs$id_y
 
+\dontshow{gc()}
+
 }

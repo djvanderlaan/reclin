@@ -26,6 +26,8 @@ test_that("blocking large = TRUE", {
   expect_s3_class(p, "ldat")
 })
 
+gc()
+
 
 test_that("blocking large = FALSE", {
   
@@ -50,6 +52,8 @@ test_that("blocking large = FALSE", {
   expect_s3_class(p, "pairs_blocking")
   expect_s3_class(p, "data.frame")
 })
+
+gc()
 
 test_that("edge case of 0 row data.frames", {
   data("linkexample1", "linkexample2")
@@ -90,4 +94,6 @@ test_that("edge case of 0 row data.frames", {
   expect_s3_class(p, "data.frame")
   
 })
+
+gc()
 

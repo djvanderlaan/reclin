@@ -32,6 +32,8 @@
 #' model <- problink_em(pairs)
 #' summary(model)
 #' 
+#' \dontshow{gc()}
+#'
 #' @export
 problink_em <- function(patterns, mprobs0 = list(0.95), uprobs0 = list(0.02), 
     p0 = 0.05, tol = 1E-5) {

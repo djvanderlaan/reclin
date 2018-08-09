@@ -1,8 +1,8 @@
 Package: reclin
 Type: Package
 Title: Record Linkage Toolkit
-Version: 0.1.0
-Date: 2018-06-04
+Version: 0.1.1
+Date: 2018-08-09
 Author: Jan van der Laan
 Maintainer: Jan van der Laan <r@eoos.dds.nl>
 Description: Functions to assist in performing probabilistic record linkage and
@@ -10,6 +10,7 @@ Description: Functions to assist in performing probabilistic record linkage and
     estimating m- and u-probabilities, forcing one-to-one matching. Can also be
     used for pre- and post-processing for machine learning methods for record
     linkage.
+URL: https://github.com/djvanderlaan/reclin
 Depends:
     stats,
     lvec,

@@ -32,6 +32,7 @@ test_that("n_to_m large = TRUE", {
   expect_s3_class(p, "ldat")
 })
 
+gc()
 
 test_that("n_to_m large = FALSE", {
   
@@ -61,3 +62,5 @@ test_that("n_to_m large = FALSE", {
   expect_s3_class(p, "pairs_blocking")
   expect_s3_class(p, "data.frame")
 })
+
+gc()

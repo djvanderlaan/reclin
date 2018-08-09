@@ -1,5 +1,11 @@
 
 
+reclin version 0.1.1
+===============================================================================
+No external changes. In the examples and tests the garbage collector is run 
+manually a couple of times to avoid problems with a too large number of file 
+handles on Solaris.
+
 
 reclin version 0.1.0
 ===============================================================================

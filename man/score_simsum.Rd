@@ -42,4 +42,6 @@ pairs <- pair_blocking(linkexample1, linkexample2, "postcode")
 pairs <- compare_pairs(pairs, c("lastname", "firstname", "address", "sex"))
 pairs <- score_simsum(pairs)
  
+\dontshow{gc()}
+
 }

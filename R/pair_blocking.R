@@ -29,6 +29,8 @@
 #' data("linkexample1", "linkexample2")
 #' pairs <- pair_blocking(linkexample1, linkexample2, "postcode")
 #'
+#' \dontshow{gc()}
+#'
 #' @import lvec
 #' @import ldat
 #' @import dplyr

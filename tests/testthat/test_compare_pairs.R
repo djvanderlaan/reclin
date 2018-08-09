@@ -33,6 +33,7 @@ test_that("compare large = TRUE", {
   expect_s3_class(p, "ldat")
 })
 
+gc()
 
 test_that("compare large = FALSE", {
   
@@ -64,7 +65,7 @@ test_that("compare large = FALSE", {
   expect_s3_class(p, "data.frame")
 })
 
-
+gc()
 
 
 test_that("edge case of 0 row data.frames", {
@@ -84,3 +85,4 @@ test_that("edge case of 0 row data.frames", {
   expect_s3_class(p, "data.frame")
 })
 
+gc()

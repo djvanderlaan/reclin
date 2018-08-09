@@ -1,6 +1,8 @@
 Introduction
 ------------
 
+`reclin` implements methodology for linking records based on inexact keys. It allows for maximum flexibility by giving users full control over each step of the linking procedure. The package is built with performance and scalability in mind: the core algorithms have been implemented in `C++` and where necessary, intermediate results are stored or retrieved from disc using an efficient memory mapping scheme.
+
 ``` r
 library(reclin)
 library(dplyr)
@@ -39,8 +41,10 @@ However, comparing all pairs can result in an intractable number of pairs: when 
 The first step in (probabilistic) linkage is, therefore, generating all pairs:
 
 ``` r
-p <- pairs_blocking(linkexample1, linkexample2, "postcode", large = FALSE)
+p <- pair_blocking(linkexample1, linkexample2, "postcode", large = FALSE)
 print(p)
+#> Simple blocking
+#>   Blocking variable(s): postcode
 #>   First data set:  6 records
 #>   Second data set: 5 records
 #>   Total number of pairs: 17 pairs
@@ -74,11 +78,13 @@ Step 2: compare pairs
 We can now compare the records on their linkage keys:
 
 ``` r
-p <- pairs_compare(p, by = c("lastname", "firstname", "address", "sex"))
+p <- compare_pairs(p, by = c("lastname", "firstname", "address", "sex"))
 print(p)
 #> Compare
 #>   By: lastname, firstname, address, sex
 #> 
+#> Simple blocking
+#>   Blocking variable(s): postcode
 #>   First data set:  6 records
 #>   Second data set: 5 records
 #>   Total number of pairs: 17 pairs
@@ -104,17 +110,21 @@ print(p)
 #> 17 6 5     TRUE     FALSE    TRUE FALSE
 ```
 
+As you can see, we don't need to pass the original data sets although the variables `lastname` etc. are from those original data sets. This is because a copy of the original data sets are stored with the pairs object `p` (and should you be worrying about memory: as long as the original data sets are not modified the data sets are not actually copied).
+
 The default comparison function returns `TRUE` when the linkage keys agree and false when they don't. However, when looking at the original data sets, we can see that most of our linkage keys are string variables that contain typing errors. The quality of our linkage could be improved if we could use a similarity score to compare the two strings: a high score means that the two strings are very similar a value close to zero means that the strings are very different.
 
 Below we use the `jaro_winkler` similarity score to compare all fields:
 
 ``` r
-p <- pairs_compare(p, by = c("lastname", "firstname", "address", "sex"),
+p <- compare_pairs(p, by = c("lastname", "firstname", "address", "sex"),
   default_comparator = jaro_winkler(0.9), overwrite = TRUE)
 print(p)
 #> Compare
 #>   By: lastname, firstname, address, sex
 #> 
+#> Simple blocking
+#>   Blocking variable(s): postcode
 #>   First data set:  6 records
 #>   Second data set: 5 records
 #>   Total number of pairs: 17 pairs
@@ -143,7 +153,7 @@ print(p)
 Step 3: score pairs
 -------------------
 
-The next step in the process, is to determined which pairs of records belong to the same entity and which do not. There are numerous ways to do this. One possibility is to label some of the pairs as match or no match, and use some machine learning algorithm to predict the match status using the comparison vectors. Another, method, is to score the pairs based on the comparison vectors and select those with a score above some threshold. The simplest way to score the pairs, is to calculate the sum of the comparison vectors. That is what `score_simsum` does:
+The next step in the process, is to determine which pairs of records belong to the same entity and which do not. There are numerous ways to do this. One possibility is to label some of the pairs as match or no match, and use some machine learning algorithm to predict the match status using the comparison vectors. Another, method, is to score the pairs based on the comparison vectors and select those with a score above some threshold. The simplest way to score the pairs, is to calculate the sum of the comparison vectors. That is what `score_simsum` does:
 
 ``` r
 p <- score_simsum(p, var = "simsum")
@@ -151,6 +161,8 @@ print(p)
 #> Compare
 #>   By: lastname, firstname, address, sex
 #> 
+#> Simple blocking
+#>   Blocking variable(s): postcode
 #>   First data set:  6 records
 #>   Second data set: 5 records
 #>   Total number of pairs: 17 pairs
@@ -201,6 +213,8 @@ print(p)
 #> Compare
 #>   By: lastname, firstname, address, sex
 #> 
+#> Simple blocking
+#>   Blocking variable(s): postcode
 #>   First data set:  6 records
 #>   Second data set: 5 records
 #>   Total number of pairs: 17 pairs
@@ -235,12 +249,95 @@ The final step is to select the pairs that are considered to belong to the same 
 
 ``` r
 p <- select_threshold(p, "weight", var = "threshold", threshold = 8)
+print(p)
+#> Compare
+#>   By: lastname, firstname, address, sex
+#> 
+#> Simple blocking
+#>   Blocking variable(s): postcode
+#>   First data set:  6 records
+#>   Second data set: 5 records
+#>   Total number of pairs: 17 pairs
+#> 
+#> Showing all pairs:
+#>    x y lastname firstname   address sex    simsum     weight threshold
+#> 1  1 1 1.000000 0.4722222 0.9230769  NA 2.3952991  7.7138545     FALSE
+#> 2  1 2 0.000000 0.5833333 0.8641026   1 2.4474359 -6.8623638     FALSE
+#> 3  1 3 0.447619 0.4642857 0.9333333   1 2.8452381  0.8024181     FALSE
+#> 4  2 1 1.000000 0.8888889 0.9230769  NA 2.8119658  8.6108449      TRUE
+#> 5  2 2 0.000000 0.0000000 0.8641026   0 0.8641026 -7.2330326     FALSE
+#> 6  2 3 0.447619 0.5396825 0.9333333   0 1.9206349  0.7929395     FALSE
+#> 7  3 1 0.447619 0.4722222 0.8641026  NA 1.7839438  0.6008053     FALSE
+#> 8  3 2 0.952381 0.5833333 0.9230769   1 3.4587912  4.0666230     FALSE
+#> 9  3 3 1.000000 0.4642857 1.0000000   1 3.4642857  7.9375333     FALSE
+#> 10 4 1 0.447619 0.6428571 0.8641026  NA 1.9545788  0.7705671     FALSE
+#> 11 4 2 0.952381 0.0000000 0.9230769   0 1.8754579  3.6959542     FALSE
+#> 12 4 3 1.000000 1.0000000 1.0000000   0 3.0000000 29.7364771      TRUE
+#> 13 5 1 0.447619 0.5555556 0.8641026  NA 1.8672772  0.6709008     FALSE
+#> 14 5 2 0.952381 0.0000000 0.9230769   0 1.8754579  3.6959542     FALSE
+#> 15 5 3 1.000000 0.8492063 1.0000000   0 2.8492063  8.5499432      TRUE
+#> 16 6 4 1.000000 1.0000000 0.6111111   1 3.6111111 28.9246883      TRUE
+#> 17 6 5 1.000000 0.5277778 1.0000000   0 2.5277778  7.9174058     FALSE
 ```
+
+The select functions add a (logical) variable to the data set indicating whether a pairs is selected or not.
 
 In this case we know which records truly belong to each other. We can use that to evaluate the linkage:
 
 ``` r
 p <- add_from_x(p, id_x = "id")
+print(p)
+#> Compare
+#>   By: lastname, firstname, address, sex
+#> 
+#> Simple blocking
+#>   Blocking variable(s): postcode
+#>   First data set:  6 records
+#>   Second data set: 5 records
+#>   Total number of pairs: 17 pairs
+#> 
+#> Showing all pairs:
+#>    x y lastname firstname   address sex    simsum     weight threshold
+#> 1  1 1 1.000000 0.4722222 0.9230769  NA 2.3952991  7.7138545     FALSE
+#> 2  1 2 0.000000 0.5833333 0.8641026   1 2.4474359 -6.8623638     FALSE
+#> 3  1 3 0.447619 0.4642857 0.9333333   1 2.8452381  0.8024181     FALSE
+#> 4  2 1 1.000000 0.8888889 0.9230769  NA 2.8119658  8.6108449      TRUE
+#> 5  2 2 0.000000 0.0000000 0.8641026   0 0.8641026 -7.2330326     FALSE
+#> 6  2 3 0.447619 0.5396825 0.9333333   0 1.9206349  0.7929395     FALSE
+#> 7  3 1 0.447619 0.4722222 0.8641026  NA 1.7839438  0.6008053     FALSE
+#> 8  3 2 0.952381 0.5833333 0.9230769   1 3.4587912  4.0666230     FALSE
+#> 9  3 3 1.000000 0.4642857 1.0000000   1 3.4642857  7.9375333     FALSE
+#> 10 4 1 0.447619 0.6428571 0.8641026  NA 1.9545788  0.7705671     FALSE
+#> 11 4 2 0.952381 0.0000000 0.9230769   0 1.8754579  3.6959542     FALSE
+#> 12 4 3 1.000000 1.0000000 1.0000000   0 3.0000000 29.7364771      TRUE
+#> 13 5 1 0.447619 0.5555556 0.8641026  NA 1.8672772  0.6709008     FALSE
+#> 14 5 2 0.952381 0.0000000 0.9230769   0 1.8754579  3.6959542     FALSE
+#> 15 5 3 1.000000 0.8492063 1.0000000   0 2.8492063  8.5499432      TRUE
+#> 16 6 4 1.000000 1.0000000 0.6111111   1 3.6111111 28.9246883      TRUE
+#> 17 6 5 1.000000 0.5277778 1.0000000   0 2.5277778  7.9174058     FALSE
+#>    id_x
+#> 1     1
+#> 2     1
+#> 3     1
+#> 4     2
+#> 5     2
+#> 6     2
+#> 7     3
+#> 8     3
+#> 9     3
+#> 10    4
+#> 11    4
+#> 12    4
+#> 13    5
+#> 14    5
+#> 15    5
+#> 16    6
+#> 17    6
+```
+
+The `add_from_x` function adds variables from the original `x`. As was mentioned before the two data sets are stored in `p`.
+
+``` r
 p <- add_from_y(p, id_y = "id")
 p$true <- p$id_x == p$id_y
 table(as.data.frame(p[c("true", "threshold")]))
@@ -308,8 +405,8 @@ The functions have been designed to be usable with pipe operators, so the entire
 ``` r
 library(dplyr)
 
-linked_data_set <- pairs_blocking(linkexample1, linkexample2, "postcode") %>%
-  pairs_compare(by = c("lastname", "firstname", "address", "sex"),
+linked_data_set <- pair_blocking(linkexample1, linkexample2, "postcode") %>%
+  compare_pairs(by = c("lastname", "firstname", "address", "sex"),
       default_comparator = jaro_winkler(0.9)) %>%
   score_problink(var = "weight") %>%
   select_n_to_m("weight", var = "ntom", threshold = 0) %>%

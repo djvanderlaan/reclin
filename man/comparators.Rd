@@ -64,4 +64,6 @@ x <- cmp(c("john", "mary", "susan", "jack"),
 # in a logical result, with NA's and values below the threshold FALSE
 cmp(x)
 
+\dontshow{gc()}
+
 }

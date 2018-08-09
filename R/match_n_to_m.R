@@ -33,6 +33,8 @@
 #' # N-to-M matching, e.g. select all pairs
 #' d[match_n_to_m(d$x, d$y, d$w, n=999, m=999), ]
 #' 
+#' \dontshow{gc()}
+#'
 #' @importFrom lpSolve lp
 #' @export
 match_n_to_m <- function(x, y, w, n = 1, m = 1) {

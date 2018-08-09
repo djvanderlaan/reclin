@@ -26,6 +26,8 @@
 #' pairs <- pair_blocking(linkexample1, linkexample2, "postcode")
 #' pairs <- compare_pairs(pairs, c("lastname", "firstname", "address", "sex"))
 #' 
+#' \dontshow{gc()}
+#' 
 #' @import ldat
 #' @import lvec
 #' @export

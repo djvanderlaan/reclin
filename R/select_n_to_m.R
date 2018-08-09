@@ -50,6 +50,8 @@
 #' pairs <- select_greedy(pairs, 0, var = "greedy")
 #' table(pairs[c("ntom", "greedy")])
 #' 
+#' \dontshow{gc()}
+#'
 #' @rdname select_n_to_m
 #' @export
 select_n_to_m <- function(pairs, threshold = NULL, weight = NULL, var = "select", 

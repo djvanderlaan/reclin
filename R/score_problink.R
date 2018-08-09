@@ -33,6 +33,8 @@
 #' model <- problink_em(pairs)
 #' pairs <- score_problink(pairs, model = model)
 #' 
+#' \dontshow{gc()}
+#'
 #' @export
 score_problink <- function(pairs, model = NULL, var = "weight", 
     add = TRUE, ...) {

@@ -31,6 +31,8 @@
 #' pairs <- compare_pairs(pairs, c("lastname", "firstname", "address", "sex"))
 #' tabulate_patterns(pairs)
 #'
+#' \dontshow{gc()}
+#'
 #' @export
 tabulate_patterns <- function(pairs, ..., comparators = NULL, by = NULL) {
   if (!methods::is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")

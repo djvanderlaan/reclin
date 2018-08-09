@@ -22,6 +22,8 @@
 #' # Select pairs with a simsum > 5 as matches
 #' pairs <- select_threshold(pairs, 5)
 #' 
+#' \dontshow{gc()}
+#'
 #' @export
 select_threshold <- function(pairs, threshold, weight, var = "select") {
   if (!methods::is(pairs, "pairs")) stop("pairs should be an object of type 'pairs'.")

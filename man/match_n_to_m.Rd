@@ -46,4 +46,6 @@ d[match_n_to_m(d$x, d$y, d$w, m=999), ]
 # N-to-M matching, e.g. select all pairs
 d[match_n_to_m(d$x, d$y, d$w, n=999, m=999), ]
 
+\dontshow{gc()}
+
 }

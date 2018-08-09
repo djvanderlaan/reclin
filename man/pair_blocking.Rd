@@ -43,4 +43,6 @@ large number of records. Therefore, blocking is usually applied.
 data("linkexample1", "linkexample2")
 pairs <- pair_blocking(linkexample1, linkexample2, "postcode")
 
+\dontshow{gc()}
+
 }
