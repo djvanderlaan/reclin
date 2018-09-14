@@ -1,62 +1,68 @@
-
 #' Comparison functions
-#' 
+#'
 #' @param threshold threshold to use for the Jaro-Winkler string distance when
 #'   creating a binary result.
-#'   
-#' @details 
-#' A comparison function should accept two arguments: both vectors. When the 
-#' function is called with both arguments it should compare the elements in the 
+#' @param ignore_case should the case be ignored for the comparison funtion?
+#'   (default is `FALSE`).
+#'
+#' @details
+#' A comparison function should accept two arguments: both vectors. When the
+#' function is called with both arguments it should compare the elements in the
 #' first vector to those in the second. When called in this way, both vectors
 #' have the same length. What the function should return depends on the methods
 #' used to score the pairs. Usually the comparison functions return a similarity
-#' score with a value of 0 indication complete difference and a value > 0 
-#' indicating similarity (often a value of 1 will indicate perfect similarity). 
-#' 
-#' Some methods, such a \code{\link{score_problink}} and 
-#' \code{\link{problink_em}}, can handle similarity scores, but also need 
-#' binary values (\code{0}/\code{FALSE} = complete dissimilarity; 
+#' score with a value of 0 indication complete difference and a value > 0
+#' indicating similarity (often a value of 1 will indicate perfect similarity).
+#'
+#' Some methods, such a \code{\link{score_problink}} and
+#' \code{\link{problink_em}}, can handle similarity scores, but also need
+#' binary values (\code{0}/\code{FALSE} = complete dissimilarity;
 #' \code{1}/\code{TRUE} = complete similarity). In order to allow for this the
 #' comparison function is called with one argument.
-#' 
+#'
 #' When the comparison is called with one argument, it is passed the result of
-#' a previous comparison. The function should translate that result to a binary 
-#' (\code{TRUE}/\code{FALSE} or \code{1}/\code{0}) result. The result should 
-#' not contain missing values. 
-#' 
-#' The \code{jaro_winkler}, \code{lcs} and \code{jaccard} functions use the corresponding 
+#' a previous comparison. The function should translate that result to a binary
+#' (\code{TRUE}/\code{FALSE} or \code{1}/\code{0}) result. The result should
+#' not contain missing values.
+#'
+#' The \code{jaro_winkler}, \code{lcs} and \code{jaccard} functions use the corresponding
 #' methods from \code{\link{stringdist}} except that they are transformed from
 #' a distance to a similarity score.
-#' 
-#' @return 
+#'
+#' @return
 #' The functions return a comparison function (see details).
-#' 
-#' @examples 
+#'
+#' @examples
 #' cmp <- identical()
-#' x <- cmp(c("john", "mary", "susan", "jack"), 
+#' x <- cmp(c("john", "mary", "susan", "jack"),
 #'          c("johan", "mary", "susanna", NA))
-#' # Applying the comparison function to the result of the comparison results 
+#' # Applying the comparison function to the result of the comparison results
 #' # in a logical result, with NA's and values of FALSE set to FALSE
 #' cmp(x)
-#' 
+#'
 #' cmp <- jaro_winkler(0.95)
-#' x <- cmp(c("john", "mary", "susan", "jack"), 
+#' x <- cmp(c("john", "mary", "susan", "jack"),
 #'          c("johan", "mary", "susanna", NA))
-#' # Applying the comparison function to the result of the comparison results 
+#' # Applying the comparison function to the result of the comparison results
 #' # in a logical result, with NA's and values below the threshold FALSE
 #' cmp(x)
-#' 
+#'
 #' \dontshow{gc()}
-#' 
+#'
 #' @rdname comparators
+#' @importFrom stringr str_to_lower
 #' @export
-identical <- function() {
+identical <- function(ignore_case = FALSE) {
   function(x, y) {
     if (is.factor(x) || (!missing(y) && is.factor(y))) {
       x <- as.character(x)
       y <- as.character(y)
     }
     if (!missing(y)) {
+      if (ignore_case) {
+        x <- str_to_lower(x)
+        y <- str_to_lower(y)
+      }
       x == y
     } else {
       x & !is.na(x)
@@ -66,11 +72,16 @@ identical <- function() {
 
 #' @rdname comparators
 #' @importFrom stringdist stringdist
+#' @importFrom stringr str_to_lower
 #' @export
-jaro_winkler <- function(threshold = 0.95) {
+jaro_winkler <- function(threshold = 0.95, ignore_case = FALSE) {
   function(x, y) {
     if (!missing(y)) {
-      1-stringdist(x, y, method = "jw")
+      if (ignore_case) {
+        x <- str_to_lower(x)
+        y <- str_to_lower(y)
+      }
+      1 - stringdist(x, y, method = "jw")
     } else {
       (x > threshold) & !is.na(x)
     }
@@ -98,7 +109,7 @@ lcs <- function(threshold = 0.80) {
 jaccard <- function(threshold = 0.80) {
   function(x, y) {
     if (!missing(y)) {
-      1-stringdist(x, y, method = "jaccard", q = 2)
+      1 - stringdist(x, y, method = "jaccard", q = 2)
     } else {
       (x > threshold) & !is.na(x)
     }

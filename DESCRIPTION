@@ -19,6 +19,7 @@ Depends:
 Imports:
     dplyr,
     stringdist,
+    stringr,
     utils,
     methods,
     lpSolve,
