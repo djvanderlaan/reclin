@@ -31,6 +31,38 @@ system.time({
 })
 
 
+system.time(
+  tab <- as.data.table(x[p, on = "x"] == y[p, on = "y"])[, .N, by = vars])
 
 
+
+
+library(parallel)
+
+cl <- makeCluster(4)
+clusterEvalQ(cl, library(data.table))
+
+group <- floor(seq_len(nrow(x))/(nrow(x)+1)*4)
+
+
+
+clusterExport(cl, "y")
+
+x <- split(x, group)
+parLapply(cl, x, function(x) {x <<- x; NULL})
+
+clusterExport(cl, "pair_blocking")
+clusterEvalQ(cl, p <<- pair_blocking(x, y))
+
+clusterExport(cl, "vars")
+
+system.time({
+clusterEvalQ(cl, {
+  for (var in vars) {
+    p[[var]] <- (x[p$x, ..var] == y[p$y, ..var])[[1]]
+  }
+})
+
+tab <- clusterEvalQ(cl, p[, .N, by = vars])
+})
 
