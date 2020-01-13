@@ -43,13 +43,13 @@ pair_blocking <- function(x, y, blocking_var = NULL,
   y <- as.data.table(y)
    
   if (missing(blocking_var) || is.null(blocking_var)) {
-    pairs <- expand.grid(x = seq_len(nrow(x)), y = seq_len(nrow(y)))
+    pairs <- CJ(x = seq_len(nrow(x)), y = seq_len(nrow(y)))
   } else {
     a <- x[, ..blocking_var]
     a$x <- seq_len(nrow(a))
     b <- y[, ..blocking_var]
     b$y <- seq_len(nrow(b))
-    pairs <- merge(a, b, by = blocking_var, all.x = TRUE, all.y = TRUE, 
+    pairs <- merge(a, b, by = blocking_var, all.x = FALSE, all.y = FALSE, 
       allow.cartesian = TRUE)
     pairs <- pairs[, c("x", "y")]
   }
