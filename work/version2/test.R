@@ -4,7 +4,7 @@ library(data.table)
 source("random_data.R")
 
 
-n <- 1000
+n <- 10000
 dta <- random_data(n1 = n, n2 = n*0.8, overlap = 0.2)
 
 x <- as.data.table(dta[[1]])
@@ -75,59 +75,52 @@ make_pairs <- function(x, y, cl = 2L, name = "foo") {
   list(cl = cl, name = name)
 }
 
-on <- head(names(x), -1)
 
 compare_pairs <- function(p, on) {
   clusterCall(p$cl, function(name, on) {
     x <- reclin_env[[name]]$x
     y <- reclin_env[[name]]$y
     pairs <- reclin_env[[name]]$pairs
-    return(on)
+    var <- on[1]
     for (var in on) {
       reclin_env[[name]]$pairs[[var]] <- 
-        (x[pairs$x, ..var] == y[pairs$y, ..var])[[1]]
+        (x[pairs$x, ..var][[1]] == y[pairs$y, ..var][[1]])
+      TRUE
     }  
-  }, name = name, on = on)
+  }, name = p$name, on = on)
+  list(cl = p$cl, name = p$name, on = on)
 }
 
 
-p <- make_pairs(x, y)
+tabulate_pairs <- function(p, on = p$on) {
+  tabs <- clusterCall(p$cl, function(name, on) {
+    pairs <- reclin_env[[name]]$pairs
+    pairs[, .(n = .N), by = on]
+  }, name = p$name, on = p$on)
+  rbindlist(tabs)[, .(n = sum(n)), by = c(p$on)]
+}
 
-
-clusterCall(p$cl, function(name, on) {
-  pairs <- reclin_env[[name]]$pairs
-  pairs[, .N, by = on]
-}, name = name, on = on)
-
-
-
-cl <- makeCluster(2)
-clusterEvalQ(cl, library(data.table))
-
-group <- floor(seq_len(nrow(x))/(nrow(x)+1)*4)
-
-
-
-clusterExport(cl, "y")
-
-x <- split(x, group)
-parLapply(cl, x, function(x) {x <<- x; NULL})
-
-clusterExport(cl, "pair_blocking")
-clusterEvalQ(cl, p <<- pair_blocking(x, y))
-
-clusterExport(cl, "vars")
 
 system.time({
-clusterEvalQ(cl, {
-  for (var in vars) {
-    p[[var]] <- (x[p$x, ..var] == y[p$y, ..var])[[1]]
-  }
+p <- make_pairs(x, y, cl = 1)
+
+on <- head(names(x), -1)
+
+p <- compare_pairs(p, on = on)
+
+tab <- tabulate_pairs(p)
+
 })
 
-tab <- clusterEvalQ(cl, p[, .N, by = vars])
+
+
+library(reclin)
+
+system.time({
+
+pr <- reclin::pair_blocking(x, y)
+pr <- reclin::compare_pairs(pr, by = on)
+tabr <- reclin::tabulate_patterns(pr)
 })
-
-
 
 
