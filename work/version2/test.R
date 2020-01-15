@@ -4,7 +4,7 @@ library(data.table)
 source("random_data.R")
 
 
-n <- 10000
+n <- 1000
 dta <- random_data(n1 = n, n2 = n*0.8, overlap = 0.2)
 
 x <- as.data.table(dta[[1]])
@@ -58,10 +58,16 @@ make_pairs <- function(x, y, cl = 2L, name = "foo") {
   }, name = name, y = y)
   
   group <- floor(seq_len(nrow(x))/(nrow(x)+1)*length(cl))
+  idx <- split(seq_len(nrow(x)), group)
   x <- split(x, group)
   
   clusterApply(cl, x, function(name, x) {
     reclin_env[[name]]$x <- as.data.table(x)
+    TRUE
+  }, name = name)
+  
+  clusterApply(cl, idx, function(name, idx) {
+    reclin_env[[name]]$idx <- idx
     TRUE
   }, name = name)
   
@@ -100,13 +106,24 @@ tabulate_pairs <- function(p, on = p$on) {
   rbindlist(tabs)[, .(n = sum(n)), by = c(p$on)]
 }
 
+collect <- function(p) {
+  pairs <- clusterCall(p$cl, function(name) {
+    pairs <- reclin_env[[name]]$pairs
+    idx <- reclin_env[[name]]$idx
+    pairs$x <- idx[pairs$x]
+    pairs
+  }, name = p$name)
+  rbindlist(pairs)
+}
 
 system.time({
-p <- make_pairs(x, y, cl = 1)
+p <- make_pairs(x, y, cl = 2)
 
 on <- head(names(x), -1)
 
 p <- compare_pairs(p, on = on)
+
+
 
 tab <- tabulate_pairs(p)
 
@@ -114,13 +131,90 @@ tab <- tabulate_pairs(p)
 
 
 
-library(reclin)
+x
+y
+
+pairs <- CJ(x = seq_len(nrow(x)), y = seq_len(nrow(y)))
+nrow(pairs)/1E6
+
+on <- head(names(x), -1)
+var <- on[1]
 
 system.time({
-
-pr <- reclin::pair_blocking(x, y)
-pr <- reclin::compare_pairs(pr, by = on)
-tabr <- reclin::tabulate_patterns(pr)
+  res <- x[pairs$x, ..var][[1]] == y[pairs$y, ..var][[1]]
 })
+
+
+identical <- function(x, y) {
+  x == y
+}
+
+t <- system.time({
+  res <- identical(x[pairs$x, ..var][[1]], y[pairs$y, ..var][[1]])
+})
+t[3]/nrow(pairs)*1E6
+
+
+library(stringdist)
+
+
+
+t <- system.time({
+  res <- stringdist::stringsim(x[pairs$x, ..var][[1]], y[pairs$y, ..var][[1]], 
+    method = "jw")
+})
+
+
+t[3]/nrow(pairs)*1E6
+
+# 
+# library(reclin)
+# 
+# system.time({
+# 
+# pr <- reclin::pair_blocking(x, y)
+# pr <- reclin::compare_pairs(pr, by = on)
+# tabr <- reclin::tabulate_patterns(pr)
+# })
+# 
+# 
+
+
+
+# Indentiy 0.054 sec per miljoen records
+# Jaro-Winkler 0.9 sec per miljoen records
+# Neem aan dat dataset ongeveer 8 kolommen heeft waarop gekoppeld wordt
+# Helft daarvan met stringdist helft daarvan met identity
+ncol <- 8
+time_per_record <- (8*0.5*0.05 + 8*0.5*0.9)/1E6
+n <- seq(0, 20E6, by =  1000)
+# Total time without blocking
+t <- n^2 * time_per_record / 3600
+plot(n, t)
+# Ga uit van het aantal paren
+n <- exp(seq(0, log(1E12), length.out = 100))
+n <- seq(0, 1E12, length.out = 100)
+t <- n * time_per_record / 3600
+plot(n, t, log='xy')
+abline(h = 24)
+
+min(n[t > 24])/1E10
+
+sqrt(1E10)
+
+
+# Which options do I want when generating pairs:
+# - blocking
+# - only generate pairs with a simsum > X
+# - generate all pairs (but do not store) and tabulate comparison patterns
+
+# Last two options only option for limited dataset sizes
+sqrt(24*3600/(time_per_record))
+# In 24 hours computation time one can run approx 150.000x150.000 linkage
+# For second options (simsum > X) one can use identity comparison perhaps using 
+# only a limited number of variables
+time_per_record2 <- (8*1*0.05 + 8*0*0.9)/1E6
+sqrt(24*3600/(time_per_record2))
+# Then 0.5E6 x 0.5E6 e.g. a factor sqrt(0.9/0.05) higher
 
 
