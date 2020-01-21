@@ -42,6 +42,7 @@ error_letter_swap <- function(str, perr = 1) {
   err <- rbinom(length(str), size = 1, prob = perr) > 0.5
   nc  <- nchar(str)
   err <- err & (nc > 1)
+  if (sum(err) > 0) return (str)
   nc <- nc[err]
   s <- (sample(max(nc), length(nc), replace = TRUE) %% (nc-1)) + 1
   old <- substr(str[err], s, s)
@@ -84,12 +85,12 @@ random_data <- function(n1, n2, overlap, perr = 0.05) {
   
   hh <- data.frame(
     last_name = random_strings(nhh, 20, 30),
-    postcode = random_postcode(n, nunique = nhh),
-    street = random_strings(n, 20, 30),
-    number = sample(1:200, n, replace = TRUE),
+    postcode = random_postcode(nhh, nunique = nhh),
+    street = random_strings(nhh, 20, 30),
+    number = sample(1:200, nhh, replace = TRUE),
     stringsAsFactors = FALSE
   )
-  exp <- rep(1:nhh, hhsize)
+  exp <- rep(seq_len(nrow(hh)), hhsize)
   dta <- hh[exp, ]
   dta$first_name <- random_strings(nrow(dta), 2, 20)
   dta$dob <- random_date(nrow(dta), "1950-01-01", "2019-12-31")

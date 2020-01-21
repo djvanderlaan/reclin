@@ -4,7 +4,7 @@ library(data.table)
 source("random_data.R")
 
 
-n <- 1000
+n <- 5000
 dta <- random_data(n1 = n, n2 = n*0.8, overlap = 0.2)
 
 x <- as.data.table(dta[[1]])
@@ -144,6 +144,17 @@ system.time({
   res <- x[pairs$x, ..var][[1]] == y[pairs$y, ..var][[1]]
 })
 
+system.time({
+  xi <- x[pairs$x, ..var][[1]]
+})
+
+system.time({
+  yi <- y[pairs$y, ..var][[1]]
+})
+
+system.time({
+  res <- xi == yi
+})
 
 identical <- function(x, y) {
   x == y
@@ -216,5 +227,9 @@ sqrt(24*3600/(time_per_record))
 time_per_record2 <- (8*1*0.05 + 8*0*0.9)/1E6
 sqrt(24*3600/(time_per_record2))
 # Then 0.5E6 x 0.5E6 e.g. a factor sqrt(0.9/0.05) higher
+
+
+
+
 
 
