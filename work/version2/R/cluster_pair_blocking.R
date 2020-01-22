@@ -1,8 +1,4 @@
 
-cluster_pair_blocking <- function(cluster, x, y, on) {
-  stop("cluster_pair_blocking not yet implemented")
-}
-
 cluster_pair_blocking <- function(cluster, x, y, on, name = "default") {
   x <- as.data.table(x)
   y <- as.data.table(y)
@@ -15,6 +11,7 @@ cluster_pair_blocking <- function(cluster, x, y, on, name = "default") {
   # Copy data to cluster
   clusterApply(cluster, x, function(name, x, y, on) {
     library(data.table)
+    library(stringdist)
     files <- list.files("R", "*.R", full.names = TRUE)
     for (file in files) source(file)
     # environment in which to store all data

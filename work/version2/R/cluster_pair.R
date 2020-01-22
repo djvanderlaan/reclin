@@ -11,6 +11,7 @@ cluster_pair <- function(cluster, x, y, name = "default") {
   # Copy data to cluster
   clusterApply(cluster, x, function(name, x, y) {
     library(data.table)
+    library(stringdist)
     files <- list.files("R", "*.R", full.names = TRUE)
     for (file in files) source(file)
     # environment in which to store all data
