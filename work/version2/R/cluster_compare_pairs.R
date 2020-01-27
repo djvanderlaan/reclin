@@ -18,7 +18,7 @@ compare_pairs.cluster_pairs <- function(pairs, on,
   }, name = pairs$name, on = on, comparators = comparators, 
     default_comparator = default_comparator, overwrite = overwrite,
     new_name = new_name)
-  attr(pairs, "compare_on") <- by
+  attr(pairs, "compare_on") <- on
   attr(pairs, "comparators") <- comparators
   if (!missing(new_name) && !is.null(new_name)) pairs$name <- new_name
   pairs

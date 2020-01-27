@@ -43,10 +43,10 @@ pairs <- compare_pairs(pairs, on = names(x)[1:8], comparators = list(
 })
 
 system.time({
-compare_pairs(clpairs, on = names(x)[1:8], comparators = list(
+clpairs <- compare_pairs(clpairs, on = names(x)[1:8], comparators = list(
   last_name = jaro_winkler(),
   street = jaro_winkler()
-))
+), overwrite = TRUE)
 })
 
 
@@ -64,17 +64,7 @@ clusterEvalQ(cl, head(reclin_env[["default"]]$pairs))
 
 
 tab <- tabulate_patterns(pairs)
+tab
 
-
-on <- attr(pairs, "compare_on")
-possible_values <- lapply(tab[, ..on], function(x) {
-  u <- unique(x)
-  if (is.factor(x)) u <- union(x, levels(x))
-  u
-})
-i <- do.call(CJ, possible_values)
-tab <- tab[i, , on = on]
-tab[is.na(n), n:= 0]
-
-
-
+tabs <- tabulate_patterns(clpairs)
+tabs

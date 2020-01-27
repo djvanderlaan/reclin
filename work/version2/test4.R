@@ -14,3 +14,4 @@ y <- as.data.table(dta[[2]])
 
 files <- list.files("R", "*.R", full.names = TRUE)
 for (file in files) source(file)
+
