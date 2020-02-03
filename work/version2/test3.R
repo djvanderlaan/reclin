@@ -28,8 +28,18 @@ system.time({
 })
 
 system.time({
+  pairs <- pair_blocking(x, y, on = "postcode")
+})
+
+
+system.time({
   clpairs <- cluster_pair_minsim(cluster = cl, x, y, on = names(x)[1:8], minsim = 2)
 })
+
+system.time({
+  clpairs <- cluster_pair_blocking(cluster = cl, x, y, on = "postcode")
+})
+
 
 system.time({
 pairs <- compare_pairs(pairs, on = names(x)[1:8], comparators = list(

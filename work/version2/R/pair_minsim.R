@@ -25,7 +25,6 @@ pair_minsim <- function(x, y, on, minsim = 0.0,
   }, x = x, y = y, on = on, minsim = minsim, comparators = comparators)
   pairs <- rbindlist(pairs)
   if (!keep_simsum) pairs <- pairs[, c(".x", ".y")]
-  pairs <- structure(pairs, blocking_on = on)
   class(pairs) <- c("pairs", class(pairs))
   if (add_xy) {
     attr(pairs, "x") <- x

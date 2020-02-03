@@ -27,13 +27,15 @@ print.cluster_pairs <- function(x, ...) {
   cat("  Second data set: ", big_num(ny), " records\n", sep = "")
   cat("  Total number of pairs: ", big_num(np), " pairs\n", sep = "")
   if (!is.null(attr(x, "blocking_on"))) {
-    on <- paste0("'", attr(x, "blocking_on"), "'", collapse = ", ")
+    on <- strlist(attr(x, "blocking_on"), indent = "    ")
     cat("  Blocking on: ", on, "\n", sep = "")
+  }
+  if (!is.null(attr(x, "compare_on"))) {
+    on <- strlist(attr(x, "compare_on"), indent = "    ")
+    cat("  Comparing on: ", on, "\n", sep = "")
   }
   cat("\nShowing a random selection of pairs:\n")
   print(pairs)
   invisible(x)
 }
-
-
 
