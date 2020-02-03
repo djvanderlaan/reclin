@@ -50,16 +50,16 @@ tabulate_patterns.cluster_pairs <- function(pairs, on, comparators,
   tab <- rbindlist(tabs)
   print(on)
   tab <- tab[, .(n = sum(n)), by = on]
-  # # Add patterns not present in dataset
-  # if (complete) {
-  #   possible_patterns <- lapply(tab[, ..on], function(x) {
-  #     u <- unique(x)
-  #     if (is.factor(x)) union(x, levels(x)) else u
-  #   })
-  #   possible_patterns <- do.call(CJ, possible_patterns)
-  #   tab <- tab[possible_patterns, , on = on]
-  #   tab$n[is.na(tab$n)] <- 0
-  # }
+  # Add patterns not present in dataset
+  if (complete) {
+    possible_patterns <- lapply(tab[, ..on], function(x) {
+      u <- unique(x)
+      if (is.factor(x)) union(x, levels(x)) else u
+    })
+    possible_patterns <- do.call(CJ, possible_patterns)
+    tab <- tab[possible_patterns, , on = on]
+    tab$n[is.na(tab$n)] <- 0
+  }
   tab
 }
 

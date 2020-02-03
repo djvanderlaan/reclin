@@ -4,7 +4,7 @@ library(stringdist)
 
 source("random_data.R")
 
-n <- 10000
+n <- 5000
 dta <- random_data(n1 = n, n2 = n*0.8, overlap = 0.2)
 
 x <- as.data.table(dta[[1]])
@@ -18,9 +18,9 @@ for (file in files) source(file)
 library(parallel)
 cl <- makeCluster(4)
 
-pairs <- pair(x, y)
+# pairs <- pair(x, y)
 
-pairs <- pair_blocking(x, y, on = c("postcode"))
+# pairs <- pair_blocking(x, y, on = c("postcode"))
 
 system.time({
   pairs <- pair_minsim(x, y, on = names(x)[1:8], minsim = 2)
@@ -29,11 +29,7 @@ system.time({
 
 system.time({
   clpairs <- cluster_pair_minsim(cluster = cl, x, y, on = names(x)[1:8], minsim = 2)
-  sum(unlist(clusterEvalQ(cl, nrow(reclin_env[["default"]]$pairs))))
 })
-
-clusterEvalQ(cl, attr(reclin_env[["default"]]$pairs, "x"))
-
 
 system.time({
 pairs <- compare_pairs(pairs, on = names(x)[1:8], comparators = list(

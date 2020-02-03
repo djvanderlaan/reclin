@@ -32,4 +32,3 @@ cluster_pair_minsim<- function(cluster, x, y, on, minsim = 0.0,
   structure(list(cluster = cluster, name = name), class = "cluster_pairs")
 }
 
-

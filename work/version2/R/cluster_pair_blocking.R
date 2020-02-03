@@ -23,7 +23,8 @@ cluster_pair_blocking <- function(cluster, x, y, on, name = "default") {
     reclin_env[[name]]$pairs <- pair_blocking(x, y, on)
     TRUE
   }, name = name, y = y, on = on)
-  structure(list(cluster = cluster, name = name), class = "cluster_pairs")
+  structure(list(cluster = cluster, name = name), class = "cluster_pairs", 
+    blocking_on = on)
 }
 
 
