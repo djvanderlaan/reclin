@@ -14,8 +14,11 @@ tabulate_patterns.pairs <- function(pairs, on, comparators, complete = TRUE) {
     on <- if (missing(comparators)) 
       attr(pairs, "compare_on") else names(comparators)
   # Tabulate
-  for (var in on) 
-    pairs[[var]] <- comparators[[var]](pairs[[var]])
+  for (var in on) {
+    cmp_fun <- comparators[[var]]
+    if (!is.null(cmp_fun))
+      pairs[[var]] <- cmp_fun(pairs[[var]])
+  }
   tab <- pairs[, .(n = .N), by = on]
   
   # Add patterns not present in dataset
@@ -48,7 +51,6 @@ tabulate_patterns.cluster_pairs <- function(pairs, on, comparators,
   }, name= pairs$name, on = on, comparators = comparators)
   # Combine results
   tab <- rbindlist(tabs)
-  print(on)
   tab <- tab[, .(n = sum(n)), by = on]
   # Add patterns not present in dataset
   if (complete) {
