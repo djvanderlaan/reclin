@@ -74,3 +74,9 @@ tab
 
 tabs <- tabulate_patterns(clpairs)
 tabs
+
+
+m <- problink_em(clpairs)
+summary(m)
+
+
