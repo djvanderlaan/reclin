@@ -3,7 +3,7 @@
 
 `reclin` has been superseded by [`reclin2`](https://github.com/djvanderlaan/reclin2). In general `reclin2` has all the functionality `reclin` has with the added benefit of being much faster and memory efficient. The package is, however, not completely backwards compatible with `reclin` although the syntax is quite similar. 
 
-There is one thing missing from `reclin2` and that is the functionality in `reclin` where data is stored partially on disk for very large data sets (this can be enables by passing `large = TRUE` to the pair generation functions). However, `reclin2` is much more memory efficient and working from disk has the disadvantage of making the computations. For me, the maintainer, this functionality has the disadvantage of being difficult to maintain across the different platforms supported by CRAN.
+There is one thing missing from `reclin2` and that is the functionality in `reclin` where data is stored partially on disk for very large data sets (this can be enables by passing `large = TRUE` to the pair generation functions). However, `reclin2` is much more memory efficient and working from disk has the disadvantage of making the computations terriby slow. For me, the maintainer, this functionality has the disadvantage of being difficult to maintain across the different platforms supported by CRAN.
 
 **Expect `reclin` to be removed from CRAN somewhere in 2023**.
 
